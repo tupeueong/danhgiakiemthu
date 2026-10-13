@@ -1,0 +1,552 @@
+[
+  {
+    "id": "TC_LRN_01",
+    "screen": "Phiên Học từ mới (Learn Session)",
+    "name": "Nạp danh sách từ mới vào phiên học",
+    "input": "Có 5 từ trạng thái 'new'",
+    "steps": "1. Click 'Học từ mới'\n2. Quan sát thẻ từ đầu tiên",
+    "expected": "Hiển thị thẻ làm quen với từ, phiên âm, nghĩa tiếng Việt, câu ví dụ",
+    "actual": "Hiển thị đúng đầy đủ thông tin từ mới",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_LRN_02",
+    "screen": "Phiên Học từ mới (Learn Session)",
+    "name": "Bước 1 - Trắc nghiệm chọn nghĩa tiếng Việt",
+    "input": "Chọn đáp án đúng",
+    "steps": "1. Đọc từ tiếng Anh\n2. Click chọn 1 trong 4 nghĩa tiếng Việt",
+    "expected": "Báo đúng (màu xanh), chuyển sang bước tiếp theo",
+    "actual": "Phản hồi chính xác, tự động phát âm từ",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_LRN_03",
+    "screen": "Phiên Học từ mới (Learn Session)",
+    "name": "Bước 1 - Chọn sai nghĩa tiếng Việt",
+    "input": "Chọn đáp án sai",
+    "steps": "1. Click chọn nghĩa sai",
+    "expected": "Báo sai (màu đỏ), hiện đáp án đúng, yêu cầu học lại bước đó",
+    "actual": "Báo sai, ghi nhận từ khó is_difficult=True",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_LRN_04",
+    "screen": "Phiên Học từ mới (Learn Session)",
+    "name": "Bước 2 - Chọn từ tiếng Anh tương ứng với nghĩa",
+    "input": "Chọn từ tiếng Anh đúng",
+    "steps": "1. Đọc nghĩa tiếng Việt\n2. Chọn 1 trong 4 từ tiếng Anh",
+    "expected": "Báo đúng, tiến lên learning_step tiếp theo",
+    "actual": "Xác nhận đúng chính xác",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_LRN_05",
+    "screen": "Phiên Học từ mới (Learn Session)",
+    "name": "Bước 3 - Gõ từ tiếng Anh theo nghĩa",
+    "input": "Gõ đúng chính tả: 'diligent'",
+    "steps": "1. Nhập từ vào ô input\n2. Nhấn Enter hoặc click Kiểm tra",
+    "expected": "Chấp nhận câu trả lời, không phân biệt chữ hoa/thường",
+    "actual": "Đạt, chuyển sang bước nghe",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_LRN_06",
+    "screen": "Phiên Học từ mới (Learn Session)",
+    "name": "Bước 3 - Gõ sai chính tả",
+    "input": "Gõ sai: 'dilligent'",
+    "steps": "1. Nhập từ sai chính tả\n2. Nhấn Enter",
+    "expected": "Báo sai, hiển thị từ đúng để người học gõ lại",
+    "actual": "Báo sai và hướng dẫn gõ lại",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_LRN_07",
+    "screen": "Phiên Học từ mới (Learn Session)",
+    "name": "Bước 4 - Nghe phát âm rồi gõ từ",
+    "input": "Nghe âm thanh phát qua loa",
+    "steps": "1. Click nút loa nghe lại nếu cần\n2. Gõ từ nghe được",
+    "expected": "Đúng âm thanh và kiểm tra đúng từ vựng",
+    "actual": "Phát âm chuẩn và nhận diện đúng kết quả gõ",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_LRN_08",
+    "screen": "Phiên Học từ mới (Learn Session)",
+    "name": "Bước 5 - Điền từ vào câu ví dụ",
+    "input": "Câu ví dụ bị khuyết từ: 'She is a _____ student.'",
+    "steps": "1. Đọc câu ví dụ\n2. Gõ từ 'diligent' vào chỗ trống",
+    "expected": "Xác nhận đúng ngữ cảnh câu ví dụ",
+    "actual": "Điền từ chuẩn xác vào câu ví dụ",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_LRN_09",
+    "screen": "Phiên Học từ mới (Learn Session)",
+    "name": "Bước 5 - Chuyển sang bài gõ nếu câu không chứa từ",
+    "input": "Từ không có câu ví dụ nào chứa đúng từ gốc",
+    "steps": "1. Bắt đầu bài tập điền câu",
+    "expected": "Tự động fallback chuyển thành bài gõ từ bình thường",
+    "actual": "Chuyển đổi an toàn sang bài gõ từ",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_LRN_10",
+    "screen": "Phiên Học từ mới (Learn Session)",
+    "name": "Hoàn tất đủ 6 bước học từ mới",
+    "input": "Trả lời đúng trọn vẹn 6 bước",
+    "steps": "1. Hoàn thành câu hỏi bước 6",
+    "expected": "Từ chuyển sang state='learned', lên lịch SRS 4 giờ",
+    "actual": "Từ chuyển sang 'learned', srs_stage=0, next_review_at = now + 4h",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_LRN_11",
+    "screen": "Phiên Học từ mới (Learn Session)",
+    "name": "Sai câu hỏi kéo dài tổng số câu",
+    "input": "Trả lời sai 1 câu ở bước 2",
+    "steps": "1. Trả lời sai bước 2\n2. Tiếp tục phiên học",
+    "expected": "Số lần kiểm tra từ đó tăng lên $> 6$ lần trước khi được tính là learned",
+    "actual": "Hệ thống hỏi lại câu sai ở cuối phiên",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_LRN_12",
+    "screen": "Phiên Học từ mới (Learn Session)",
+    "name": "Loại trừ đáp án mơ hồ trắc nghiệm",
+    "input": "Có các từ đồng nghĩa trong kho",
+    "steps": "1. Quan sát 4 phương án trắc nghiệm",
+    "expected": "Không lấy từ đồng nghĩa hoặc cùng từ tiếng Anh làm đáp án sai",
+    "actual": "Các đáp án sai được lọc sạch sẽ, không gây hiểu nhầm",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_LRN_13",
+    "screen": "Phiên Học từ mới (Learn Session)",
+    "name": "Hiển thị loại từ trong câu hỏi",
+    "input": "Từ 'record' (noun) đang học",
+    "steps": "1. Quan sát câu hỏi trắc nghiệm",
+    "expected": "Hiển thị nhãn 'noun' rõ ràng bên cạnh từ",
+    "actual": "Nhãn loại từ hiển thị chuẩn xác",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_LRN_14",
+    "screen": "Phiên Học từ mới (Learn Session)",
+    "name": "Âm thanh đọc lại sau khi chấm đúng",
+    "input": "Trả lời đúng câu trắc nghiệm nghĩa",
+    "steps": "1. Chọn đúng đáp án",
+    "expected": "Hệ thống phát âm lại từ tiếng Anh bằng giọng đã cấu hình",
+    "actual": "Âm thanh phát lại chuẩn xác sau 100ms",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_LRN_15",
+    "screen": "Phiên Học từ mới (Learn Session)",
+    "name": "Thoát phiên học giữa chừng",
+    "input": "Đang học dở 2 từ, click nút 'Thoát'",
+    "steps": "1. Bấm nút Quay lại Dashboard",
+    "expected": "Tiến độ các bước đã học được bảo lưu trong DB",
+    "actual": "Tiến độ learning_step được bảo toàn",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_LRN_16",
+    "screen": "Phiên Học từ mới (Learn Session)",
+    "name": "Hiển thị Collocations khi làm quen",
+    "input": "Từ có 2 collocations",
+    "steps": "1. Xem thẻ làm quen",
+    "expected": "Hiển thị danh sách collocations bên dưới ví dụ",
+    "actual": "Hiển thị đẹp mắt, không rối mắt",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_LRN_17",
+    "screen": "Phiên Học từ mới (Learn Session)",
+    "name": "Hiển thị Word patterns khi làm quen",
+    "input": "Từ có word pattern 'demand + for + noun'",
+    "steps": "1. Xem thẻ làm quen",
+    "expected": "Hiển thị đúng cấu trúc pattern",
+    "actual": "Hiển thị rõ ràng cấu trúc câu đi kèm",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_LRN_18",
+    "screen": "Phiên Học từ mới (Learn Session)",
+    "name": "Tổng kết phiên học từ mới",
+    "input": "Học xong tất cả từ trong phiên",
+    "steps": "1. Hoàn thành từ cuối cùng",
+    "expected": "Hiển thị màn hình chúc mừng, số từ vừa hoàn thành",
+    "actual": "Màn hình tổng kết hiển thị ấn tượng",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_REV_01",
+    "screen": "Phiên Ôn tập SRS (Review Session)",
+    "name": "Chỉ lấy từ đã thuộc và đến hạn",
+    "input": "Có 3 từ đến hạn, 2 từ chưa đến hạn",
+    "steps": "1. Bắt đầu phiên ôn tập SRS",
+    "expected": "Phiên chỉ chứa đúng 3 từ đã đến hạn ôn",
+    "actual": "Đúng 3 từ đến hạn được nạp vào phiên",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_REV_02",
+    "screen": "Phiên Ôn tập SRS (Review Session)",
+    "name": "Xoay vòng 4 dạng câu hỏi",
+    "input": "Làm bài ôn tập",
+    "steps": "1. Quan sát các câu hỏi xuất hiện",
+    "expected": "Xoay vòng 4 dạng: chọn nghĩa, gõ từ, chọn từ, nghe rồi gõ",
+    "actual": "Xoay vòng đúng 4 dạng, không có dạng nghe rồi chọn",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_REV_03",
+    "screen": "Phiên Ôn tập SRS (Review Session)",
+    "name": "Đúng ở Stage 0 (4h) thăng hạng Stage 1 (12h)",
+    "input": "Từ đang ở stage 0, trả lời đúng",
+    "steps": "1. Trả lời đúng câu hỏi",
+    "expected": "srs_stage = 1, next_review_at = now + 12h",
+    "actual": "Thăng hạng lên Stage 1 (12 giờ)",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_REV_04",
+    "screen": "Phiên Ôn tập SRS (Review Session)",
+    "name": "Đúng ở Stage 1 (12h) thăng hạng Stage 2 (24h)",
+    "input": "Từ đang ở stage 1, trả lời đúng",
+    "steps": "1. Trả lời đúng",
+    "expected": "srs_stage = 2, next_review_at = now + 24h (1 ngày)",
+    "actual": "Thăng hạng lên Stage 2 (24 giờ)",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_REV_05",
+    "screen": "Phiên Ôn tập SRS (Review Session)",
+    "name": "Đúng ở Stage 2 (24h) thăng hạng Stage 3 (6 ngày)",
+    "input": "Từ đang ở stage 2, trả lời đúng",
+    "steps": "1. Trả lời đúng",
+    "expected": "srs_stage = 3, next_review_at = now + 6 ngày",
+    "actual": "Thăng hạng lên Stage 3 (6 ngày)",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_REV_06",
+    "screen": "Phiên Ôn tập SRS (Review Session)",
+    "name": "Đúng ở Stage 3 (6 ngày) thăng hạng Stage 4 (12 ngày)",
+    "input": "Từ đang ở stage 3, trả lời đúng",
+    "steps": "1. Trả lời đúng",
+    "expected": "srs_stage = 4, next_review_at = now + 12 ngày",
+    "actual": "Thăng hạng lên Stage 4 (12 ngày)",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_REV_07",
+    "screen": "Phiên Ôn tập SRS (Review Session)",
+    "name": "Đúng ở Stage 4 (12 ngày) thăng hạng Stage 5 (48 ngày)",
+    "input": "Từ đang ở stage 4, trả lời đúng",
+    "steps": "1. Trả lời đúng",
+    "expected": "srs_stage = 5, next_review_at = now + 48 ngày",
+    "actual": "Thăng hạng lên Stage 5 (48 ngày)",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_REV_08",
+    "screen": "Phiên Ôn tập SRS (Review Session)",
+    "name": "Đúng ở Stage 5 (48 ngày) thăng hạng Stage 6 (96 ngày)",
+    "input": "Từ đang ở stage 5, trả lời đúng",
+    "steps": "1. Trả lời đúng",
+    "expected": "srs_stage = 6, next_review_at = now + 96 ngày",
+    "actual": "Thăng hạng lên Stage 6 (96 ngày)",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_REV_09",
+    "screen": "Phiên Ôn tập SRS (Review Session)",
+    "name": "Đúng ở Stage 6 (96 ngày) thăng hạng Stage 7 (180 ngày)",
+    "input": "Từ đang ở stage 6, trả lời đúng",
+    "steps": "1. Trả lời đúng",
+    "expected": "srs_stage = 7, next_review_at = now + 180 ngày (6 tháng)",
+    "actual": "Thăng hạng lên Stage 7 (6 tháng)",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_REV_10",
+    "screen": "Phiên Ôn tập SRS (Review Session)",
+    "name": "Đúng ở Stage 7 (Cực đại) duy trì Stage 7",
+    "input": "Từ đang ở stage 7, trả lời đúng",
+    "steps": "1. Trả lời đúng câu hỏi",
+    "expected": "srs_stage giữ nguyên ở 7, hạn ôn tiếp theo sau 6 tháng",
+    "actual": "Duy trì ở Stage 7, cập nhật hạn ôn thành công",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_REV_11",
+    "screen": "Phiên Ôn tập SRS (Review Session)",
+    "name": "Trả lời sai reset ngay lập tức về Stage 0 (4 giờ)",
+    "input": "Từ đang ở Stage 5 (48 ngày), trả lời sai",
+    "steps": "1. Chọn sai đáp án",
+    "expected": "srs_stage lập tức reset về 0, next_review_at = now + 4h",
+    "actual": "Reset về Stage 0 và lên lịch sau 4 giờ",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_REV_12",
+    "screen": "Phiên Ôn tập SRS (Review Session)",
+    "name": "Hiển thị thẻ xem lại đầy đủ khi làm sai",
+    "input": "Trả lời sai một câu ôn tập",
+    "steps": "1. Quan sát màn hình sau khi báo sai",
+    "expected": "Hiện thẻ xem lại đầy đủ: từ, phiên âm, nghĩa, loại từ, ví dụ, collocations",
+    "actual": "Thẻ xem lại chi tiết hiện lên đầy đủ thông tin",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_REV_13",
+    "screen": "Phiên Ôn tập SRS (Review Session)",
+    "name": "Đánh dấu cờ từ khó is_difficult khi làm sai",
+    "input": "Trả lời sai câu hỏi ôn tập",
+    "steps": "1. Kiểm tra thuộc tính của từ sau khi làm sai",
+    "expected": "is_difficult chuyển thành True, incorrect_count tăng 1",
+    "actual": "Đánh dấu từ khó chính xác trong database",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_REV_14",
+    "screen": "Phiên Ôn tập SRS (Review Session)",
+    "name": "Ghi nhận nhật ký bảng review_logs",
+    "input": "Hoàn thành 1 câu ôn tập",
+    "steps": "1. Kiểm tra bảng review_logs",
+    "expected": "Có 1 bản ghi mới với mode='review', stage_before, stage_after",
+    "actual": "Nhật ký lưu đầy đủ lịch sử thăng/giảm hạng",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_REV_15",
+    "screen": "Phiên Ôn tập SRS (Review Session)",
+    "name": "Thanh tiến độ phiên ôn tập",
+    "input": "Phiên có 10 câu ôn",
+    "steps": "1. Làm từng câu và quan sát thanh tiến độ",
+    "expected": "Thanh tiến độ nhảy từng nấc tương ứng số câu hoàn thành",
+    "actual": "Thanh tiến độ cập nhật chính xác",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_REV_16",
+    "screen": "Phiên Ôn tập SRS (Review Session)",
+    "name": "Phím tắt Enter nộp bài",
+    "input": "Nhập đáp án và bấm Enter",
+    "steps": "1. Gõ từ\n2. Bấm Enter trên bàn phím",
+    "expected": "Hệ thống tự động chấm bài không cần bấm chuột",
+    "actual": "Phím tắt hoạt động mượt mà",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_REV_17",
+    "screen": "Phiên Ôn tập SRS (Review Session)",
+    "name": "Phím tắt Space chuyển sang câu tiếp",
+    "input": "Đang ở màn hình kết quả sau khi chấm",
+    "steps": "1. Nhấn phím cách (Space)",
+    "expected": "Tự động chuyển sang câu tiếp theo",
+    "actual": "Chuyển câu tiếp theo mượt mà",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_REV_18",
+    "screen": "Phiên Ôn tập SRS (Review Session)",
+    "name": "Kết thúc phiên ôn khi hết từ",
+    "input": "Làm xong câu cuối cùng",
+    "steps": "1. Hoàn thành câu cuối",
+    "expected": "Hiển thị màn hình tổng kết phiên ôn tập",
+    "actual": "Màn hình tổng kết hiển thị số từ ôn tập thành công",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_SPD_01",
+    "screen": "Phiên Ôn siêu tốc (Speed Review)",
+    "name": "Khởi tạo phiên với 3 trái tim",
+    "input": "Bấm bắt đầu Ôn siêu tốc",
+    "steps": "1. Quan sát góc trên màn hình",
+    "expected": "Hiển thị đủ 3 biểu tượng trái tim đỏ",
+    "actual": "Hiển thị chính xác 3 tim",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_SPD_02",
+    "screen": "Phiên Ôn siêu tốc (Speed Review)",
+    "name": "Đồng hồ đếm ngược 8 giây",
+    "input": "Mỗi câu hỏi mới bắt đầu",
+    "steps": "1. Quan sát thanh đếm lùi thời gian",
+    "expected": "Thanh đếm ngược từ 8s về 0s mượt mà",
+    "actual": "Đồng hồ đếm ngược chuẩn 8 giây",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_SPD_03",
+    "screen": "Phiên Ôn siêu tốc (Speed Review)",
+    "name": "Trả lời đúng trong thời gian cho phép",
+    "input": "Chọn đúng đáp án ở giây thứ 6",
+    "steps": "1. Click chọn đáp án đúng",
+    "expected": "Cộng điểm (dựa trên thời gian còn lại), tiến sang câu tiếp theo",
+    "actual": "Cộng điểm chính xác, chuyển câu tức thì",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_SPD_04",
+    "screen": "Phiên Ôn siêu tốc (Speed Review)",
+    "name": "Điểm số tính theo thời gian",
+    "input": "Trả lời nhanh ở giây thứ 7 vs giây thứ 2",
+    "steps": "1. So sánh điểm số nhận được",
+    "expected": "Trả lời càng nhanh điểm càng cao (từ 100 đến 1000 điểm)",
+    "actual": "Công thức tính điểm phản ánh chính xác tốc độ",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_SPD_05",
+    "screen": "Phiên Ôn siêu tốc (Speed Review)",
+    "name": "Trả lời sai bị trừ 1 tim",
+    "input": "Chọn đáp án sai",
+    "steps": "1. Click chọn sai",
+    "expected": "Số tim giảm từ 3 xuống 2, từ bị reset về 4h",
+    "actual": "Trừ 1 tim, tim đổi sang màu xám/vỡ",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_SPD_06",
+    "screen": "Phiên Ôn siêu tốc (Speed Review)",
+    "name": "Hết 8 giây không trả lời (Timeout)",
+    "input": "Để đồng hồ chạy hết về 0s",
+    "steps": "1. Không bấm chọn gì trong 8 giây",
+    "expected": "Báo hết giờ, trừ 1 tim, reset lịch SRS về 4h",
+    "actual": "Tự động trừ 1 tim và chuyển câu",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_SPD_07",
+    "screen": "Phiên Ôn siêu tốc (Speed Review)",
+    "name": "Chuỗi đúng 15 câu (Streak 15) thưởng thêm 1 tim",
+    "input": "Trả lời đúng liên tiếp 15 câu",
+    "steps": "1. Đạt chuỗi streak = 15",
+    "expected": "Hệ thống cộng thêm 1 tim thưởng, hiệu ứng chúc mừng",
+    "actual": "Cộng thưởng 1 tim chính xác",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_SPD_08",
+    "screen": "Phiên Ôn siêu tốc (Speed Review)",
+    "name": "Hết cả 3 tim kết thúc phiên (Game Over)",
+    "input": "Bị trừ hết 3 tim",
+    "steps": "1. Trả lời sai 3 lần",
+    "expected": "Phiên dừng ngay lập tức, hiển thị Game Over và tổng điểm",
+    "actual": "Hiển thị bảng điểm Game Over",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_SPD_09",
+    "screen": "Phiên Ôn siêu tốc (Speed Review)",
+    "name": "Bỏ qua từ không tạo được 2 đáp án rõ ràng",
+    "input": "Từ không tìm được đáp án nhiễu phù hợp",
+    "steps": "1. Bắt đầu câu hỏi",
+    "expected": "Hệ thống tự động bỏ qua từ đó, giữ nguyên lịch SRS thay vì ép làm bài gõ",
+    "actual": "Bỏ qua an toàn, giữ nguyên tiến độ",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_SPD_10",
+    "screen": "Phiên Ôn siêu tốc (Speed Review)",
+    "name": "Cơ chế Snapshot danh sách từ khi bắt đầu",
+    "input": "Bắt đầu phiên speed review",
+    "steps": "1. Kiểm tra danh sách từ trong session",
+    "expected": "Snapshot cố định danh sách từ trong bảng speed_review_items",
+    "actual": "Lưu cố định danh sách từ theo position",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_SPD_11",
+    "screen": "Phiên Ôn siêu tốc (Speed Review)",
+    "name": "Chống ghi trùng kết quả bằng attempt_id",
+    "input": "Gửi lặp lại request nộp bài với cùng attempt_id",
+    "steps": "1. Bấm đúp liên tục",
+    "expected": "Chỉ xử lý 1 lần duy nhất, không trừ 2 tim hoặc cộng 2 lần điểm",
+    "actual": "Tính chất Idempotency bảo toàn tuyệt đối",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_SPD_12",
+    "screen": "Phiên Ôn siêu tốc (Speed Review)",
+    "name": "Từ chối nộp bài khi từ vừa được ôn ở chế độ khác",
+    "input": "Từ vừa được ôn ở phiên thường giữa lúc session đang mở",
+    "steps": "1. Nộp bài trong speed review",
+    "expected": "Báo lỗi hoặc bỏ qua từ đó để tránh xung đột lịch SRS",
+    "actual": "Bảo vệ xung đột trạng thái thành công",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_SPD_13",
+    "screen": "Phiên Ôn siêu tốc (Speed Review)",
+    "name": "Bảng điểm tổng kết sau khi hoàn thành phiên",
+    "input": "Chơi hết danh sách từ",
+    "steps": "1. Hoàn thành câu cuối",
+    "expected": "Hiển thị bảng kết quả: Tổng điểm, số câu đúng, số câu sai, chuỗi kỷ lục",
+    "actual": "Hiển thị chi tiết bảng thành tích cá nhân",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_SPD_14",
+    "screen": "Phiên Ôn siêu tốc (Speed Review)",
+    "name": "Phím tắt 1, 2, 3, 4 chọn đáp án nhanh",
+    "input": "Nhấn phím số 1, 2, 3 hoặc 4",
+    "steps": "1. Bấm phím số trên bàn phím",
+    "expected": "Chọn phương án tương ứng và nộp bài ngay",
+    "actual": "Phím tắt số hoạt động cực nhạy",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_SPD_15",
+    "screen": "Phiên Ôn siêu tốc (Speed Review)",
+    "name": "Hiệu ứng rung/nháy đỏ khi sai hoặc hết giờ",
+    "input": "Hết giờ hoặc chọn sai",
+    "steps": "1. Quan sát hiệu ứng giao diện",
+    "expected": "Giao diện nháy cảnh báo đỏ trực quan",
+    "actual": "Hiệu ứng cảnh báo rõ ràng",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_SPD_16",
+    "screen": "Phiên Ôn siêu tốc (Speed Review)",
+    "name": "Nút tạm dừng phiên học (Pause)",
+    "input": "Click nút Tạm dừng",
+    "steps": "1. Bấm Tạm dừng",
+    "expected": "Đồng hồ 8s dừng đếm ngược, che mờ câu hỏi",
+    "actual": "Tạm dừng thành công",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_SPD_17",
+    "screen": "Phiên Ôn siêu tốc (Speed Review)",
+    "name": "Lưu thời điểm kết thúc completed_at",
+    "input": "Kết thúc phiên",
+    "steps": "1. Kiểm tra bản ghi trong speed_review_sessions",
+    "expected": "Trường completed_at được gán thời gian hiện tại",
+    "actual": "Cập nhật completed_at chính xác",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_SPD_18",
+    "screen": "Phiên Ôn siêu tốc (Speed Review)",
+    "name": "Âm thanh gõ nhịp đếm ngược",
+    "input": "Đồng hồ đếm lùi những giây cuối",
+    "steps": "1. Lắng nghe âm thanh đếm ngược",
+    "expected": "Âm thanh cảnh báo hồi hộp",
+    "actual": "Hiệu ứng âm thanh tăng tính tập trung",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_SPD_19",
+    "screen": "Phiên Ôn siêu tốc (Speed Review)",
+    "name": "Độ trễ timer trên máy cấu hình yếu",
+    "input": "Chạy nhiều tab trình duyệt nặng",
+    "steps": "1. Quan sát đồng hồ đếm ngược",
+    "expected": "Đồng hồ giữ nhịp chuẩn 1000ms mỗi giây",
+    "actual": "Timer sử dụng setInterval đôi khi bị lệch 0.3s khi máy quá tải (Ghi nhận vào Defect Log)",
+    "status": "FAIL"
+  }
+]

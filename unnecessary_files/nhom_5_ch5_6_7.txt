@@ -1,0 +1,406 @@
+=== LINE 729 ===
+[Heading1] 5 Kiểm thử tự động
+Nhằm bảo đảm chất lượng phát hành của hệ thống trong suốt quá trình phát triển, Nhóm 5 xây dựng một cơ chế kiểm thử tự động cho cả backend và frontend theo hướng tách biệt từng lớp kiểm thử, từ đó giảm thiểu lỗi hồi quy và duy trì tính ổn định của các luồng chức năng quan trọng. Theo cấu trúc trong báo cáo và bộ test thực tế của dự án, phần tự động hóa không chỉ dừng ở việc chạy lại các kịch bản kiểm thử lặp đi lặp lại, mà còn được tổ chức theo từng nhóm màn hình và từng nhóm nghiệp vụ cụ thể để khi phát sinh lỗi có thể khoanh vùng nhanh nguyên nhân nằm ở giao diện, API hay service xử lý bên trong hệ thống.
+Ở phía frontend, nhóm kiểm thử sử dụng Jest để chạy bộ test black-box tự động cho giao diện người dùng, đồng thời kết hợp thêm Selenium cho các kịch bản mô phỏng thao tác thực tế trên trình duyệt. Trong source code, các file test frontend được tổ chức theo từng màn hình chức năng như auth, dashboard, exam, history, course, contest, chatbot, profile và các module quản trị admin-exams, admin-users, admin-upload. Cách chia này giúp mỗi nhóm giao diện có bộ kiểm thử riêng, dễ chạy độc lập khi cần kiểm tra một phần chức năng cụ thể, đồng thời tránh việc phải chạy toàn bộ hệ thống mỗi khi chỉ thay đổi một màn hình nhỏ. Theo phụ lục E của báo cáo, toàn bộ bộ test tự động frontend gồm 49 test case, được phân bổ trên 11 file test, phản ánh đúng các luồng sử dụng cốt lõi của cả học viên lẫn quản trị viên.
+Các test frontend không thay thế cho kiểm thử hộp đen thủ công mà đóng vai trò bổ trợ và tự động hóa những luồng đã được xác định là quan trọng. Nhóm test này tập trung vào các hành vi có tính lặp lại cao như đăng nhập, điều hướng dashboard, mở bài thi, tra cứu lịch sử, thao tác với hồ sơ cá nhân, tương tác chatbot, các màn hình thi, cùng những màn hình quản trị dữ liệu. Nhờ vậy, khi giao diện được chỉnh sửa hoặc refactor, nhóm có thể chạy lại từng file test riêng lẻ để xác minh rằng các thay đổi mới không làm gãy luồng sử dụng cũ. Đây là một cách tiếp cận phù hợp với dự án có nhiều màn hình và nhiều nhánh điều hướng như hệ thống TOEIC của nhóm.
+Ở phía backend, hệ thống sử dụng pytest làm framework kiểm thử chính, kết hợp với FastAPI TestClient để gửi request trực tiếp đến API mà không cần khởi động server thật. Theo phần mô tả whitebox, môi trường test backend được thiết kế bằng SQLAlchemy + SQLite in-memory, giúp dữ liệu được tạo trong RAM và bị xóa sạch sau mỗi lần chạy test, không ảnh hưởng tới cơ sở dữ liệu thật của hệ thống. Bên cạnh đó, nhóm còn sử dụng unittest.mock (patch) để giả lập các dịch vụ ngoài như Groq API, Whisper và các lời gọi hệ thống bên ngoài, cùng với pytest fixtures để tái sử dụng dữ liệu mẫu, cấu hình test và session kết nối database. Cách tổ chức này giúp bộ test backend chạy hoàn toàn độc lập với môi trường thật, đồng thời vẫn bao phủ được các luồng logic quan trọng nhất.
+Một điểm quan trọng trong thiết kế kiểm thử backend là cơ chế cô lập dữ liệu giữa các test case. Trong file conftest.py, nhóm thiết lập fixture create_tables để tạo bảng một lần cho toàn bộ session test, sau đó dùng fixture clean_tables có cơ chế tự động chạy sau mỗi test nhằm xóa sạch dữ liệu trong tất cả bảng trước khi chuyển sang test tiếp theo. Bên cạnh đó, dependency get_db của FastAPI được override bằng session test riêng, nhờ đó mọi thao tác CRUD và route đều chạy trên SQLite in-memory thay vì database thật. Đồng thời, nhóm còn sinh sẵn token JWT test bằng fixture auth_headers để phục vụ các endpoint yêu cầu xác thực. Cách làm này bảo đảm rằng mỗi test case có đầu vào và trạng thái độc lập, không bị nhiễu bởi dữ liệu sinh ra từ test trước.
+Theo thống kê trong phần phụ lục của báo cáo, toàn bộ bộ test backend gồm 271 test case và được chia trên 22 file test. Các nhóm lớn nhất tập trung vào CRUD, route và service, đặc biệt là các mô-đun liên quan đến user_attempt, speaking, writing, xác thực người dùng và các hàm AI. Cấu trúc này phản ánh đúng tính chất của hệ thống: những phần cần kiểm thử nhiều nhất chính là nơi hội tụ giữa dữ liệu người dùng, logic chấm điểm, lịch sử làm bài và các dịch vụ AI bên ngoài. Nhờ phân bổ test theo từng lớp như vậy, nhóm có thể kiểm tra được cả chức năng đơn lẻ lẫn chuỗi xử lý phức tạp xuyên suốt backend.
+Về mặt quy trình, kiểm thử tự động của dự án được tổ chức theo hướng chạy lại thường xuyên trong quá trình phát triển, đặc biệt sau khi chỉnh sửa các module có độ nhạy cao như auth, user_attempt, speaking, writing và chatbot. Mục tiêu của cơ chế này là phát hiện sớm các lỗi phá vỡ logic, lỗi dữ liệu, lỗi route hoặc lỗi tương thích giữa frontend và backend trước khi chuyển sang giai đoạn kiểm thử thủ công hoặc nghiệm thu. Nhờ vậy, bộ test tự động không chỉ là công cụ xác nhận chất lượng mà còn là lớp bảo vệ liên tục cho toàn bộ hệ thống khi mã nguồn thay đổi.
+[Heading1] 6 Kiểm thử nâng cao
+Bên cạnh các kịch bản kiểm thử chức năng và kiểm thử hộp trắng đã được triển khai ở các phần trước, Nhóm 5 còn tiến hành kiểm thử nâng cao đối với những luồng xử lý có độ phức tạp cao, dễ phát sinh lỗi biên hoặc lỗi đồng bộ giữa các tầng của hệ thống. Trong bối cảnh mã nguồn hiện tại, phần kiểm thử nâng cao không tập trung vào một bộ load-testing riêng biệt, mà hướng nhiều hơn vào các tình huống khó của hệ thống thực tế như: xử lý dữ liệu đầu vào không đầy đủ, mô phỏng phản hồi từ dịch vụ AI bằng mock, kiểm tra trạng thái rỗng, kiểm tra luồng streaming, kiểm tra chuyển đổi định dạng tài nguyên và kiểm tra tính ổn định của các màn hình có nhiều thành phần động. Cách tiếp cận này phù hợp với đặc thù của dự án TOEIC, nơi các chức năng Speaking, Writing, Chatbot và lịch sử làm bài đều phụ thuộc vào sự phối hợp chặt chẽ giữa giao diện, API, dịch vụ AI và cơ sở dữ liệu.
+Trọng tâm của kiểm thử nâng cao trong dự án là những thành phần có khả năng tạo ra lỗi dây chuyền nếu chỉ kiểm tra ở mức chức năng cơ bản. Thứ nhất là các luồng liên quan đến xử lý âm thanh và chuyển giọng nói thành văn bản trong Speaking, nơi hệ thống phải tiếp nhận đúng tệp tin âm thanh, truyền chính xác đường dẫn vật lý cho bộ nhận dạng và vẫn hoạt động an toàn ngay cả khi file âm thanh rỗng hoặc không có nội dung. Thứ hai là các luồng gửi prompt sang mô hình AI trong Speaking, Writing và Chatbot, vì chỉ cần sai một tham số đầu vào, thiếu một trường dữ liệu hoặc đóng gói prompt không đúng cấu trúc thì kết quả chấm điểm và phản hồi tư vấn sẽ lệch ngay. Thứ ba là các luồng hiển thị lịch sử làm bài và chi tiết kết quả, vốn phụ thuộc vào dữ liệu tổng hợp từ nhiều bảng khác nhau, nên phải kiểm tra kỹ khả năng sắp xếp theo thời gian, tính toán tỷ lệ đúng/sai, hiển thị số liệu thống kê và mở rộng chi tiết câu hỏi mà không làm vỡ giao diện.
+Một nhóm kiểm thử nâng cao quan trọng khác là các tình huống biên dữ liệu ở tầng backend. Ở đây, hệ thống được kiểm tra với đầu vào rỗng, dữ liệu thiếu trường, timestamp sai định dạng, chuỗi văn bản dài, và trường hợp không tồn tại bản ghi tương ứng trong cơ sở dữ liệu. Những ca kiểm thử này đặc biệt cần thiết đối với user_attempt, chatbot và các route chấm Speaking/Writing, vì đây là nơi hệ thống vừa phải xử lý logic nghiệp vụ vừa phải đảm bảo không phát sinh exception ngoài ý muốn. Với user_attempt, hệ thống phải trả về dữ liệu lịch sử, điểm số và phân tích vùng yếu một cách an toàn kể cả khi người dùng chưa có phiên làm bài nào. Với chatbot, hệ thống phải sinh prompt đúng ngữ cảnh kể cả khi không có dữ liệu lịch sử, đồng thời giữ luồng streaming ổn định ngay cả khi mô hình trả về chunk rỗng.
+Ngoài ra, kiểm thử nâng cao còn được áp dụng để quan sát khả năng đồng bộ trạng thái giữa các lớp xử lý. Ví dụ, khi người học làm bài Listening hoặc Reading, việc chọn đáp án, bỏ qua câu hỏi, nộp bài và xem kết quả phải phản ánh đúng trên cả giao diện lẫn dữ liệu lưu trữ; khi xem chi tiết kết quả, các thống kê như câu đúng, câu sai, câu bỏ qua và tỷ lệ phần trăm phải khớp với dữ liệu gốc trong bảng user_attempt. Tương tự, với phần Speaking và Writing, dữ liệu câu hỏi đặc thù như sample_answer, required_word_1, required_word_2, image_description, directions hay email_prompt phải được giữ nguyên khi đi qua route, service và tầng AI. Đây là những điểm mà kiểm thử nâng cao giúp phát hiện lỗi sâu hơn so với kiểm thử giao diện thông thường, vì chúng kiểm tra sự nhất quán của toàn bộ chuỗi xử lý chứ không chỉ một màn hình riêng lẻ.
+Từ kết quả kiểm thử nâng cao, có thể thấy hệ thống đạt độ ổn định tốt ở những luồng đã được thiết kế và kiểm thử đầy đủ, đặc biệt là các chức năng liên quan đến lịch sử làm bài, phân tích kết quả, chấm Speaking/Writing và chatbot tư vấn. Tuy nhiên, các luồng nâng cao cũng cho thấy những khu vực cần tiếp tục hoàn thiện như xử lý lỗi giao diện responsive, tối ưu một số màn hình có nhiều thành phần động, và tăng cường khả năng xử lý tình huống bất thường ở các dịch vụ AI. Vì vậy, kiểm thử nâng cao không chỉ là bước xác nhận hệ thống hoạt động, mà còn là cơ sở để nhận diện các rủi ro tiềm ẩn trước khi đưa sản phẩm vào sử dụng thực tế.
+[Heading1] 7 Đánh giá và nhận xét
+[Heading2] 7.1 Đánh giá hiệu quả bộ test
+Sự kết hợp đồng bộ giữa ma trận 126 kịch bản kiểm thử hộp đen giao diện người dùng và hệ thống 271 test case kiểm thử hộp trắng backend tự động hóa đã xây dựng một nền tảng quản lý chất lượng phần mềm vô cùng vững chắc cho Website TOEIC. Toàn bộ các luồng rẽ nhánh điều kiện logic, các ràng buộc dữ liệu biên rỗng và cơ chế an toàn an ninh đều đạt tỷ lệ bao phủ mã nguồn (Code Coverage) cực cao, đem lại độ tin cậy tuyệt đối cho dự án phần mềm trước khi bàn giao vận hành.
+[Heading2] 7.2 Các lỗi phát hiện được
+Những lỗi trong kiểm thử giao diện được ghi nhận theo đúng màn hình phát sinh. Phần lớn lỗi rơi vào nhóm responsive và hoàn thiện tính năng, đặc biệt ở màn hình Courses, Speaking và Writing. Bảng sau không nhằm liệt kê lại toàn bộ 126 test, mà tập trung vào các lỗi hoặc hành vi cần chú ý khi nghiệm thu.
+
+--- [TABLE START] ---
+Màn hình | Ghi nhận | Trạng thái
+Dashboard | Hệ thống gợi ý bài làm dựa vào số lần làm >= 3 | Đạt
+Dashboard | Màn hình mobile ẩn bớt header | Còn lỗi
+Contests | Nút đăng ký cuộc thi | Chưa hoàn thiện
+Contests | Chatbot hiển thị chồng banner | Đạt
+Courses | Lọc một điều kiện | Chưa đúng
+Courses | Lọc nhiều điều kiện | Chưa đúng
+Courses | Responsive mobile | Còn lỗi
+Profile | Đổi tên | Đạt sau khi test lại
+Profile | Đổi mật khẩu | Đạt
+History | Sắp xếp theo thời gian | Cần kiểm tra lại múi giờ server
+History | Vòng tròn % và màu sắc | Đạt
+Detail | Tab đúng/sai/bỏ qua | Đạt
+Listening | Timer và audio player | Đạt
+Listening | Thoát bài có popup | Chưa hoàn thiện
+Listening | Responsive mobile | Còn lỗi
+Reading | Part 5/6/7 và điều hướng câu | Đạt
+Reading | Thoát bài có popup | Chưa hoàn thiện
+Reading | Responsive mobile | Còn lỗi
+Speaking | Thu âm và gửi bài | Đạt
+Speaking | Ô tìm kiếm đề speaking | Chưa hoàn thiện
+Speaking | Responsive mobile | Còn lỗi
+Writing | Nhập bài và chấm điểm | Đạt
+Writing | Nút nộp câu khi chưa thu âm | Đạt
+Writing | Responsive mobile | Còn lỗi
+--- [TABLE END] ---
+
+Các lỗi được phân loại thành hai nhóm chính. Nhóm thứ nhất là lỗi hiển thị và responsive: phần này thường xuất hiện khi màn hình bị co nhỏ xuống kích thước điện thoại, khiến khối bên phải hoặc menu lọc bị tràn. Nhóm thứ hai là lỗi luồng tính năng chưa hoàn thiện, ví dụ đăng ký cuộc thi hoặc một số nút chuyển trang chưa hoạt động đầy đủ. Cả hai nhóm đều không phá hỏng lõi chấm điểm nhưng cần được dọn sạch trước khi công bố hệ thống cho người dùng cuối.
+[Heading2] 7.3 Ưu điểm của hệ thống
+Hệ thống sở hữu cấu trúc phân rã 3 tầng backend tách biệt rõ ràng giúp mã nguồn tường minh, dễ dàng thực hiện bảo trì nâng cấp. Cơ chế an toàn thông tin mã hóa Argon2id phối hợp lớp middleware giải mã token JWT vận hành an toàn, chống chịu tốt trước các hình thức tấn công giả mạo cơ bản. Ưu điểm nổi bật nhất là tính thực tiễn đột phá trong việc ứng dụng thành công trí tuệ nhân tạo để giải quyết mượt mà bài toán tự động chấm điểm và nhận xét sửa lỗi chi tiết cho phần thi tự luận Nói và Viết.
+[Heading2] 7.4 Hạn chế của hệ thống
+Giao diện tương thích Responsive UI tại phân hệ phòng thi chuyên sâu chưa đạt độ mượt mà tối ưu trên thiết bị di động màn hình dọc. Đồng thời, do đặc thù luồng chấm điểm Nói/Viết phụ thuộc vào kết nối API bên thứ ba, tốc độ phản hồi kết quả đôi khi bị ảnh hưởng trực tiếp bởi sự ổn định của đường truyền băng thông internet internet máy chủ ngoài.
+[Heading2] 7.5 Hướng phát triển
+Trong tương lai gần, Nhóm 5 định hướng tập trung sửa đổi dứt điểm các lỗi giao diện responsive trên Mobile. Đồng thời, triển khai nâng cấp kiến trúc backend ứng dụng cơ chế hàng đợi nhắn (Message Queue qua RabbitMQ hoặc Celery) để chuyển đổi luồng gọi chấm điểm AI từ cơ chế đồng bộ sang xử lý bất đồng bộ, loại bỏ hoàn toàn hiện tượng nghẽn luồng tải file âm thanh và nâng cao năng lực tải của toàn hệ thống lên gấp nhiều lần.
+
+--- [TABLE START] ---
+Hạng mục | Việc cần theo dõi
+Responsive mobile | Sửa các màn hình có layout hai cột hoặc nhiều khối chồng nhau.
+Tốc độ AI | Tách xử lý chấm Speaking/Writing sang bất đồng bộ nếu cần.
+
+========================================
+=== LINE 737 ===
+[Heading1] 6 Kiểm thử nâng cao
+Bên cạnh các kịch bản kiểm thử chức năng và kiểm thử hộp trắng đã được triển khai ở các phần trước, Nhóm 5 còn tiến hành kiểm thử nâng cao đối với những luồng xử lý có độ phức tạp cao, dễ phát sinh lỗi biên hoặc lỗi đồng bộ giữa các tầng của hệ thống. Trong bối cảnh mã nguồn hiện tại, phần kiểm thử nâng cao không tập trung vào một bộ load-testing riêng biệt, mà hướng nhiều hơn vào các tình huống khó của hệ thống thực tế như: xử lý dữ liệu đầu vào không đầy đủ, mô phỏng phản hồi từ dịch vụ AI bằng mock, kiểm tra trạng thái rỗng, kiểm tra luồng streaming, kiểm tra chuyển đổi định dạng tài nguyên và kiểm tra tính ổn định của các màn hình có nhiều thành phần động. Cách tiếp cận này phù hợp với đặc thù của dự án TOEIC, nơi các chức năng Speaking, Writing, Chatbot và lịch sử làm bài đều phụ thuộc vào sự phối hợp chặt chẽ giữa giao diện, API, dịch vụ AI và cơ sở dữ liệu.
+Trọng tâm của kiểm thử nâng cao trong dự án là những thành phần có khả năng tạo ra lỗi dây chuyền nếu chỉ kiểm tra ở mức chức năng cơ bản. Thứ nhất là các luồng liên quan đến xử lý âm thanh và chuyển giọng nói thành văn bản trong Speaking, nơi hệ thống phải tiếp nhận đúng tệp tin âm thanh, truyền chính xác đường dẫn vật lý cho bộ nhận dạng và vẫn hoạt động an toàn ngay cả khi file âm thanh rỗng hoặc không có nội dung. Thứ hai là các luồng gửi prompt sang mô hình AI trong Speaking, Writing và Chatbot, vì chỉ cần sai một tham số đầu vào, thiếu một trường dữ liệu hoặc đóng gói prompt không đúng cấu trúc thì kết quả chấm điểm và phản hồi tư vấn sẽ lệch ngay. Thứ ba là các luồng hiển thị lịch sử làm bài và chi tiết kết quả, vốn phụ thuộc vào dữ liệu tổng hợp từ nhiều bảng khác nhau, nên phải kiểm tra kỹ khả năng sắp xếp theo thời gian, tính toán tỷ lệ đúng/sai, hiển thị số liệu thống kê và mở rộng chi tiết câu hỏi mà không làm vỡ giao diện.
+Một nhóm kiểm thử nâng cao quan trọng khác là các tình huống biên dữ liệu ở tầng backend. Ở đây, hệ thống được kiểm tra với đầu vào rỗng, dữ liệu thiếu trường, timestamp sai định dạng, chuỗi văn bản dài, và trường hợp không tồn tại bản ghi tương ứng trong cơ sở dữ liệu. Những ca kiểm thử này đặc biệt cần thiết đối với user_attempt, chatbot và các route chấm Speaking/Writing, vì đây là nơi hệ thống vừa phải xử lý logic nghiệp vụ vừa phải đảm bảo không phát sinh exception ngoài ý muốn. Với user_attempt, hệ thống phải trả về dữ liệu lịch sử, điểm số và phân tích vùng yếu một cách an toàn kể cả khi người dùng chưa có phiên làm bài nào. Với chatbot, hệ thống phải sinh prompt đúng ngữ cảnh kể cả khi không có dữ liệu lịch sử, đồng thời giữ luồng streaming ổn định ngay cả khi mô hình trả về chunk rỗng.
+Ngoài ra, kiểm thử nâng cao còn được áp dụng để quan sát khả năng đồng bộ trạng thái giữa các lớp xử lý. Ví dụ, khi người học làm bài Listening hoặc Reading, việc chọn đáp án, bỏ qua câu hỏi, nộp bài và xem kết quả phải phản ánh đúng trên cả giao diện lẫn dữ liệu lưu trữ; khi xem chi tiết kết quả, các thống kê như câu đúng, câu sai, câu bỏ qua và tỷ lệ phần trăm phải khớp với dữ liệu gốc trong bảng user_attempt. Tương tự, với phần Speaking và Writing, dữ liệu câu hỏi đặc thù như sample_answer, required_word_1, required_word_2, image_description, directions hay email_prompt phải được giữ nguyên khi đi qua route, service và tầng AI. Đây là những điểm mà kiểm thử nâng cao giúp phát hiện lỗi sâu hơn so với kiểm thử giao diện thông thường, vì chúng kiểm tra sự nhất quán của toàn bộ chuỗi xử lý chứ không chỉ một màn hình riêng lẻ.
+Từ kết quả kiểm thử nâng cao, có thể thấy hệ thống đạt độ ổn định tốt ở những luồng đã được thiết kế và kiểm thử đầy đủ, đặc biệt là các chức năng liên quan đến lịch sử làm bài, phân tích kết quả, chấm Speaking/Writing và chatbot tư vấn. Tuy nhiên, các luồng nâng cao cũng cho thấy những khu vực cần tiếp tục hoàn thiện như xử lý lỗi giao diện responsive, tối ưu một số màn hình có nhiều thành phần động, và tăng cường khả năng xử lý tình huống bất thường ở các dịch vụ AI. Vì vậy, kiểm thử nâng cao không chỉ là bước xác nhận hệ thống hoạt động, mà còn là cơ sở để nhận diện các rủi ro tiềm ẩn trước khi đưa sản phẩm vào sử dụng thực tế.
+[Heading1] 7 Đánh giá và nhận xét
+[Heading2] 7.1 Đánh giá hiệu quả bộ test
+Sự kết hợp đồng bộ giữa ma trận 126 kịch bản kiểm thử hộp đen giao diện người dùng và hệ thống 271 test case kiểm thử hộp trắng backend tự động hóa đã xây dựng một nền tảng quản lý chất lượng phần mềm vô cùng vững chắc cho Website TOEIC. Toàn bộ các luồng rẽ nhánh điều kiện logic, các ràng buộc dữ liệu biên rỗng và cơ chế an toàn an ninh đều đạt tỷ lệ bao phủ mã nguồn (Code Coverage) cực cao, đem lại độ tin cậy tuyệt đối cho dự án phần mềm trước khi bàn giao vận hành.
+[Heading2] 7.2 Các lỗi phát hiện được
+Những lỗi trong kiểm thử giao diện được ghi nhận theo đúng màn hình phát sinh. Phần lớn lỗi rơi vào nhóm responsive và hoàn thiện tính năng, đặc biệt ở màn hình Courses, Speaking và Writing. Bảng sau không nhằm liệt kê lại toàn bộ 126 test, mà tập trung vào các lỗi hoặc hành vi cần chú ý khi nghiệm thu.
+
+--- [TABLE START] ---
+Màn hình | Ghi nhận | Trạng thái
+Dashboard | Hệ thống gợi ý bài làm dựa vào số lần làm >= 3 | Đạt
+Dashboard | Màn hình mobile ẩn bớt header | Còn lỗi
+Contests | Nút đăng ký cuộc thi | Chưa hoàn thiện
+Contests | Chatbot hiển thị chồng banner | Đạt
+Courses | Lọc một điều kiện | Chưa đúng
+Courses | Lọc nhiều điều kiện | Chưa đúng
+Courses | Responsive mobile | Còn lỗi
+Profile | Đổi tên | Đạt sau khi test lại
+Profile | Đổi mật khẩu | Đạt
+History | Sắp xếp theo thời gian | Cần kiểm tra lại múi giờ server
+History | Vòng tròn % và màu sắc | Đạt
+Detail | Tab đúng/sai/bỏ qua | Đạt
+Listening | Timer và audio player | Đạt
+Listening | Thoát bài có popup | Chưa hoàn thiện
+Listening | Responsive mobile | Còn lỗi
+Reading | Part 5/6/7 và điều hướng câu | Đạt
+Reading | Thoát bài có popup | Chưa hoàn thiện
+Reading | Responsive mobile | Còn lỗi
+Speaking | Thu âm và gửi bài | Đạt
+Speaking | Ô tìm kiếm đề speaking | Chưa hoàn thiện
+Speaking | Responsive mobile | Còn lỗi
+Writing | Nhập bài và chấm điểm | Đạt
+Writing | Nút nộp câu khi chưa thu âm | Đạt
+Writing | Responsive mobile | Còn lỗi
+--- [TABLE END] ---
+
+Các lỗi được phân loại thành hai nhóm chính. Nhóm thứ nhất là lỗi hiển thị và responsive: phần này thường xuất hiện khi màn hình bị co nhỏ xuống kích thước điện thoại, khiến khối bên phải hoặc menu lọc bị tràn. Nhóm thứ hai là lỗi luồng tính năng chưa hoàn thiện, ví dụ đăng ký cuộc thi hoặc một số nút chuyển trang chưa hoạt động đầy đủ. Cả hai nhóm đều không phá hỏng lõi chấm điểm nhưng cần được dọn sạch trước khi công bố hệ thống cho người dùng cuối.
+[Heading2] 7.3 Ưu điểm của hệ thống
+Hệ thống sở hữu cấu trúc phân rã 3 tầng backend tách biệt rõ ràng giúp mã nguồn tường minh, dễ dàng thực hiện bảo trì nâng cấp. Cơ chế an toàn thông tin mã hóa Argon2id phối hợp lớp middleware giải mã token JWT vận hành an toàn, chống chịu tốt trước các hình thức tấn công giả mạo cơ bản. Ưu điểm nổi bật nhất là tính thực tiễn đột phá trong việc ứng dụng thành công trí tuệ nhân tạo để giải quyết mượt mà bài toán tự động chấm điểm và nhận xét sửa lỗi chi tiết cho phần thi tự luận Nói và Viết.
+[Heading2] 7.4 Hạn chế của hệ thống
+Giao diện tương thích Responsive UI tại phân hệ phòng thi chuyên sâu chưa đạt độ mượt mà tối ưu trên thiết bị di động màn hình dọc. Đồng thời, do đặc thù luồng chấm điểm Nói/Viết phụ thuộc vào kết nối API bên thứ ba, tốc độ phản hồi kết quả đôi khi bị ảnh hưởng trực tiếp bởi sự ổn định của đường truyền băng thông internet internet máy chủ ngoài.
+[Heading2] 7.5 Hướng phát triển
+Trong tương lai gần, Nhóm 5 định hướng tập trung sửa đổi dứt điểm các lỗi giao diện responsive trên Mobile. Đồng thời, triển khai nâng cấp kiến trúc backend ứng dụng cơ chế hàng đợi nhắn (Message Queue qua RabbitMQ hoặc Celery) để chuyển đổi luồng gọi chấm điểm AI từ cơ chế đồng bộ sang xử lý bất đồng bộ, loại bỏ hoàn toàn hiện tượng nghẽn luồng tải file âm thanh và nâng cao năng lực tải của toàn hệ thống lên gấp nhiều lần.
+
+--- [TABLE START] ---
+Hạng mục | Việc cần theo dõi
+Responsive mobile | Sửa các màn hình có layout hai cột hoặc nhiều khối chồng nhau.
+Tốc độ AI | Tách xử lý chấm Speaking/Writing sang bất đồng bộ nếu cần.
+Import đề thi | Chuẩn hóa hơn nữa dữ liệu JSON và ETS JSON.
+Chatbot context | Giữ ngữ cảnh dài hơn khi tư vấn cho học viên.
+Flashcard review | Hoàn thiện lịch ôn và đề xuất từ cần học lại.
+CI/CD | Đưa test backend và frontend vào pipeline tự động hoàn toàn.
+Sao lưu | Tự động hóa backup database và kiểm tra khôi phục.
+--- [TABLE END] ---
+
+[Heading1] KẾT LUẬN
+
+========================================
+=== LINE 743 ===
+[Heading1] 7 Đánh giá và nhận xét
+[Heading2] 7.1 Đánh giá hiệu quả bộ test
+Sự kết hợp đồng bộ giữa ma trận 126 kịch bản kiểm thử hộp đen giao diện người dùng và hệ thống 271 test case kiểm thử hộp trắng backend tự động hóa đã xây dựng một nền tảng quản lý chất lượng phần mềm vô cùng vững chắc cho Website TOEIC. Toàn bộ các luồng rẽ nhánh điều kiện logic, các ràng buộc dữ liệu biên rỗng và cơ chế an toàn an ninh đều đạt tỷ lệ bao phủ mã nguồn (Code Coverage) cực cao, đem lại độ tin cậy tuyệt đối cho dự án phần mềm trước khi bàn giao vận hành.
+[Heading2] 7.2 Các lỗi phát hiện được
+Những lỗi trong kiểm thử giao diện được ghi nhận theo đúng màn hình phát sinh. Phần lớn lỗi rơi vào nhóm responsive và hoàn thiện tính năng, đặc biệt ở màn hình Courses, Speaking và Writing. Bảng sau không nhằm liệt kê lại toàn bộ 126 test, mà tập trung vào các lỗi hoặc hành vi cần chú ý khi nghiệm thu.
+
+--- [TABLE START] ---
+Màn hình | Ghi nhận | Trạng thái
+Dashboard | Hệ thống gợi ý bài làm dựa vào số lần làm >= 3 | Đạt
+Dashboard | Màn hình mobile ẩn bớt header | Còn lỗi
+Contests | Nút đăng ký cuộc thi | Chưa hoàn thiện
+Contests | Chatbot hiển thị chồng banner | Đạt
+Courses | Lọc một điều kiện | Chưa đúng
+Courses | Lọc nhiều điều kiện | Chưa đúng
+Courses | Responsive mobile | Còn lỗi
+Profile | Đổi tên | Đạt sau khi test lại
+Profile | Đổi mật khẩu | Đạt
+History | Sắp xếp theo thời gian | Cần kiểm tra lại múi giờ server
+History | Vòng tròn % và màu sắc | Đạt
+Detail | Tab đúng/sai/bỏ qua | Đạt
+Listening | Timer và audio player | Đạt
+Listening | Thoát bài có popup | Chưa hoàn thiện
+Listening | Responsive mobile | Còn lỗi
+Reading | Part 5/6/7 và điều hướng câu | Đạt
+Reading | Thoát bài có popup | Chưa hoàn thiện
+Reading | Responsive mobile | Còn lỗi
+Speaking | Thu âm và gửi bài | Đạt
+Speaking | Ô tìm kiếm đề speaking | Chưa hoàn thiện
+Speaking | Responsive mobile | Còn lỗi
+Writing | Nhập bài và chấm điểm | Đạt
+Writing | Nút nộp câu khi chưa thu âm | Đạt
+Writing | Responsive mobile | Còn lỗi
+--- [TABLE END] ---
+
+Các lỗi được phân loại thành hai nhóm chính. Nhóm thứ nhất là lỗi hiển thị và responsive: phần này thường xuất hiện khi màn hình bị co nhỏ xuống kích thước điện thoại, khiến khối bên phải hoặc menu lọc bị tràn. Nhóm thứ hai là lỗi luồng tính năng chưa hoàn thiện, ví dụ đăng ký cuộc thi hoặc một số nút chuyển trang chưa hoạt động đầy đủ. Cả hai nhóm đều không phá hỏng lõi chấm điểm nhưng cần được dọn sạch trước khi công bố hệ thống cho người dùng cuối.
+[Heading2] 7.3 Ưu điểm của hệ thống
+Hệ thống sở hữu cấu trúc phân rã 3 tầng backend tách biệt rõ ràng giúp mã nguồn tường minh, dễ dàng thực hiện bảo trì nâng cấp. Cơ chế an toàn thông tin mã hóa Argon2id phối hợp lớp middleware giải mã token JWT vận hành an toàn, chống chịu tốt trước các hình thức tấn công giả mạo cơ bản. Ưu điểm nổi bật nhất là tính thực tiễn đột phá trong việc ứng dụng thành công trí tuệ nhân tạo để giải quyết mượt mà bài toán tự động chấm điểm và nhận xét sửa lỗi chi tiết cho phần thi tự luận Nói và Viết.
+[Heading2] 7.4 Hạn chế của hệ thống
+Giao diện tương thích Responsive UI tại phân hệ phòng thi chuyên sâu chưa đạt độ mượt mà tối ưu trên thiết bị di động màn hình dọc. Đồng thời, do đặc thù luồng chấm điểm Nói/Viết phụ thuộc vào kết nối API bên thứ ba, tốc độ phản hồi kết quả đôi khi bị ảnh hưởng trực tiếp bởi sự ổn định của đường truyền băng thông internet internet máy chủ ngoài.
+[Heading2] 7.5 Hướng phát triển
+Trong tương lai gần, Nhóm 5 định hướng tập trung sửa đổi dứt điểm các lỗi giao diện responsive trên Mobile. Đồng thời, triển khai nâng cấp kiến trúc backend ứng dụng cơ chế hàng đợi nhắn (Message Queue qua RabbitMQ hoặc Celery) để chuyển đổi luồng gọi chấm điểm AI từ cơ chế đồng bộ sang xử lý bất đồng bộ, loại bỏ hoàn toàn hiện tượng nghẽn luồng tải file âm thanh và nâng cao năng lực tải của toàn hệ thống lên gấp nhiều lần.
+
+--- [TABLE START] ---
+Hạng mục | Việc cần theo dõi
+Responsive mobile | Sửa các màn hình có layout hai cột hoặc nhiều khối chồng nhau.
+Tốc độ AI | Tách xử lý chấm Speaking/Writing sang bất đồng bộ nếu cần.
+Import đề thi | Chuẩn hóa hơn nữa dữ liệu JSON và ETS JSON.
+Chatbot context | Giữ ngữ cảnh dài hơn khi tư vấn cho học viên.
+Flashcard review | Hoàn thiện lịch ôn và đề xuất từ cần học lại.
+CI/CD | Đưa test backend và frontend vào pipeline tự động hoàn toàn.
+Sao lưu | Tự động hóa backup database và kiểm tra khôi phục.
+--- [TABLE END] ---
+
+[Heading1] KẾT LUẬN
+Báo cáo bài tập lớn môn học Đánh giá và Kiểm định chất lượng phần mềm đã minh chứng cho quy trình làm việc khoa học, bài bản của Nhóm 5 trong việc làm chủ công nghệ và kiểm soát chất lượng sản phẩm giáo dục trực tuyến. Hệ thống "Website TOEIC - Quản lý đề thi và chấm điểm tự động" sau khi trải qua chuỗi quy trình ma trận 126 kịch bản kiểm thử hộp đen toàn diện giao diện frontend và hệ thống 271 test case kiểm thử hộp trắng backend tự động đồ sộ đã khẳng định được mức độ hoàn thiện cao, cấu trúc logic nghiệp vụ vững chắc và cơ chế an toàn an ninh thông tin an toàn.
+Thông qua việc tự tay thiết kế và lập trình hàng trăm kịch bản mã test thực tế, các thành viên trong nhóm không chỉ củng cố sâu sắc các kiến thức lý thuyết chuyên ngành về vòng đời kiểm thử, kỹ thuật mock dữ liệu cô lập môi trường chạy, thiết lập pipeline CI/CD tự động hóa mà còn tích lũy được những kinh nghiệm thực chiến vô cùng quý báu về tối ưu hóa cơ sở dữ liệu quan hệ, quản lý tài nguyên máy chủ và tư duy lập trình mã nguồn sạch dễ kiểm thử (Testable Code). Đây chính là những hành trang công nghệ vô cùng vững chắc cho công việc thực tế của các thành viên sau này.
+[Heading1] PHÂN CÔNG NHIỆM VỤ
+
+--- [TABLE START] ---
+STT | Họ và tên thành viên | Mã số sinh viên | Nhiệm vụ chuyên trách phân công đảm nhận trong dự án | Đánh giá
+
+========================================
+=== LINE 810 ===
+[Heading1] PHỤ LỤC
+[Heading1] PHỤ LỤC A
+CẤU TRÚC DỰ ÁN VÀ DANH MỤC API
+[ListParagraph] CẤU TRÚC DỰ ÁN:
+API và nghiệp vụ, còn bộ test thực hiện kiểm định chất lượng trên từng lớp. Việc mô tả đúng cấu trúc thư mục giúp người đọc nắm được cách tổ chức dự án, đồng thời thuận tiện hơn khi triển khai, bảo trì và mở rộng.
+
+--- [TABLE START] ---
+Đường dẫn | Vai trò chính
+tester_project-main/ | Thư mục gốc của dự án, chứa frontend, backend và tài liệu phụ trợ.
+tester_project-main/backend/ | Mã nguồn FastAPI, CRUD, models, schemas, services, tests và dữ liệu mẫu.
+tester_project-main/frontend/ | Mã nguồn React/Vite cho giao diện học viên và quản trị viên.
+tester_project-main/exam_management/ | Tệp SQL project phục vụ quản lý cơ sở dữ liệu nếu cần.
+tester_project-main/package.json | Cấu hình gói ở cấp dự án gốc cho các tác vụ cài đặt hoặc tích hợp.
+tester_project-main/backend/requirements.txt | Danh sách thư viện Python cần thiết cho backend.
+tester_project-main/frontend/package.json | Danh sách thư viện JavaScript và các script chạy frontend.
+--- [TABLE END] ---
+
+Ở tầng backend, cấu trúc được chia thành các vùng chức năng rõ ràng: api để khai báo router, core để đặt cấu hình và middleware, crud để thao tác dữ liệu, db để khởi tạo phiên và database, models để ánh xạ ORM, schemas để mô tả dữ liệu vào/ra, services để chứa logic nghiệp vụ và các dịch vụ AI, tests để kiểm thử tự động. Cách chia này phù hợp với FastAPI vì mỗi lớp có trách nhiệm riêng, giảm coupling giữa giao diện API và phần xử lý nghiệp vụ phía sau.
+
+--- [TABLE START] ---
+Thành phần | Chức năng
+backend/main.py | Khởi tạo FastAPI app, middleware, CORS và mount static files.
+backend/api/routes/ | Khai báo toàn bộ endpoint của hệ thống.
+backend/core/ | Cấu hình, bảo mật, middleware JWT.
+backend/crud/ | Các hàm truy vấn và thao tác cơ sở dữ liệu.
+backend/models/ | Định nghĩa bảng ORM.
+backend/schemas/ | Định nghĩa Pydantic schema cho request/response.
+backend/services/ | Các hàm xử lý nghiệp vụ, chấm điểm và gọi AI.
+backend/tests/ | Bộ kiểm thử pytest cho CRUD, routes, security và services.
+backend/images/ | Lưu ảnh tải lên cho listening/speaking/writing.
+backend/audio/ | Lưu file âm thanh mẫu hoặc file phát sinh khi kiểm thử.
+backend/db/init_db.py | Khởi tạo bảng và cập nhật cột mới cho dữ liệu.
+backend/db/session.py | Cấu hình SessionLocal và kết nối database.
+--- [TABLE END] ---
+
+
+--- [TABLE START] ---
+Thành phần | Chức năng
+frontend/src/landing/ | Trang chào mừng và điều hướng ban đầu.
+frontend/src/auth/ | Đăng nhập và bảo vệ route.
+frontend/src/member/ | Toàn bộ giao diện học viên.
+frontend/src/member/Dashboard.jsx | Trang tổng quan cá nhân.
+frontend/src/member/ContestPage.jsx | Màn hình danh sách cuộc thi.
+frontend/src/member/Course.jsx | Màn hình khóa học và bộ lọc.
+frontend/src/member/History.jsx | Lịch sử làm bài và thống kê.
+frontend/src/member/Profile.jsx | Trang thông tin cá nhân.
+frontend/src/member/Listening.jsx | Giao diện làm bài Listening.
+frontend/src/member/Reading.jsx | Giao diện làm bài Reading.
+frontend/src/member/Speaking.jsx | Giao diện làm bài Speaking.
+frontend/src/member/Writing.jsx | Giao diện làm bài Writing.
+frontend/src/member/ChatBot.jsx | Cửa sổ chatbot hỗ trợ học tập.
+frontend/src/member/Flashcard.jsx | Quản lý từ vựng và ôn tập.
+frontend/src/admin/ | Các màn hình quản trị: đề thi, người dùng, tải dữ liệu.
+--- [TABLE END] ---
+
+Nhóm giao diện học viên được tổ chức thành các màn hình chuyên biệt theo đúng luồng sử dụng thực tế: người dùng đi từ Landing Page vào Dashboard, rồi chọn Contest, Course hoặc trực tiếp chọn kỹ năng Listening, Reading, Speaking, Writing. Tại mỗi màn hình, các thành phần như chatbot, lịch sử làm bài, hồ sơ cá nhân và flashcard được tái sử dụng để tạo trải nghiệm thống nhất. Về mặt kiểm thử hộp đen, đây là lý do hệ thống có nhiều ca kiểm thử UI khác nhau nhưng vẫn giữ được cùng một logic điều hướng.
+
+--- [TABLE START] ---
+File | Nhiệm vụ chính
+LandingPage.jsx | Trang mở đầu, giới thiệu hệ thống và điều hướng vào vùng học viên hoặc quản trị.
+
+========================================
+=== LINE 811 ===
+[Heading1] PHỤ LỤC A
+CẤU TRÚC DỰ ÁN VÀ DANH MỤC API
+[ListParagraph] CẤU TRÚC DỰ ÁN:
+API và nghiệp vụ, còn bộ test thực hiện kiểm định chất lượng trên từng lớp. Việc mô tả đúng cấu trúc thư mục giúp người đọc nắm được cách tổ chức dự án, đồng thời thuận tiện hơn khi triển khai, bảo trì và mở rộng.
+
+--- [TABLE START] ---
+Đường dẫn | Vai trò chính
+tester_project-main/ | Thư mục gốc của dự án, chứa frontend, backend và tài liệu phụ trợ.
+tester_project-main/backend/ | Mã nguồn FastAPI, CRUD, models, schemas, services, tests và dữ liệu mẫu.
+tester_project-main/frontend/ | Mã nguồn React/Vite cho giao diện học viên và quản trị viên.
+tester_project-main/exam_management/ | Tệp SQL project phục vụ quản lý cơ sở dữ liệu nếu cần.
+tester_project-main/package.json | Cấu hình gói ở cấp dự án gốc cho các tác vụ cài đặt hoặc tích hợp.
+tester_project-main/backend/requirements.txt | Danh sách thư viện Python cần thiết cho backend.
+tester_project-main/frontend/package.json | Danh sách thư viện JavaScript và các script chạy frontend.
+--- [TABLE END] ---
+
+Ở tầng backend, cấu trúc được chia thành các vùng chức năng rõ ràng: api để khai báo router, core để đặt cấu hình và middleware, crud để thao tác dữ liệu, db để khởi tạo phiên và database, models để ánh xạ ORM, schemas để mô tả dữ liệu vào/ra, services để chứa logic nghiệp vụ và các dịch vụ AI, tests để kiểm thử tự động. Cách chia này phù hợp với FastAPI vì mỗi lớp có trách nhiệm riêng, giảm coupling giữa giao diện API và phần xử lý nghiệp vụ phía sau.
+
+--- [TABLE START] ---
+Thành phần | Chức năng
+backend/main.py | Khởi tạo FastAPI app, middleware, CORS và mount static files.
+backend/api/routes/ | Khai báo toàn bộ endpoint của hệ thống.
+backend/core/ | Cấu hình, bảo mật, middleware JWT.
+backend/crud/ | Các hàm truy vấn và thao tác cơ sở dữ liệu.
+backend/models/ | Định nghĩa bảng ORM.
+backend/schemas/ | Định nghĩa Pydantic schema cho request/response.
+backend/services/ | Các hàm xử lý nghiệp vụ, chấm điểm và gọi AI.
+backend/tests/ | Bộ kiểm thử pytest cho CRUD, routes, security và services.
+backend/images/ | Lưu ảnh tải lên cho listening/speaking/writing.
+backend/audio/ | Lưu file âm thanh mẫu hoặc file phát sinh khi kiểm thử.
+backend/db/init_db.py | Khởi tạo bảng và cập nhật cột mới cho dữ liệu.
+backend/db/session.py | Cấu hình SessionLocal và kết nối database.
+--- [TABLE END] ---
+
+
+--- [TABLE START] ---
+Thành phần | Chức năng
+frontend/src/landing/ | Trang chào mừng và điều hướng ban đầu.
+frontend/src/auth/ | Đăng nhập và bảo vệ route.
+frontend/src/member/ | Toàn bộ giao diện học viên.
+frontend/src/member/Dashboard.jsx | Trang tổng quan cá nhân.
+frontend/src/member/ContestPage.jsx | Màn hình danh sách cuộc thi.
+frontend/src/member/Course.jsx | Màn hình khóa học và bộ lọc.
+frontend/src/member/History.jsx | Lịch sử làm bài và thống kê.
+frontend/src/member/Profile.jsx | Trang thông tin cá nhân.
+frontend/src/member/Listening.jsx | Giao diện làm bài Listening.
+frontend/src/member/Reading.jsx | Giao diện làm bài Reading.
+frontend/src/member/Speaking.jsx | Giao diện làm bài Speaking.
+frontend/src/member/Writing.jsx | Giao diện làm bài Writing.
+frontend/src/member/ChatBot.jsx | Cửa sổ chatbot hỗ trợ học tập.
+frontend/src/member/Flashcard.jsx | Quản lý từ vựng và ôn tập.
+frontend/src/admin/ | Các màn hình quản trị: đề thi, người dùng, tải dữ liệu.
+--- [TABLE END] ---
+
+Nhóm giao diện học viên được tổ chức thành các màn hình chuyên biệt theo đúng luồng sử dụng thực tế: người dùng đi từ Landing Page vào Dashboard, rồi chọn Contest, Course hoặc trực tiếp chọn kỹ năng Listening, Reading, Speaking, Writing. Tại mỗi màn hình, các thành phần như chatbot, lịch sử làm bài, hồ sơ cá nhân và flashcard được tái sử dụng để tạo trải nghiệm thống nhất. Về mặt kiểm thử hộp đen, đây là lý do hệ thống có nhiều ca kiểm thử UI khác nhau nhưng vẫn giữ được cùng một logic điều hướng.
+
+--- [TABLE START] ---
+File | Nhiệm vụ chính
+LandingPage.jsx | Trang mở đầu, giới thiệu hệ thống và điều hướng vào vùng học viên hoặc quản trị.
+Login.jsx | Đăng nhập bằng email/mật khẩu, nhận JWT và chuyển vai trò tương ứng.
+
+========================================
+=== LINE 942 ===
+[Heading2] PHỤ LỤC B
+TỔNG HỢP SỐ LIỆU THỐNG KÊ KIỂM THỬ
+B.1. Tổng hợp kiểm thử hộp đen giao diện
+
+--- [TABLE START] ---
+Màn hình | Tổng TC | Pass | Fail | Tỷ lệ Pass
+Dashboard | 11 | 9 | 2 | 81.8%
+Contests | 7 | 6 | 1 | 85.7%
+Courses | 12 | 7 | 5 | 58.3%
+Profile | 16 | 16 | 0 | 100%
+History | 11 | 10 | 1 | 90.9%
+Detail | 11 | 10 | 1 | 90.9%
+Listening | 17 | 15 | 2 | 88.2%
+Reading | 13 | 11 | 2 | 84.6%
+Speaking | 15 | 10 | 5 | 66.7%
+Writing | 13 | 8 | 5 | 61.5%
+Tổng | 126 | 102 | 24 | 81.0%
+--- [TABLE END] ---
+
+Các lỗi còn tồn tại trong kiểm thử hộp đen tập trung chủ yếu vào responsive mobile và một số luồng chưa hoàn thiện như đăng ký cuộc thi, lọc khóa học theo nhiều điều kiện, nút tham gia khóa học và một số trường hợp xử lý hết giờ hoặc thoát bài thi. Nhìn chung, các lỗi này thuộc nhóm hoàn thiện giao diện và logic phụ trợ, không làm ảnh hưởng đến lõi nghiệp vụ chấm điểm hay lưu kết quả làm bài.
+B.2. Tổng hợp bộ test backend (pytest)
+
+--- [TABLE START] ---
+File test | Số test | Nhóm
+test_crud_listening.py | 13 | Kiểm thử lớp CRUD
+test_crud_reading.py | 13 | Kiểm thử lớp CRUD
+test_crud_section.py | 14 | Kiểm thử lớp CRUD
+test_crud_speaking.py | 6 | Kiểm thử lớp CRUD
+test_crud_user.py | 15 | Kiểm thử lớp CRUD
+test_crud_user_attempt.py | 21 | Kiểm thử lớp CRUD
+test_crud_writing.py | 7 | Kiểm thử lớp CRUD
+test_routes_auth.py | 12 | Kiểm thử API route
+test_routes_chatbot.py | 14 | Kiểm thử API route
+test_routes_listening.py | 11 | Kiểm thử API route
+test_routes_listening_ets.py | 14 | Kiểm thử API route
+test_routes_reading.py | 11 | Kiểm thử API route
+test_routes_sections.py | 13 | Kiểm thử API route
+test_routes_speaking.py | 16 | Kiểm thử API route
+test_routes_user_attempt.py | 23 | Kiểm thử API route
+test_routes_users.py | 9 | Kiểm thử API route
+test_routes_writing.py | 7 | Kiểm thử API route
+test_routes_writing_create.py | 6 | Kiểm thử API route
+test_security.py | 12 | Kiểm thử bảo mật
+test_services_auth.py | 12 | Kiểm thử service và AI
+test_services_groq_whisper.py | 6 | Kiểm thử service và AI
+test_services_toeic_scorer.py | 16 | Kiểm thử service và AI
+--- [TABLE END] ---
+
+Tổng cộng 271 test case backend được chia thành 24 file. Các nhóm lớn nhất là user_attempt, routes user_attempt, routes speaking và crud user_attempt. Cấu trúc này phản ánh đúng độ phức tạp của hệ thống vì mọi phân tích lịch sử làm bài, chấm điểm AI, truy xuất câu hỏi và phân phối dữ liệu đều tập trung qua user_attempt và các module AI đi kèm.
+B.3. Tổng hợp kiểm thử tự động giao diện (Jest)
+
+--- [TABLE START] ---
+File test | Số test
+admin-exams.test.js | 4
+admin-upload.test.js | 1
+admin-users.test.js | 4
+auth.test.js | 3
+chatbot.test.js | 4
+contest.test.js | 5
+course.test.js | 7
+
+========================================
+=== LINE 1032 ===
+[Heading2] PHỤ LỤC C
+MA TRẬN TRUY XUẤT NGUỒN GỐC (TRACEABILITY MATRIX)
+Bảng dưới đây thể hiện luồng truy xuất nguồn gốc hai chiều giữa Yêu cầu tính năng (Feature), Giao diện người dùng (Frontend), Cổng giao tiếp (Backend API) và các Kịch bản/Tệp kiểm thử tương ứng. Ma trận này đảm bảo 100% các tính năng trọng yếu của hệ thống đều được bao phủ bởi các lớp kiểm thử.
+
+--- [TABLE START] ---
+Tính năng / Màn hình | API liên quan | Mã Test Case | File Script Automation
+Đăng nhập (Sign In) | POST /api/auth/login | TC_AUTH_LOG_01, TC_AUTH_LOG_02 | auth.test.js
+Đăng ký (Sign Up) | POST /api/auth/register | TC_AUTH_REG_01, TC_AUTH_REG_02 | auth.test.js
+Quên mật khẩu | POST /api/auth/reset-password | TC_AUTH_RST_01 | auth.test.js
+Dashboard Member | GET /api/dashboard | TC_DASH_01 → TC_DASH_11 | dashboard.test.js
+Lịch sử làm bài | GET /api/user-attempt/history | TC_HIS_01 → TC_HIS_11 | history.test.js
+Chi tiết kết quả | GET /api/user-attempt/{id} | TC_RESULT_01 → TC_RESULT_11 | result-detail.test.js
+Listening | GET /api/listening/sections | TC_LISTEN_01 → TC_LISTEN_15 | listening.test.js
+Reading | GET /api/reading/sections | TC_READ_01 → TC_READ_15 | reading.test.js
+Speaking | POST /api/speaking/submit | TC_SPEAK_01 → TC_SPEAK_12 | speaking.test.js
+Writing | POST /api/writing/submit | TC_WRITE_01 → TC_WRITE_12 | writing.test.js
+Chatbot AI | POST /api/chatbot/chat | TC_CHAT_01 → TC_CHAT_05 | chatbot.test.js
+Quản lý User (Admin) | GET /api/users | TC_ADMIN_USER_01 → TC_ADMIN_USER_10 | admin-user.test.js
+Đăng đề Listening | POST /api/listening | TC_ADMIN_LISTEN_01 → TC_ADMIN_LISTEN_08 | admin-listening.test.js
+Đăng đề Reading | POST /api/reading | TC_ADMIN_READ_01 → TC_ADMIN_READ_08 | admin-reading.test.js
+Đăng đề Speaking | POST /api/speaking | TC_ADMIN_SPEAK_01 → TC_ADMIN_SPEAK_08 | admin-speaking.test.js
+Đăng đề Writing | POST /api/writing | TC_ADMIN_WRITE_01 → TC_ADMIN_WRITE_08 | admin-writing.test.js
+--- [TABLE END] ---
+
+
+
+========================================

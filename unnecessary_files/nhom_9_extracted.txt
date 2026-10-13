@@ -1,0 +1,69 @@
+ĐẠI HỌC PHENIKAA
+TRƯỜNG CÔNG NGHỆ THÔNG TIN PHENIKAA
+ĐÁNH GIÁ VÀ KIỂM ĐỊNH CHẤT LƯỢNG PHẦN MỀM (CSE703010)
+ĐỀ TÀI: WEB HỌC TỪ VỰNG TIẾNG ANH
+
+--- [TABLE START] ---
+Lớp: | Đánh giá và kiểm định chất lượng phần mềm*-1-1-26 (COUR02.LT3)
+Nhóm: | Nhóm 9
+Thành viên: | Đỗ Thành Long - 23010174
+ | Nguyễn Hữu Đăng Khoa - 23010901
+ | Hoàng Tiến Đạt - 23010864
+ | Tô Thị Thùy Dương - 23010876Nguyễn Tùng Dương - 23013811
+Giảng viên: | TS. Trương Đức Phương
+--- [TABLE END] ---
+
+Năm học: 2026-2027
+MỤC LỤC
+[Heading1] DANH MỤC BẢNG BIỂU
+[Heading1] DANH MỤC HÌNH VẼ
+[Heading1] DANH MỤC TỪ VIẾT TẮT (nếu có)
+[Heading1] MỞ ĐẦU
+[Heading1] Giới thiệu
+[Heading2] Giới thiệu bài toán
+[Heading2] Mục tiêu đề tài
+[Heading2] Phạm vi đề tài
+[Heading2] Công nghệ sử dụng
+[Heading1] Phân tích và xây dựng hệ thống
+[Heading2] Mô tả hệ thống
+[Heading2] Các chức năng chính
+[Heading2] Thiết kế cơ sở dữ liệu
+[Heading2] Giao diện chương trình
+[Heading1] Kiểm thử hộp đen
+[Heading2] Tổng quan và kỹ thuật áp dụng
+[Heading2] Màn hình Hôm nay
+[Heading2] Màn hình Thư viện
+[Heading2] Màn hình Thêm từ
+[Heading2] Màn hình Sổ công thức
+[Heading2] Màn hình Cài đặt
+[Heading2] Phiên Học từ mới
+[Heading2] Phiên Ôn tập SRS
+[Heading2] Phiên Ôn siêu tốc
+[Heading2] Kiểm thử API REST
+[Heading1] Kiểm thử hộp trắng
+[Heading2] Tổng quan chiến lược kiểm thử
+Kiểm thử logic SRS trong src.py
+Kiểm thử chuẩn hoá và validate dữ liệu
+Kiểm thử tầng API Route
+Kiểm thử mô hình và cơ sở dữ liệu
+Kiểm thử chống ghi trùng và tranh chấp ở Ôn siêu tốc
+Kiểm thử hộp trắng Frontend app.js
+Độ phủ mã
+Bảng map test case với source code
+[Heading1] Kiểm thử tự động
+[Heading1] Kiểm thử nâng cao
+[Heading1] Đánh giá và nhận xét
+[Heading2] Đánh giá hiệu quả bộ test
+[Heading2] Các lỗi phát hiện được
+[Heading2] Ưu điểm của hệ thống
+[Heading2] Hạn chế của hệ thống
+[Heading2] Hướng phát triển
+[Heading1] Kết luận
+Trình bày khoảng 1 trang các ý sau:
+Kết quả đạt được
+Kiến thức học được
+Kinh nghiệm nhóm
+[Heading1] Phân công nhiệm vụ
+Bảng phân công nhiệm vụ của các thành viên
+[Heading1] Phụ lục (Nếu có)
+Trình bày các phụ lục

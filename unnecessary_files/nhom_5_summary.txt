@@ -1,0 +1,92 @@
+Total lines: 1056
+
+=== HEADINGS AND KEY SECTIONS ===
+L15: MỤC LỤC
+L16: [Heading1] DANH MỤC BẢNG BIỂU
+L41: [Heading1] DANH MỤC HÌNH VẼ
+L45: [Heading1] DANH MỤC TỪ VIẾT TẮT
+L63: [Heading1] MỞ ĐẦU
+L67: [Heading1] 1 Giới thiệu
+L68: [Heading2] 1.1 Giới thiệu bài toán
+L72: [Heading2] 1.2 Mục tiêu đề tài
+L76: [Heading2] 1.3 Phạm vi đề tài
+L80: [Heading2] 1.4 Công nghệ sử dụng
+L85: Phần xử lý trí tuệ nhân tạo được tách riêng thành cụm dịch vụ trong thư mục services/speaking_AI để dễ kiểm soát và dễ mock khi kiểm thử. Cụ thể, convert_audio.py phụ trách chuyển đổi định dạng âm thanh bằng ffmpeg, whisper_service.py nạp mô hình Whisper base để chuyển giọng nói thành văn bản, groq_service.py gửi prompt tới mô hình Groq LLM, còn toeic_scorer.py tạo prompt chấm điểm cho từng dạng Speaking/Writing theo đúng cấu trúc đề. Cách tách này giúp mỗi bước xử lý có thể được kiểm thử độc lập, đồng thời giảm rủi ro khi thay đổi logic chấm điểm hoặc thay mô hình AI.
+L87: [Heading1] 2 Phân tích và xây dựng hệ thống
+L88: [Heading2] 2.1 Mô tả hệ thống
+L91: [Heading2] 2.2 Các chức năng chính
+L93: [Heading2] 2.3 Thiết kế cơ sở dữ liệu
+L102: [Heading2] 2.4 Giao diện chương trình
+L104: [Heading1] 3 Kiểm thử hộp đen
+L105: [Heading2] 3.1 ROLE = MEMBER
+L106: [Heading3] 3.1.1 Màn hình Dashboard (Trang chính hệ thống)
+L124: [Heading3] 3.1.2 Giao diện Các cuộc thi (Contests)
+L138: [Heading3] 3.1.3 Giao diện các khóa học
+L157: [Heading3] 3.1.4 Thông tin cá nhân
+L180: [Heading3] 3.1.5 Lịch sử làm bài
+L198: [Heading3] 3.1.6 Giao diện chi tiết kết quả bài làm
+L216: [Heading3] 3.1.7 Kỹ năng Listening
+L240: [Heading3] 3.1.8 Kỹ năng Reading
+L260: [Heading3] 3.1.9 Kỹ năng Speaking
+L282: [Heading3] 3.1.10 Kỹ năng Writing
+L302: [Heading2] 3.2 Auth
+L303: [Heading3] 3.2.1 Màn hình Đăng ký (Sign up)
+L317: [Heading3] 3.2.2 Màn hình Đăng nhập (Sign In)
+L329: [Heading3] 3.2.3 Màn hình Quên mật khẩu (Reset Password)
+L340: [Heading2] 3.3 Landing Page
+L341: [Heading3] 3.3.1 Giao diện Trang chủ (Homepage)
+L352: [Heading2] 3.4 ROLE = ADMIN
+L353: [Heading3] 3.4.1 Giao diện quản lý người dùng
+L368: [Heading3] 3.4.2  Đăng đề thi kỹ năng Speaking
+L403: [Heading3] 3.4.3 Đăng đề thi kỹ năng Writing
+L424: [Heading3] 3.4.4 Đăng đề thi kỹ năng Listening
+L444: [Heading3] 3.4.5 Đăng đề thi kỹ năng Reading
+L464: [Heading3] 3.4.6 Trang Dashboard của Admin
+L481: [Heading2] 3.5 Test API Postman
+L482: [Heading3] 3.5.1 Test Case API: Module Auth
+L498: [Heading3] 3.5.2 Test Case API: Chatbot
+L511: [Heading3] 3.5.3 Test Case API: User Attempt
+L537: [Heading1] 4 Kiểm thử hộp trắng
+L538: [Heading2] 4.1 Tổng quan chiến lược kiểm thử
+L553: [Heading2] 4.2 Kiểm thử bảo mật (Security Testing)
+L556: [Heading3] 4.2.1 Cơ chế hash mật khẩu bằng Argon2
+L560: [Heading3] 4.2.2 Quản lý JSON Web Token (JWT)
+L564: [Heading3] 4.2.3 Lớp bảo vệ Middleware xác thực JWT trên toàn bộ hệ thống API
+L568: [Heading2] 4.3 Kiểm thử tầng CRUD (Database Layer Testing)
+L570: [Heading3] 4.3.1 Phân hệ quản lý thực thể tài khoản người dùng — test_crud_user.py
+L573: [Heading3] 4.3.2 Phân hệ quản lý đề thi (Section CRUD Layer) — test_crud_section.py
+L576: [Heading3] 4.3.3 Phân hệ quản lý ngân hàng câu hỏi 4 kỹ năng
+L580: [Heading3] 4.3.4 Phân hệ lịch sử làm bài học viên (UserAttempt) — test_crud_user_attempt.py
+L583: [Heading2] 4.4 Kiểm thử tầng API Route (HTTP Integration Testing)
+L585: [Heading3] 4.4.1 Phân hệ xác thực người dùng — test_routes_auth.py
+L588: [Heading3] 4.4.2 Phân hệ API Route quản lý đề thi — test_routes_sections.py
+L591: [Heading3] 4.4.3 Phân hệ API Route quản lý câu hỏi 4 kỹ năng và nộp bài MCQ
+L598: [Heading3] 4.4.4 Phân hệ API Route quản lý câu hỏi 4 kỹ năng và Nộp bài MCQ (23 tests)
+L605: [Heading3] 4.4.5 Phân hệ API Route chấm điểm Speaking với AI test_routes_speaking.py
+L610: [Heading3] 4.4.6 Phân hệ API Route chấm điểm Writing với AI — test_routes_writing.py
+L615: [Heading3] 4.4.7 Phân hệ API Route quản lý Chatbot AI — test_routes_chatbot.py
+L620: [Heading2] 4.5 Kiểm thử logic nghiệp vụ phức tạp tầng Service
+L622: [Heading3] 4.5.1 Dịch vụ chấm điểm TOEIC — test_services_toeic_scorer.py
+L626: [Heading3] 4.5.2 Dịch vụ kết nối mạng và nhận dạng giọng nói —test_services_groq_whisper.py
+L630: [Heading2] 4.6 Kiểm thử WhiteBox-Testing FE
+L632: [Heading3] 4.6.1 Tổng quan
+L642: [Heading3] 4.6.2 Điều kiện chạy test
+L653: [Heading3] 4.6.3 Kết quả chạy gần nhất
+L663: [Heading3] 4.6.4 Chi tiết theo module
+L676: [Heading3] 4.6.5 Nguyên nhân Test Fail
+L685: [Heading3] 4.6.6 Coverage (Nhánh logic)
+L697: [Heading3] 4.6.7 Bảng map Test Case – Source code
+L729: [Heading1] 5 Kiểm thử tự động
+L737: [Heading1] 6 Kiểm thử nâng cao
+L743: [Heading1] 7 Đánh giá và nhận xét
+L744: [Heading2] 7.1 Đánh giá hiệu quả bộ test
+L746: [Heading2] 7.2 Các lỗi phát hiện được
+L778: [Heading2] 7.3 Ưu điểm của hệ thống
+L780: [Heading2] 7.4 Hạn chế của hệ thống
+L782: [Heading2] 7.5 Hướng phát triển
+L796: [Heading1] KẾT LUẬN
+L799: [Heading1] PHÂN CÔNG NHIỆM VỤ
+L810: [Heading1] PHỤ LỤC
+L811: [Heading1] PHỤ LỤC A
+L942: [Heading2] PHỤ LỤC B
+L1032: [Heading2] PHỤ LỤC C

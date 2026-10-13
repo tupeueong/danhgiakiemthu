@@ -1,0 +1,602 @@
+[
+  {
+    "id": "TC_DASH_01",
+    "screen": "Hôm nay (Dashboard)",
+    "name": "Hiển thị số lượng từ mới",
+    "input": "Hệ thống có 5 từ trạng thái 'new'",
+    "steps": "1. Mở trang chủ localhost:5000\n2. Quan sát thẻ thống kê 'Từ mới'",
+    "expected": "Hiển thị đúng số lượng 5 từ mới",
+    "actual": "Hiển thị đúng 5 từ mới trên badge",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_DASH_02",
+    "screen": "Hôm nay (Dashboard)",
+    "name": "Hiển thị số lượng từ đang học",
+    "input": "Hệ thống có 3 từ trạng thái 'learning'",
+    "steps": "1. Mở trang chủ\n2. Quan sát thẻ thống kê 'Đang học'",
+    "expected": "Hiển thị đúng số lượng 3 từ đang học",
+    "actual": "Hiển thị đúng 3 từ đang học",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_DASH_03",
+    "screen": "Hôm nay (Dashboard)",
+    "name": "Hiển thị số lượng từ đã thuộc",
+    "input": "Hệ thống có 10 từ trạng thái 'learned'",
+    "steps": "1. Mở trang chủ\n2. Quan sát thẻ thống kê 'Đã thuộc'",
+    "expected": "Hiển thị đúng số lượng 10 từ đã thuộc",
+    "actual": "Hiển thị đúng 10 từ đã thuộc",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_DASH_04",
+    "screen": "Hôm nay (Dashboard)",
+    "name": "Hiển thị số lượng từ đến hạn ôn",
+    "input": "Hệ thống có 4 từ có next_review_at <= hiện tại",
+    "steps": "1. Mở trang chủ\n2. Quan sát thẻ thống kê 'Đến hạn'",
+    "expected": "Hiển thị đúng 4 từ cần ôn tập",
+    "actual": "Hiển thị đúng 4 từ đến hạn ôn tập",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_DASH_05",
+    "screen": "Hôm nay (Dashboard)",
+    "name": "Hiển thị số lượng từ khó",
+    "input": "Hệ thống có 2 từ có cờ is_difficult = True",
+    "steps": "1. Mở trang chủ\n2. Quan sát thẻ 'Từ khó'",
+    "expected": "Hiển thị đúng 2 từ khó",
+    "actual": "Hiển thị đúng 2 từ khó",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_DASH_06",
+    "screen": "Hôm nay (Dashboard)",
+    "name": "Nút Bắt đầu học khi có từ mới",
+    "input": "Có ít nhất 1 từ mới",
+    "steps": "1. Click nút 'Học từ mới'\n2. Quan sát điều hướng",
+    "expected": "Mở modal/giao diện phiên học từ mới",
+    "actual": "Giao diện phiên học từ mới hiển thị chính xác",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_DASH_07",
+    "screen": "Hôm nay (Dashboard)",
+    "name": "Nút Bắt đầu học khi không có từ mới",
+    "input": "0 từ mới trong kho",
+    "steps": "1. Quan sát trạng thái nút 'Học từ mới'",
+    "expected": "Nút bị vô hiệu hóa hoặc có thông báo chưa có từ mới",
+    "actual": "Nút hiển thị trạng thái disabled hoặc thông báo đã học hết từ mới",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_DASH_08",
+    "screen": "Hôm nay (Dashboard)",
+    "name": "Nút Ôn tập SRS khi có từ đến hạn",
+    "input": "Có ít nhất 1 từ đến hạn",
+    "steps": "1. Click nút 'Ôn tập SRS'",
+    "expected": "Khởi động phiên ôn tập SRS",
+    "actual": "Mở phiên ôn tập SRS thành công",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_DASH_09",
+    "screen": "Hôm nay (Dashboard)",
+    "name": "Nút Ôn siêu tốc khi đủ điều kiện >= 3 từ",
+    "input": "Có >= 3 từ đã thuộc và đến hạn",
+    "steps": "1. Click nút 'Ôn siêu tốc'",
+    "expected": "Khởi động phiên ôn siêu tốc với 3 tim",
+    "actual": "Mở phiên ôn siêu tốc hiển thị 3 tim và đồng hồ đếm ngược 8s",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_DASH_10",
+    "screen": "Hôm nay (Dashboard)",
+    "name": "Nút Ôn siêu tốc khi chưa đủ 3 từ",
+    "input": "Chỉ có 1 hoặc 2 từ đến hạn",
+    "steps": "1. Click nút 'Ôn siêu tốc'",
+    "expected": "Thông báo cần tối thiểu 3 từ đến hạn để bắt đầu",
+    "actual": "Hiển thị thông báo yêu cầu cần tối thiểu 3 từ đến hạn",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_DASH_11",
+    "screen": "Hôm nay (Dashboard)",
+    "name": "Thanh tiến độ chu kỳ học tập",
+    "input": "Dữ liệu học tập tổng hợp",
+    "steps": "1. Quan sát thanh progress bar trên Dashboard",
+    "expected": "Hiển thị tỷ lệ phần trăm từ đã thuộc trên tổng số từ",
+    "actual": "Thanh tiến độ tính đúng tỷ lệ %",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_DASH_12",
+    "screen": "Hôm nay (Dashboard)",
+    "name": "Responsive trên màn hình điện thoại (Mobile)",
+    "input": "Thu nhỏ kích thước trình duyệt về 375x667",
+    "steps": "1. Nhấn F12 chọn Device Mode Mobile\n2. Quan sát khối thống kê",
+    "expected": "Các khối thẻ xếp dọc, không bị tràn viền ngang",
+    "actual": "Một số khối thẻ bị tràn viền bên phải trên màn hình hẹp (Lỗi CSS Responsive)",
+    "status": "FAIL"
+  },
+  {
+    "id": "TC_LIB_01",
+    "screen": "Thư viện (Library)",
+    "name": "Tìm kiếm từ tiếng Anh chính xác",
+    "input": "Từ khóa: 'compelling'",
+    "steps": "1. Nhập 'compelling' vào ô tìm kiếm",
+    "expected": "Danh sách hiển thị đúng từ 'compelling'",
+    "actual": "Lọc tức thì hiển thị đúng từ 'compelling'",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_LIB_02",
+    "screen": "Thư viện (Library)",
+    "name": "Tìm kiếm không phân biệt hoa thường",
+    "input": "Từ khóa: 'COMPELLING'",
+    "steps": "1. Nhập 'COMPELLING' chữ hoa vào ô tìm kiếm",
+    "expected": "Vẫn tìm thấy từ 'compelling'",
+    "actual": "Tìm thấy chính xác không phân biệt chữ hoa chữ thường",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_LIB_03",
+    "screen": "Thư viện (Library)",
+    "name": "Tìm kiếm theo nghĩa tiếng Việt",
+    "input": "Từ khóa: 'thuyết phục'",
+    "steps": "1. Nhập 'thuyết phục' vào ô tìm kiếm",
+    "expected": "Hiển thị các từ có nghĩa chứa 'thuyết phục'",
+    "actual": "Hiển thị đúng các từ có nghĩa chứa từ khóa",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_LIB_04",
+    "screen": "Thư viện (Library)",
+    "name": "Tìm kiếm theo loại từ",
+    "input": "Từ khóa: 'adjective'",
+    "steps": "1. Nhập 'adjective' vào ô tìm kiếm",
+    "expected": "Hiển thị danh sách các tính từ",
+    "actual": "Hiển thị danh sách các tính từ phù hợp",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_LIB_05",
+    "screen": "Thư viện (Library)",
+    "name": "Tìm kiếm từ không tồn tại",
+    "input": "Từ khóa: 'xyz987random'",
+    "steps": "1. Nhập từ khóa không tồn tại vào ô tìm kiếm",
+    "expected": "Thông báo không tìm thấy kết quả hoặc danh sách rỗng",
+    "actual": "Hiển thị thông báo không có từ vựng phù hợp",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_LIB_06",
+    "screen": "Thư viện (Library)",
+    "name": "Lọc tab trạng thái 'Tất cả'",
+    "input": "Click tab 'Tất cả'",
+    "steps": "1. Click vào tab lọc 'Tất cả'",
+    "expected": "Hiển thị toàn bộ từ vựng trong kho",
+    "actual": "Hiển thị đầy đủ toàn bộ từ vựng",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_LIB_07",
+    "screen": "Thư viện (Library)",
+    "name": "Lọc tab trạng thái 'Từ mới'",
+    "input": "Click tab 'Từ mới'",
+    "steps": "1. Click vào tab 'Từ mới'",
+    "expected": "Chỉ hiển thị các từ có state = 'new'",
+    "actual": "Chỉ hiển thị các từ trạng thái 'new'",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_LIB_08",
+    "screen": "Thư viện (Library)",
+    "name": "Lọc tab trạng thái 'Đang học'",
+    "input": "Click tab 'Đang học'",
+    "steps": "1. Click vào tab 'Đang học'",
+    "expected": "Chỉ hiển thị các từ có state = 'learning'",
+    "actual": "Chỉ hiển thị các từ trạng thái 'learning'",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_LIB_09",
+    "screen": "Thư viện (Library)",
+    "name": "Lọc tab trạng thái 'Đã thuộc'",
+    "input": "Click tab 'Đã thuộc'",
+    "steps": "1. Click vào tab 'Đã thuộc'",
+    "expected": "Chỉ hiển thị các từ có state = 'learned'",
+    "actual": "Chỉ hiển thị các từ trạng thái 'learned'",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_LIB_10",
+    "screen": "Thư viện (Library)",
+    "name": "Lọc tab trạng thái 'Từ khó'",
+    "input": "Click tab 'Từ khó'",
+    "steps": "1. Click vào tab 'Từ khó'",
+    "expected": "Chỉ hiển thị các từ có cờ is_difficult = True",
+    "actual": "Chỉ hiển thị đúng các từ bị đánh dấu khó",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_LIB_11",
+    "screen": "Thư viện (Library)",
+    "name": "Mở xem chi tiết từ vựng",
+    "input": "Click vào một từ trong bảng",
+    "steps": "1. Click vào dòng từ vựng\n2. Quan sát khung chi tiết",
+    "expected": "Hiển thị đầy đủ phiên âm, nghĩa, các ví dụ, collocations và word patterns",
+    "actual": "Hiển thị đầy đủ thông tin chi tiết của từ",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_LIB_12",
+    "screen": "Thư viện (Library)",
+    "name": "Chỉnh sửa thông tin từ vựng",
+    "input": "Sửa nghĩa tiếng Việt của từ",
+    "steps": "1. Click nút Sửa\n2. Thay đổi nghĩa\n3. Bấm Lưu",
+    "expected": "Thông tin cập nhật ngay lập tức trên giao diện và CSDL",
+    "actual": "Dữ liệu cập nhật thành công",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_LIB_13",
+    "screen": "Thư viện (Library)",
+    "name": "Xoá từ vựng",
+    "input": "Click nút Xoá một từ",
+    "steps": "1. Click nút Xoá\n2. Bấm Xác nhận ở hộp thoại confirm",
+    "expected": "Từ bị xoá khỏi danh sách, các câu ví dụ và tiến độ bị xoá liên hoàn",
+    "actual": "Từ bị xoá hoàn toàn khỏi hệ thống",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_LIB_14",
+    "screen": "Thư viện (Library)",
+    "name": "Đặt lại tiến độ học (Reset)",
+    "input": "Click nút Đặt lại tiến độ",
+    "steps": "1. Click nút Reset trên một từ đã học\n2. Xác nhận",
+    "expected": "Tiến độ từ trở về 'new', learning_step=0, srs_stage=0",
+    "actual": "Tiến độ reset về 'new' thành công",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_LIB_15",
+    "screen": "Thư viện (Library)",
+    "name": "Xuất dữ liệu ra tệp CSV",
+    "input": "Click nút 'Xuất CSV'",
+    "steps": "1. Click nút 'Xuất CSV'\n2. Tải file export.csv về",
+    "expected": "Tệp CSV tải về thành công, mở được với mã ký tự UTF-8",
+    "actual": "File CSV tải về chuẩn, hiển thị tiếng Việt có dấu rõ ràng",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_ADD_01",
+    "screen": "Thêm từ (Add Word)",
+    "name": "Thêm từ đơn lẻ hợp lệ",
+    "input": "English: 'meticulous', Phonetic: '/məˈtɪkjələs/', Vietnamese: 'tỉ mỉ', POS: 'adjective'",
+    "steps": "1. Điền các ô trong form\n2. Bấm 'Thêm từ'",
+    "expected": "Thông báo thêm thành công, từ xuất hiện trong Thư viện",
+    "actual": "Thêm từ thành công, form tự làm sạch",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_ADD_02",
+    "screen": "Thêm từ (Add Word)",
+    "name": "Bỏ trống trường tiếng Anh bắt buộc",
+    "input": "English: rỗng, Vietnamese: 'tỉ mỉ'",
+    "steps": "1. Để trống ô English\n2. Bấm 'Thêm từ'",
+    "expected": "Báo lỗi yêu cầu nhập từ tiếng Anh",
+    "actual": "Hiển thị thông báo yêu cầu nhập từ tiếng Anh",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_ADD_03",
+    "screen": "Thêm từ (Add Word)",
+    "name": "Bỏ trống trường tiếng Việt bắt buộc",
+    "input": "English: 'meticulous', Vietnamese: rỗng",
+    "steps": "1. Để trống ô Vietnamese\n2. Bấm 'Thêm từ'",
+    "expected": "Báo lỗi yêu cầu nhập nghĩa tiếng Việt",
+    "actual": "Hiển thị thông báo yêu cầu nhập nghĩa tiếng Việt",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_ADD_04",
+    "screen": "Thêm từ (Add Word)",
+    "name": "Chuẩn hóa alias loại từ viết tắt",
+    "input": "Nhập POS: 'adj'",
+    "steps": "1. Nhập 'adj' vào ô Loại từ\n2. Bấm thêm từ",
+    "expected": "Hệ thống tự chuẩn hóa thành 'adjective'",
+    "actual": "Hệ thống tự động chuẩn hóa sang 'adjective'",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_ADD_05",
+    "screen": "Thêm từ (Add Word)",
+    "name": "Thêm từ bị trùng hoàn toàn",
+    "input": "Thêm từ đã tồn tại cùng loại từ",
+    "steps": "1. Nhập từ 'compelling' (adjective) đã có sẵn\n2. Bấm thêm",
+    "expected": "Báo lỗi 409 Conflict: Từ này đã tồn tại trong thư viện",
+    "actual": "Hiển thị thông báo lỗi trùng lặp từ",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_ADD_06",
+    "screen": "Thêm từ (Add Word)",
+    "name": "Cùng từ tiếng Anh nhưng khác loại từ",
+    "input": "Đã có 'record' (noun), thêm 'record' (verb)",
+    "steps": "1. Nhập 'record' với loại từ 'verb'\n2. Bấm thêm",
+    "expected": "Thêm thành công mục từ thứ 2 riêng biệt",
+    "actual": "Cho phép thêm thành công 2 mục riêng cho 2 loại từ",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_ADD_07",
+    "screen": "Thêm từ (Add Word)",
+    "name": "Thêm nhiều câu ví dụ trên nhiều dòng",
+    "input": "Nhập 3 câu ví dụ xuống dòng trong ô Ví dụ",
+    "steps": "1. Nhập 3 câu ví dụ\n2. Bấm Thêm từ",
+    "expected": "Hệ thống lưu trữ đủ 3 câu ví dụ vào bảng word_examples",
+    "actual": "Lưu trữ chính xác 3 câu ví dụ",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_ADD_08",
+    "screen": "Thêm từ (Add Word)",
+    "name": "Tự động loại bỏ câu ví dụ trùng nhau",
+    "input": "Nhập 2 câu ví dụ giống hệt nhau",
+    "steps": "1. Nhập 2 câu giống nhau\n2. Bấm Thêm từ",
+    "expected": "Chỉ lưu 1 câu duy nhất, bỏ qua câu trùng",
+    "actual": "Tự động khử trùng lặp câu ví dụ",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_ADD_09",
+    "screen": "Thêm từ (Add Word)",
+    "name": "Thêm nhiều Collocations và Word Patterns",
+    "input": "Mỗi dòng 1 cụm collocation/pattern",
+    "steps": "1. Nhập danh sách collocations\n2. Bấm Thêm",
+    "expected": "Lưu trữ thành danh sách mảng chuỗi chính xác",
+    "actual": "Lưu trữ và hiển thị chính xác các cụm từ đi kèm",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_ADD_10",
+    "screen": "Thêm từ (Add Word)",
+    "name": "Dán hàng loạt (Bulk Import) định dạng 7 cột",
+    "input": "Dữ liệu 5 dòng phân cách bằng phím Tab",
+    "steps": "1. Dán vào ô Bulk Import\n2. Bấm 'Nhập danh sách'",
+    "expected": "Import thành công 5 từ mới vào hệ thống",
+    "actual": "Import thành công 5 từ mới",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_ADD_11",
+    "screen": "Thêm từ (Add Word)",
+    "name": "Bulk import có ngăn cách || trong cột ví dụ",
+    "input": "Cột ví dụ chứa 'Sentence 1 || Sentence 2'",
+    "steps": "1. Dán dữ liệu có ||\n2. Bấm Nhập danh sách",
+    "expected": "Tách thành 2 câu ví dụ riêng biệt cho từ",
+    "actual": "Phân tách chuẩn xác các câu ví dụ bằng ký tự ||",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_ADD_12",
+    "screen": "Thêm từ (Add Word)",
+    "name": "Bulk import tự động bỏ qua từ trùng lặp",
+    "input": "Dán danh sách có 2 từ mới và 1 từ đã có sẵn",
+    "steps": "1. Dán dữ liệu\n2. Bấm Nhập danh sách",
+    "expected": "Thông báo: Đã thêm 2 từ, bỏ qua 1 từ trùng",
+    "actual": "Báo cáo chính xác: 2 imported, 1 skipped",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_ADD_13",
+    "screen": "Thêm từ (Add Word)",
+    "name": "Bulk import dữ liệu sai số cột",
+    "input": "Dán dòng chỉ có 3 cột",
+    "steps": "1. Dán dòng thiếu cột\n2. Bấm Nhập",
+    "expected": "Báo lỗi chi tiết dòng thiếu thông tin",
+    "actual": "Hiển thị cảnh báo dòng không đúng định dạng",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_ADD_14",
+    "screen": "Thêm từ (Add Word)",
+    "name": "Bulk import dữ liệu rỗng",
+    "input": "Để trống ô dán dữ liệu",
+    "steps": "1. Bấm 'Nhập danh sách'",
+    "expected": "Báo lỗi yêu cầu dán nội dung",
+    "actual": "Hiển thị thông báo vui lòng nhập dữ liệu",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_ADD_15",
+    "screen": "Thêm từ (Add Word)",
+    "name": "Hỗ trợ định dạng 5 cột cũ",
+    "input": "Dán danh sách chỉ có 5 cột (kết thúc ở Examples)",
+    "steps": "1. Dán dữ liệu 5 cột\n2. Bấm Nhập",
+    "expected": "Hệ thống vẫn import bình thường, 2 cột sau để trống",
+    "actual": "Tương thích ngược định dạng 5 cột cũ thành công",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_ADD_16",
+    "screen": "Thêm từ (Add Word)",
+    "name": "Nút làm sạch form (Clear)",
+    "input": "Form đang có dữ liệu nhập dở",
+    "steps": "1. Bấm nút 'Làm lại / Xóa form'",
+    "expected": "Tất cả các ô input trở về trạng thái trống",
+    "actual": "Xóa trắng các trường nhập liệu",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_ADD_17",
+    "screen": "Thêm từ (Add Word)",
+    "name": "Xử lý khoảng trắng thừa đầu đuôi",
+    "input": "English: '   diligent   ', Vietnamese: '   chăm chỉ  '",
+    "steps": "1. Nhập có nhiều khoảng trắng thừa\n2. Bấm Thêm",
+    "expected": "Hệ thống tự trim cắt khoảng trắng thừa trước khi lưu",
+    "actual": "Dữ liệu được làm sạch khoảng trắng chuẩn xác",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_ADD_18",
+    "screen": "Thêm từ (Add Word)",
+    "name": "Nhập từ tiếng Anh chứa ký tự đặc biệt",
+    "input": "English: 'state-of-the-art'",
+    "steps": "1. Nhập từ có dấu gạch ngang\n2. Bấm Thêm",
+    "expected": "Hệ thống chấp nhận từ ghép có gạch nối hợp lệ",
+    "actual": "Lưu trữ thành công từ ghép",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_FORM_01",
+    "screen": "Sổ công thức (Formulas)",
+    "name": "Thêm ghi chú công thức 1 dòng",
+    "input": "Nội dung: 'S + V + O'",
+    "steps": "1. Nhập vào ô công thức\n2. Bấm Thêm",
+    "expected": "Công thức hiển thị ngay trong danh sách",
+    "actual": "Ghi chú công thức thêm thành công",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_FORM_02",
+    "screen": "Sổ công thức (Formulas)",
+    "name": "Thêm ghi chú công thức nhiều dòng",
+    "input": "Nội dung có xuống dòng và dấu gạch đầu dòng",
+    "steps": "1. Nhập nội dung nhiều dòng\n2. Bấm Thêm",
+    "expected": "Giữ nguyên các dòng khi hiển thị",
+    "actual": "Định dạng nhiều dòng được bảo toàn nguyên vẹn",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_FORM_03",
+    "screen": "Sổ công thức (Formulas)",
+    "name": "Thêm công thức bỏ trống nội dung",
+    "input": "Nội dung: rỗng",
+    "steps": "1. Để trống\n2. Bấm Thêm",
+    "expected": "Báo lỗi yêu cầu nhập nội dung công thức",
+    "actual": "Hiển thị thông báo không được để trống",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_FORM_04",
+    "screen": "Sổ công thức (Formulas)",
+    "name": "Chỉnh sửa ghi chú công thức",
+    "input": "Sửa nội dung công thức đã có",
+    "steps": "1. Bấm nút Sửa\n2. Đổi nội dung\n3. Bấm Cập nhật",
+    "expected": "Nội dung cập nhật thành công trên giao diện",
+    "actual": "Cập nhật nội dung công thức thành công",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_FORM_05",
+    "screen": "Sổ công thức (Formulas)",
+    "name": "Xoá ghi chú công thức",
+    "input": "Click nút Xoá một công thức",
+    "steps": "1. Bấm Xoá\n2. Xác nhận ở hộp thoại",
+    "expected": "Công thức bị xoá khỏi danh sách",
+    "actual": "Xoá công thức thành công",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_FORM_06",
+    "screen": "Sổ công thức (Formulas)",
+    "name": "Sắp xếp theo thời gian cập nhật mới nhất",
+    "input": "Nhiều công thức",
+    "steps": "1. Sửa một công thức ở dưới\n2. Quan sát vị trí",
+    "expected": "Công thức vừa sửa nhảy lên vị trí đầu tiên",
+    "actual": "Sắp xếp đúng theo updated_at giảm dần",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_FORM_07",
+    "screen": "Sổ công thức (Formulas)",
+    "name": "Tính độc lập không ảnh hưởng từ vựng",
+    "input": "Thêm, sửa, xoá công thức",
+    "steps": "1. Thao tác CRUD công thức\n2. Vào màn Thư viện kiểm tra",
+    "expected": "Kho từ vựng và lịch SRS giữ nguyên 100%",
+    "actual": "Từ vựng và SRS hoàn toàn độc lập, không bị ảnh hưởng",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_FORM_08",
+    "screen": "Sổ công thức (Formulas)",
+    "name": "Bảo vệ an toàn chống XSS trong công thức",
+    "input": "Nội dung: '<script>alert(1)</script>'",
+    "steps": "1. Nhập mã script HTML\n2. Bấm Thêm",
+    "expected": "Hệ thống escape ký tự, không thực thi mã độc",
+    "actual": "Hiển thị dạng văn bản an toàn, không bị XSS",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_SET_01",
+    "screen": "Cài đặt (Settings)",
+    "name": "Hiển thị 3 tùy chọn giọng đọc",
+    "input": "Mở màn hình Cài đặt",
+    "steps": "1. Vào mục Cài đặt\n2. Quan sát dropdown giọng đọc",
+    "expected": "Hiển thị đủ 3 giọng: Microsoft Zira, Microsoft Mark, Google US English",
+    "actual": "Dropdown hiển thị đầy đủ 3 giọng đọc",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_SET_02",
+    "screen": "Cài đặt (Settings)",
+    "name": "Chọn và lưu giọng Microsoft Zira",
+    "input": "Chọn 'Microsoft Zira - English (United States)'",
+    "steps": "1. Chọn giọng Zira\n2. Bấm Lưu",
+    "expected": "Thông báo lưu thành công, lưu vào DB Setting",
+    "actual": "Lưu thành công giọng Microsoft Zira",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_SET_03",
+    "screen": "Cài đặt (Settings)",
+    "name": "Chọn và lưu giọng Microsoft Mark",
+    "input": "Chọn 'Microsoft Mark - English (United States)'",
+    "steps": "1. Chọn giọng Mark\n2. Bấm Lưu",
+    "expected": "Thông báo lưu thành công",
+    "actual": "Lưu thành công giọng Microsoft Mark",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_SET_04",
+    "screen": "Cài đặt (Settings)",
+    "name": "Chọn và lưu giọng Google US English",
+    "input": "Chọn 'Google US English'",
+    "steps": "1. Chọn Google US\n2. Bấm Lưu",
+    "expected": "Thông báo lưu thành công",
+    "actual": "Lưu thành công giọng Google US English",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_SET_05",
+    "screen": "Cài đặt (Settings)",
+    "name": "Nút Nghe thử giọng đọc",
+    "input": "Bấm nút 'Nghe thử'",
+    "steps": "1. Chọn một giọng\n2. Bấm nút Nghe thử",
+    "expected": "Phát âm câu mẫu bằng đúng giọng đã chọn qua loa",
+    "actual": "Loa phát âm rõ ràng đúng giọng đã chọn",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_SET_06",
+    "screen": "Cài đặt (Settings)",
+    "name": "Duy trì cấu hình sau khi tải lại trang (F5)",
+    "input": "Đã lưu giọng Mark, nhấn F5",
+    "steps": "1. Tải lại trang F5\n2. Vào lại Cài đặt",
+    "expected": "Dropdown vẫn giữ đúng giá trị giọng Mark đã lưu",
+    "actual": "Dữ liệu cài đặt được duy trì liên tục",
+    "status": "PASS"
+  },
+  {
+    "id": "TC_SET_07",
+    "screen": "Cài đặt (Settings)",
+    "name": "Xử lý khi trình duyệt không hỗ trợ Web Speech API",
+    "input": "Mô phỏng trình duyệt cũ không có window.speechSynthesis",
+    "steps": "1. Tắt Web Speech API\n2. Thử phát âm",
+    "expected": "Hiển thị thông báo trình duyệt không hỗ trợ âm thanh, không sập web",
+    "actual": "Xử lý ngoại lệ an toàn, thông báo rõ ràng cho người dùng",
+    "status": "PASS"
+  }
+]

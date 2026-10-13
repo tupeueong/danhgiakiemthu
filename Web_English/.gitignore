@@ -1,0 +1,25 @@
+# Python Virtual Environments
+.venv/
+venv/
+env/
+ENV/
+
+# Python Bytecode & Cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Coverage files
+.coverage
+.coverage.*
+
+# SQLite lock files
+*.db-shm
+*.db-wal
+
+# OS and IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

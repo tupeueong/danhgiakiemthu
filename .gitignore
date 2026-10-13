@@ -1,0 +1,30 @@
+# Python Virtual Environments
+.venv/
+venv/
+env/
+ENV/
+*.venv/
+
+# Python Bytecode & Cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Coverage sqlite db
+.coverage
+.coverage.*
+
+# Backup git repo inside unnecessary_files
+unnecessary_files/Web_English_git_backup/
+
+# SQLite lock files
+*.db-shm
+*.db-wal
+
+# OS and IDE Files
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/

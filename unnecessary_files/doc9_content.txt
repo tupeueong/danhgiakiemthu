@@ -1,0 +1,92 @@
+P0 [normal]: ĐẠI HỌC PHENIKAA
+P1 [normal]: TRƯỜNG CÔNG NGHỆ THÔNG TIN PHENIKAA
+P2 [normal]: 
+P3 [normal]: 
+P4 [normal]: 
+P5 [normal]: ĐÁNH GIÁ VÀ KIỂM ĐỊNH CHẤT LƯỢNG PHẦN MỀM 
+(CSE703010)
+P6 [normal]: ĐỀ TÀI: WEB HỌC TỪ VỰNG TIẾNG ANH
+P7 [normal]: 
+P8 [normal]: 
+P9 [normal]: 
+P10 [normal]: 
+P11 [normal]: 
+P12 [normal]: 
+P13 [normal]: 
+P14 [normal]: 
+P15 [normal]: 
+P16 [normal]: 
+P17 [normal]: 
+P18 [normal]: 
+P19 [normal]: Năm học: 2026-2027
+P20 [normal]: MỤC LỤC
+P21 [normal]: 
+P22 [normal]: 
+P23 [Heading 1]: DANH MỤC BẢNG BIỂU
+P24 [normal]: 
+P25 [Heading 1]: DANH MỤC HÌNH VẼ
+P26 [normal]: 
+P27 [Heading 1]: DANH MỤC TỪ VIẾT TẮT (nếu có)
+P28 [normal]: 
+P29 [Heading 1]: MỞ ĐẦU
+P30 [normal]: 
+P31 [Heading 1]: Giới thiệu
+P32 [Heading 2]: Giới thiệu bài toán
+P33 [Heading 2]: Mục tiêu đề tài
+P34 [Heading 2]: Phạm vi đề tài
+P35 [Heading 2]: Công nghệ sử dụng
+P36 [Heading 1]: Phân tích và xây dựng hệ thống
+P37 [Heading 2]: Mô tả hệ thống
+P38 [normal]: 
+P39 [Heading 2]: Các chức năng chính
+P40 [normal]: 
+P41 [Heading 2]: Thiết kế cơ sở dữ liệu
+P42 [normal]: 
+P43 [Heading 2]: Giao diện chương trình
+P44 [normal]: 
+P45 [Heading 1]: Kiểm thử hộp đen
+P46 [Heading 2]: Tổng quan và kỹ thuật áp dụng 
+P47 [normal]: 
+P48 [Heading 2]: Màn hình Hôm nay 
+P49 [Heading 2]: Màn hình Thư viện
+P50 [Heading 2]: Màn hình Thêm từ 
+P51 [Heading 2]: Màn hình Sổ công thức 	
+P52 [Heading 2]: Màn hình Cài đặt 
+P53 [Heading 2]: Phiên Học từ mới 
+P54 [Heading 2]: Phiên Ôn tập SRS 
+P55 [Heading 2]: Phiên Ôn siêu tốc 
+P56 [Heading 2]: Kiểm thử API REST 
+P57 [normal]: 
+P58 [Heading 1]: Kiểm thử hộp trắng
+P59 [Heading 2]: Tổng quan chiến lược kiểm thử 
+P60 [normal]: Kiểm thử logic SRS trong src.py
+P61 [normal]: Kiểm thử chuẩn hoá và validate dữ liệu 
+P62 [normal]: Kiểm thử tầng API Route 
+P63 [normal]: Kiểm thử mô hình và cơ sở dữ liệu 
+P64 [normal]: Kiểm thử chống ghi trùng và tranh chấp ở Ôn siêu tốc 
+P65 [normal]: Kiểm thử hộp trắng Frontend app.js
+P66 [normal]: Độ phủ mã 
+P67 [normal]: Bảng map test case với source code 
+P68 [normal]: 
+P69 [Heading 1]: Kiểm thử tự động
+P70 [Heading 2]: 
+P71 [normal]: 
+P72 [Heading 1]: Kiểm thử nâng cao
+P73 [Heading 2]: 
+P74 [normal]: 
+P75 [Heading 1]: Đánh giá và nhận xét
+P76 [Heading 2]: Đánh giá hiệu quả bộ test
+P77 [Heading 2]: Các lỗi phát hiện được
+P78 [Heading 2]: Ưu điểm của hệ thống
+P79 [Heading 2]: Hạn chế của hệ thống
+P80 [Heading 2]: Hướng phát triển
+P81 [Heading 1]: Kết luận
+P82 [normal]: Trình bày khoảng 1 trang các ý sau:
+P83 [normal]: Kết quả đạt được
+P84 [normal]: Kiến thức học được
+P85 [normal]: Kinh nghiệm nhóm
+P86 [Heading 1]: Phân công nhiệm vụ 
+P87 [normal]: Bảng phân công nhiệm vụ của các thành viên
+P88 [Heading 1]: Phụ lục (Nếu có)
+P89 [normal]: Trình bày các phụ lục
+P90 [normal]: 

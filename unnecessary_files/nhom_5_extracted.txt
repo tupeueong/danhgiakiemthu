@@ -1,0 +1,1055 @@
+ĐẠI HỌC PHENIKAA
+TRƯỜNG CÔNG NGHỆ THÔNG TIN
+ĐÁNH GIÁ VÀ KIỂM ĐỊNH CHẤT LƯỢNG PHẦN MỀM
+(CSE703010)
+ĐỀ TÀI: WEBSITE TOEIC - QUẢN LÝ ĐỀ THI
+
+--- [TABLE START] ---
+Lớp học phần: | Đánh giá và kiểm định chất lượng phần mềm*-1-3-25(COUR01.LT4)
+Nhóm thực hiện: | Nhóm 5
+Thành viên nhóm: | Vũ Minh Trung - 23010361Đoàn Quang Minh - 23010392Lương Hồng Quân - 23010423Nguyễn Thanh Nam - 23010056Nguyễn Tá Đặng Minh - 22010072
+Giảng viên: | TS. Trương Đức Phương
+--- [TABLE END] ---
+
+Năm học: 2025-2026
+MỤC LỤC
+[Heading1] DANH MỤC BẢNG BIỂU
+[TableofFigures] Bảng 1:Màn hình Dashboard (Trang chính hệ thống)18
+[TableofFigures] Bảng 2:Giao diện Các cuộc thi (Contests)21
+[TableofFigures] Bảng 3:Giao diện các khóa học23
+[TableofFigures] Bảng 4:Thông tin cá nhân27
+[TableofFigures] Bảng 5:Lịch sử làm bài30
+[TableofFigures] Bảng 6:Giao diện chi tiết kết quả bài làm33
+[TableofFigures] Bảng 7:Kỹ năng Listening36
+[TableofFigures] Bảng 8:Kỹ năng Reading41
+[TableofFigures] Bảng 9:Kỹ năng Speaking45
+[TableofFigures] Bảng 10:Kỹ năng Writing49
+[TableofFigures] Bảng 11:Màn hình Đăng ký (Sign up)53
+[TableofFigures] Bảng 12:Màn hình Đăng nhập (Sign In)56
+[TableofFigures] Bảng 13:Màn hình Quên mật khẩu (Reset Password)57
+[TableofFigures] Bảng 14:Giao diện Trang chủ (Homepage)58
+[TableofFigures] Bảng 15:Giao diện quản lý người dùng60
+[TableofFigures] Bảng 16:Đăng đề thi kỹ năng Speaking66
+[TableofFigures] Bảng 17:Đăng đề thi kỹ năng Writing72
+[TableofFigures] Bảng 18:Đăng đề thi kỹ năng Listening82
+[TableofFigures] Bảng 19:Đăng đề thi kỹ năng Reading87
+[TableofFigures] Bảng 20:Trang Dashboard của Admin93
+[TableofFigures] Bảng 21:Test Case API: Module Auth99
+[TableofFigures] Bảng 22:Test Case API: Chatbot103
+[TableofFigures] Bảng 23:Test Case API: User Attempt107
+[TableofFigures] Bảng 24:Bảng map Test Case – Source code140
+[Heading1] DANH MỤC HÌNH VẼ
+[TableofFigures] Hình 1:Sơ đồ hệ thống Web TOEIC13
+[TableofFigures] Hình 2:Mô hình thực thể liên kết cơ sở dữ liệu quan hệ (ERD Diagram)16
+[TableofFigures] Hình 3:Kết quả kiểm thử hộp trắng FE136
+[Heading1] DANH MỤC TỪ VIẾT TẮT
+
+--- [TABLE START] ---
+Từ viết tắt | Ý nghĩa cụ thể tiếng Anh | Ý nghĩa dịch nghĩa tiếng Việt
+AI | Artificial Intelligence | Trí tuệ nhân tạo
+API | Application Programming Interface | Giao diện lập trình ứng dụng
+CRUD | Create, Read, Update, Delete | Các thao tác dữ liệu cốt lõi (Tạo, Đọc, Sửa, Xóa)
+CI/CD | Continuous Integration / Continuous Deployment | Tích hợp liên tục và triển khai liên tục
+DB | Database | Cơ sở dữ liệu
+ETS | Educational Testing Service | Viện Khảo thí Giáo dục Hoa Kỳ
+HTTP | Hypertext Transfer Protocol | Giao thức truyền tải siêu văn bản
+JWT | JSON Web Token | Mã thông báo chuỗi xác thực dạng JSON bảo mật
+LLM | Large Language Model | Mô hình ngôn ngữ lớn
+MCQ | Multiple Choice Question | Câu hỏi trắc nghiệm đa lựa chọn khách quan
+ORM | Object-Relational Mapping | Ánh xạ thực thể quan hệ cơ sở dữ liệu
+SSE | Server-Sent Events | Cơ chế truyền dữ liệu dòng liên tục từ máy chủ
+--- [TABLE END] ---
+
+[Heading1] MỞ ĐẦU
+Trong bối cảnh toàn cầu hóa và hội nhập kinh tế quốc tế sâu rộng, năng lực sử dụng ngoại ngữ, đặc biệt là tiếng Anh thương mại theo chuẩn đánh giá TOEIC (Test of English for International Communication), đã trở thành điều kiện tiên quyết cho việc đánh giá chuẩn đầu ra tại các trường đại học hàng đầu cũng như tiêu chí tuyển chọn nhân sự tại các doanh nghiệp đa quốc gia. Nhận thức rõ được tầm quan trọng cấp thiết này, việc nghiên cứu, thiết kế và phát triển dự án "Website TOEIC - Quản lý đề thi và chấm điểm tự động" do Nhóm 5 thực hiện hướng tới việc xây dựng một giải pháp công nghệ toàn diện nhằm mang lại trải nghiệm thi trực tuyến mượt mà và trực quan cho học viên.
+Dự án không chỉ tập trung tối ưu hóa các module làm bài trắc nghiệm khách quan truyền thống cho hai kỹ năng Nghe (Listening) và Đọc (Reading), mà còn sở hữu một điểm đột phá vượt trội chính là tích hợp các dịch vụ trí tuệ nhân tạo hiện đại. Cụ thể, việc nhúng mô hình Whisper AI và Groq LLM đã hiện thực hóa tính năng "giám khảo ảo" tự động thu âm giọng nói, phân tích âm học ngữ âm, rà soát cấu trúc ngữ pháp tự luận để đưa ra thang điểm chính xác cùng nhận xét sửa lỗi chi tiết theo thời gian thực cho hai kỹ năng sản sinh vốn cực kỳ khó tự học là Nói (Speaking) và Viết (Writing).
+Tuy nhiên, đối với một nền tảng Web tích hợp đa dịch vụ phức tạp, việc cam kết chất lượng phần mềm, tính toàn vẹn của dữ liệu quan hệ, độ ổn định logic nghiệp vụ và năng lực chịu tải tối ưu của hệ thống là một bài toán cốt lõi. Do đó, báo cáo bài tập lớn này được Nhóm 5 thiết lập nhằm tổng hợp, phân tích chi tiết toàn bộ quy trình kiểm định chất lượng, bao gồm ma trận 126 kịch bản kiểm thử hộp đen toàn diện giao diện frontend và bộ test suite 271 kịch bản kiểm thử hộp trắng backend tự động. Luồng rà soát nghiêm ngặt này là cơ sở khoa học vững chắc khẳng định chất lượng cao của sản phẩm trước khi đưa vào ứng dụng thực tiễn.
+[Heading1] 1 Giới thiệu
+[Heading2] 1.1 Giới thiệu bài toán
+Trong bối cảnh nhu cầu học và luyện thi tiếng Anh quốc tế tại Việt Nam ngày càng tăng, TOEIC đã trở thành một trong những chứng chỉ được quan tâm nhiều nhất bởi sinh viên và người đi làm. Tuy nhiên, trên thực tế phần lớn các nền tảng thi thử trực tuyến hiện nay chỉ tập trung vào hai kỹ năng trắc nghiệm khách quan là Listening và Reading, vì đây là các phần dễ chuẩn hóa đáp án, dễ tự động chấm điểm và dễ hiển thị kết quả ngay sau khi người học hoàn thành bài thi. Ngược lại, hai kỹ năng Speaking và Writing lại có tính mở cao, đòi hỏi đánh giá theo ngữ cảnh, theo chất lượng diễn đạt và theo tiêu chí ngôn ngữ nên thường phải dựa vào chấm thủ công hoặc các hệ thống hỗ trợ có độ phức tạp lớn hơn nhiều. Chính sự chênh lệch này tạo ra khoảng trống rõ rệt giữa nhu cầu học tập thực tế và khả năng hỗ trợ tự động của các hệ thống hiện có.
+Đối với một hệ thống luyện thi TOEIC đầy đủ, bài toán không chỉ dừng lại ở việc hiển thị đề thi hay lưu đáp án, mà còn phải quản lý được ngân hàng câu hỏi lớn, tổ chức đề thi theo đúng cấu trúc từng kỹ năng, ghi nhận lịch sử làm bài, thống kê kết quả, và đặc biệt là xử lý tốt các luồng nghiệp vụ liên quan đến AI như chuyển giọng nói thành văn bản, tạo prompt chấm điểm và sinh phản hồi cho bài nói hoặc bài viết. Với dự án Website TOEIC - Quản lý đề thi, nhóm 5 lựa chọn cách xây dựng một hệ thống web có khả năng phân tầng rõ ràng giữa giao diện người dùng, xử lý nghiệp vụ và truy vấn cơ sở dữ liệu, đồng thời tích hợp các dịch vụ AI để hỗ trợ chấm Speaking/Writing và chatbot tư vấn học tập.
+Từ góc nhìn kiểm thử phần mềm, đây là một hệ thống có nhiều nhánh chức năng khác nhau và nhiều điểm dễ phát sinh lỗi: giao diện responsive, luồng nộp bài, tính điểm, xử lý file âm thanh, phân tích dữ liệu lịch sử, xác thực JWT, và tương tác với mô hình ngôn ngữ lớn. Vì vậy, báo cáo này không chỉ mô tả sản phẩm mà còn tập trung kiểm định chất lượng của toàn bộ hệ thống thông qua kiểm thử hộp đen, hộp trắng, kiểm thử tự động, kiểm thử logic nghiệp vụ và kiểm thử nâng cao. Theo tài liệu báo cáo hiện tại, phạm vi kiểm thử đã bao phủ 49 kịch bản hộp đen giao diện và 271 kịch bản hộp trắng backend, cho thấy mục tiêu của nhóm không chỉ là hoàn thiện chức năng mà còn là xác nhận độ ổn định và tính nhất quán của hệ thống trước khi đưa vào sử dụng thực tế.
+[Heading2] 1.2 Mục tiêu đề tài
+Đề tài này được xây dựng nhằm hiện thực hóa một hệ thống luyện thi TOEIC trực tuyến có khả năng vận hành ổn định, phân tách module rõ ràng và hỗ trợ kiểm thử độc lập ở cả frontend lẫn backend. Mục tiêu đầu tiên là xây dựng một Web Application an toàn, trong đó học viên có thể thực hiện các thao tác thi thử, xem lịch sử, theo dõi kết quả và tương tác với chatbot hỗ trợ học tập, còn quản trị viên có thể quản lý ngân hàng câu hỏi, đề thi và dữ liệu hệ thống. Mục tiêu thứ hai là tích hợp các dịch vụ AI thật sự nằm trong dự án, gồm Whisper để chuyển âm thanh thành văn bản và Groq LLM để hỗ trợ chấm điểm, phân tích và sinh phản hồi cho các dạng câu hỏi Speaking/Writing.
+Mục tiêu thứ ba là xây dựng một quy trình kiểm thử đủ sâu để phát hiện lỗi ở nhiều tầng khác nhau của hệ thống. Ở tầng giao diện, hệ thống cần được kiểm thử về điều hướng, phản hồi của các nút chức năng, trạng thái rỗng và khả năng hiển thị responsive trên nhiều kích thước màn hình. Ở tầng backend, nhóm kiểm thử phải xác minh được các lớp bảo mật, CRUD, API Route và Service, đặc biệt là các chức năng nhạy cảm như hash mật khẩu, JWT, lịch sử làm bài, submit MCQ, chatbot streaming và các hàm chấm Speaking/Writing. Mục tiêu này được thể hiện rất rõ trong whitebox của dự án, nơi các test được phân chia theo từng nhóm chức năng, từng file test và từng loại dữ liệu đầu vào để bảo đảm khả năng kiểm soát lỗi và khoanh vùng nguyên nhân khi có sự cố.
+Từ đó, có thể thấy đề tài không chỉ hướng đến việc tạo ra một website luyện thi TOEIC đơn thuần, mà còn hướng đến một hệ thống có khả năng tự động hóa nhiều khâu quan trọng trong quá trình học và kiểm tra, giảm phụ thuộc vào chấm thủ công, rút ngắn thời gian phản hồi cho người học và tăng độ tin cậy của kết quả đánh giá. Đây chính là cơ sở để nhóm thiết kế các tầng kiểm thử theo hướng công nghiệp, kết hợp cả kiểm thử chức năng, kiểm thử kỹ thuật và kiểm thử tích hợp thực tế.
+[Heading2] 1.3 Phạm vi đề tài
+Phạm vi nghiên cứu và triển khai của đề tài tập trung vào môi trường ứng dụng Web Application, với hai phân hệ người dùng chính là học viên và quản trị viên. Ở phía học viên, hệ thống hỗ trợ các chức năng tìm kiếm đề thi, làm bài phòng thi trực tuyến, xem lịch sử làm bài, theo dõi thống kê năng lực, tương tác với chatbot và sử dụng thêm các chức năng học tập như flashcard. Ở phía quản trị viên, hệ thống cung cấp các màn hình để quản lý đề thi, người dùng và tải dữ liệu đầu vào phục vụ ngân hàng câu hỏi. Cách phân chia này phù hợp với cấu trúc thư mục frontend trong source code, nơi các màn hình được tổ chức riêng theo landing, auth, member và admin, giúp luồng sử dụng được tách bạch và dễ kiểm thử hơn.
+Về mặt kỹ thuật, phạm vi của báo cáo bao phủ toàn bộ backend FastAPI và frontend ReactJS/Vite của dự án. Backend được tổ chức thành các nhóm chức năng gồm api, core, crud, db, models, schemas, services và tests; điều này cho phép kiểm thử theo từng lớp trách nhiệm, từ lớp xử lý dữ liệu cho tới lớp chấm điểm AI và lớp bảo mật JWT. Frontend tập trung vào các màn hình chính như Dashboard, Contest, Course, History, Profile, Listening, Reading, Speaking, Writing, ChatBot và Flashcard. Do đó, phạm vi kiểm thử của báo cáo không chỉ dừng ở mức “chạy được” mà còn bao gồm việc đối chiếu hành vi thực tế của từng thành phần với source code, dữ liệu mô hình và kết quả test suite đã triển khai.
+Xét theo tài liệu whitebox và blackbox, phạm vi kiểm định của đề tài được giới hạn vào các thành phần đã có trong mã nguồn, không mở rộng sang các chức năng ngoài dự án hoặc các giả định không có trong code. Điều này đặc biệt quan trọng vì hệ thống có nhiều luồng phức tạp liên quan đến AI, streaming, upload file, bảo mật và lưu lịch sử làm bài; nếu mô tả vượt quá source code thì báo cáo sẽ mất tính chính xác. Vì vậy, toàn bộ nội dung kiểm thử trong báo cáo được định hướng bám sát dữ liệu thật của hệ thống, bao gồm số lượng test case, các module được kiểm thử và các luồng chức năng đã hiện thực hóa trong source.
+[Heading2] 1.4 Công nghệ sử dụng
+Hệ thống Website TOEIC - Quản lý đề thi được xây dựng theo kiến trúc tách lớp rõ ràng nhằm bảo đảm khả năng mở rộng, bảo trì và kiểm thử độc lập giữa giao diện, xử lý nghiệp vụ và dữ liệu. Ở tầng giao diện, dự án sử dụng React kết hợp Vite để xây dựng các màn hình cho học viên và quản trị viên; cấu trúc frontend được chia thành các khu vực chức năng riêng như Landing, Auth, Member và Admin, đồng thời sử dụng cơ chế điều hướng của React Router để chuyển giữa các nhóm màn hình này. Cách tổ chức đó giúp các luồng sử dụng trong hệ thống được phân mảnh rõ ràng, dễ quản lý trạng thái, dễ kiểm soát điều hướng và thuận lợi khi kiểm thử theo từng kịch bản người dùng thực tế.
+Ở tầng xử lý phía máy chủ, project sử dụng FastAPI làm framework chính để tiếp nhận và xử lý toàn bộ request API. Trong main.py, ứng dụng được khởi tạo theo mô hình FastAPI chuẩn, sau đó gắn thêm middleware xác thực JWT, cấu hình CORS và mount các thư mục tĩnh phục vụ ảnh, âm thanh. Mã nguồn backend được tổ chức thành các vùng chức năng riêng gồm api, core, crud, db, models, schemas, services và tests, nhờ đó mỗi lớp chịu trách nhiệm một phần rõ ràng của hệ thống: api gom router, core chứa cấu hình và bảo mật, crud thao tác dữ liệu, db quản lý session và khởi tạo database, models định nghĩa ORM, schemas định nghĩa dữ liệu vào/ra, còn services chứa logic nghiệp vụ và các hàm gọi AI. Cách phân tầng này giúp việc truy vết lỗi và kiểm thử độc lập từng lớp trở nên rõ ràng hơn.
+Về mặt dữ liệu, hệ thống sử dụng SQLAlchemy làm ORM để ánh xạ các bảng quan hệ sang đối tượng Python, qua đó toàn bộ thao tác với cơ sở dữ liệu được chuẩn hóa và thống nhất trong các lớp CRUD. Các thực thể chính của hệ thống xoay quanh User, Section, QuestionBase, các nhóm câu hỏi của bốn kỹ năng ListeningQuestion, ReadingQuestion, SpeakingQuestion, WritingQuestion, cùng UserAttempt và Flashcard. Trong đó, QuestionBase đóng vai trò cầu nối giữa section và từng loại câu hỏi chuyên biệt, còn UserAttempt lưu lịch sử làm bài, đáp án người dùng, trạng thái đúng/sai và thời điểm nộp bài để phục vụ thống kê, chấm điểm và chatbot phân tích tiến độ học tập. Ở môi trường kiểm thử, hệ thống dùng SQLite in-memory để cô lập dữ liệu giữa các test case, bảo đảm các lượt kiểm thử không tác động lẫn nhau và không làm ảnh hưởng tới dữ liệu thật.
+Về bảo mật, hệ thống dùng JWT kết hợp middleware để bảo vệ các route yêu cầu đăng nhập. Trong core/security.py, mật khẩu được băm bằng Argon2 thông qua passlib, sau đó mới được lưu xuống cơ sở dữ liệu; JWT được tạo bằng thư viện python-jose với payload chứa thông tin định danh người dùng và thời hạn hiệu lực. Middleware trong core/middleware.py cho phép các đường dẫn công khai như /api/auth/*, /docs, /redoc, /openapi.json, /images và /audio đi qua, còn các đường dẫn còn lại phải có header Authorization: Bearer <token> hợp lệ. Cách triển khai này phù hợp với một hệ thống thi trực tuyến vì người dùng chỉ có thể truy cập đúng phạm vi chức năng sau khi đã xác thực thành công.
+Phần xử lý trí tuệ nhân tạo được tách riêng thành cụm dịch vụ trong thư mục services/speaking_AI để dễ kiểm soát và dễ mock khi kiểm thử. Cụ thể, convert_audio.py phụ trách chuyển đổi định dạng âm thanh bằng ffmpeg, whisper_service.py nạp mô hình Whisper base để chuyển giọng nói thành văn bản, groq_service.py gửi prompt tới mô hình Groq LLM, còn toeic_scorer.py tạo prompt chấm điểm cho từng dạng Speaking/Writing theo đúng cấu trúc đề. Cách tách này giúp mỗi bước xử lý có thể được kiểm thử độc lập, đồng thời giảm rủi ro khi thay đổi logic chấm điểm hoặc thay mô hình AI.
+Ở phần kiểm thử, backend được kiểm định bằng pytest, FastAPI TestClient, SQLAlchemy + SQLite in-memory, unittest.mock và pytest fixtures; còn phía giao diện được kiểm thử tự động bằng Jest và Selenium cho các luồng thao tác người dùng. Bộ test backend được thiết kế theo hướng cô lập rất chặt, có fixture reset dữ liệu sau mỗi test, override get_db bằng session riêng và mock các dịch vụ ngoài như Groq, Whisper hay subprocess để test có thể chạy hoàn toàn offline. Theo tài liệu whitebox, toàn bộ backend có 271 test case phân bố trên 22 file test, còn frontend có bộ test black-box tự động theo từng màn hình chức năng để bổ trợ cho kiểm thử giao diện thủ công.
+[Heading1] 2 Phân tích và xây dựng hệ thống
+[Heading2] 2.1 Mô tả hệ thống
+Hệ thống vận hành chặt chẽ theo mô hình kiến trúc Client - Server tách biệt hoàn toàn thông qua giao tiếp bằng giao thức mạng RESTful API. Trình duyệt Client (Frontend) đảm nhận vai trò kết xuất các khối thành phần giao diện, quản lý đồng hồ đếm ngược thời gian làm bài, kiểm soát thiết bị phần cứng micro thu âm. Khi học viên thực hiện nộp bài, gói dữ liệu câu trả lời (chuỗi ký tự trắc nghiệm hoặc tệp âm thanh nhị phân FormData) sẽ được truyền gửi bảo mật lên máy chủ Server (Backend). Tại đây, FastAPI tiếp nhận request, đẩy dữ liệu qua lớp bộ lọc Middleware xác thực chữ ký mã token JWT phục vụ phân quyền truy cập, sau đó điều phối đi sâu vào module Service xử lý các thuật toán so khớp đáp án, phân tích prompt truyền sang cổng AI Gateway ngoài, và sử dụng ORM SQLAlchemy để thực thi lưu trữ dữ liệu xuống cơ sở dữ liệu quan hệ một cách toàn vẹn.
+[Caption] Hình 1:Sơ đồ hệ thống Web TOEIC
+[Heading2] 2.2 Các chức năng chính
+Hệ thống được tổ chức thành các phân hệ chức năng bám sát source code. Phân hệ Listening và Reading cung cấp giao diện làm bài thi trực tuyến, có đồng hồ đếm ngược, lưới câu hỏi để điều hướng nhanh, trình phát audio cho phần nghe và luồng nộp bài để hệ thống chấm điểm, lưu kết quả và ghi lịch sử làm bài. Phân hệ Speaking và Writing cho phép người học ghi âm hoặc nhập bài trực tiếp trên trình duyệt; phía backend xử lý âm thanh bằng bước chuyển đổi định dạng, nhận dạng giọng nói bằng Whisper, gửi nội dung sang Groq LLM và dùng module toeic_scorer để sinh prompt chấm điểm theo từng dạng câu hỏi. Phân hệ Chatbot khai thác dữ liệu lịch sử làm bài và vùng kỹ năng yếu của người dùng để tạo phản hồi tư vấn học tập, trả kết quả theo dạng streaming text qua route chat. Ngoài ra, hệ thống còn có Flashcard để người học lưu và ôn từ vựng cá nhân. Cách mô tả này khớp với các module backend như auth_service, exam_service, scoring_service, speaking_AI/*, user_attempt, chatbot, flashcard, đồng thời khớp với các màn hình frontend tương ứng trong repo.
+[Heading2] 2.3 Thiết kế cơ sở dữ liệu
+Cơ sở dữ liệu của hệ thống được xây dựng nhằm phục vụ toàn bộ quy trình luyện thi TOEIC trực tuyến, từ quản lý tài khoản người dùng, quản lý ngân hàng câu hỏi, tổ chức đề thi, lưu lịch sử làm bài cho đến hỗ trợ học từ vựng bằng flashcard. Mô hình dữ liệu được thiết kế theo hướng tách biệt giữa dữ liệu nghiệp vụ và dữ liệu câu hỏi chuyên biệt, giúp hệ thống dễ mở rộng, dễ bảo trì và thuận lợi trong quá trình kiểm thử.
+Thực thể trung tâm của hệ thống là User, chịu trách nhiệm quản lý thông tin tài khoản, xác thực đăng nhập và phân quyền sử dụng hệ thống. Mọi hoạt động của học viên như làm bài thi, xem lịch sử học tập hay tạo flashcard đều được liên kết với thực thể này. Bên cạnh đó, hệ thống sử dụng thực thể Section để quản lý các bộ đề hoặc phần thi. Mỗi Section chứa thông tin về kỹ năng, thời gian làm bài và các thuộc tính liên quan đến một bài kiểm tra cụ thể.
+Để quản lý câu hỏi theo nhiều kỹ năng khác nhau nhưng vẫn đảm bảo tính thống nhất của dữ liệu, hệ thống sử dụng thực thể QuestionBase làm lớp liên kết trung gian. Thực thể này giữ vai trò kết nối giữa Section và các nhóm câu hỏi chuyên biệt. Thay vì lưu toàn bộ dữ liệu câu hỏi trong một bảng duy nhất, hệ thống phân tách thành bốn thực thể riêng gồm ListeningQuestion, ReadingQuestion, SpeakingQuestion và WritingQuestion. Cách thiết kế này giúp mỗi loại câu hỏi có thể lưu trữ các thuộc tính đặc thù mà không làm phức tạp cấu trúc dữ liệu tổng thể.
+Đối với kỹ năng Listening, thực thể ListeningQuestion lưu các thông tin như nội dung câu hỏi, hướng dẫn làm bài, tệp âm thanh, hình ảnh minh họa và các phương án trả lời. Đối với kỹ năng Reading, thực thể ReadingQuestion quản lý đoạn văn, câu hỏi, các đáp án lựa chọn và thông tin phân loại theo từng Part của đề TOEIC. Với kỹ năng Speaking, thực thể SpeakingQuestion lưu nội dung yêu cầu, thông tin hình ảnh, dữ liệu mô tả và câu trả lời mẫu phục vụ cho quá trình đánh giá. Tương tự, thực thể WritingQuestion lưu nội dung đề bài, đoạn văn, từ khóa bắt buộc và đáp án tham khảo nhằm hỗ trợ chức năng chấm điểm tự động.
+Một trong những thực thể quan trọng nhất của hệ thống là UserAttempt. Thực thể này ghi nhận toàn bộ quá trình làm bài của học viên, bao gồm người thực hiện, bài thi tương ứng, câu hỏi được trả lời, đáp án của người dùng, trạng thái đúng hoặc sai, kết quả đánh giá từ hệ thống và thời điểm thực hiện. Dữ liệu trong UserAttempt được sử dụng để xây dựng các chức năng lịch sử làm bài, theo dõi tiến độ học tập, phân tích kết quả luyện thi và hỗ trợ cá nhân hóa trải nghiệm người dùng.
+Ngoài các chức năng liên quan đến thi thử, hệ thống còn cung cấp khả năng học từ vựng thông qua thực thể Flashcard. Thực thể này lưu trữ từ hoặc cụm từ được người dùng tạo ra trong quá trình học tập, bao gồm nội dung gốc, nội dung dịch, giải thích ý nghĩa, ví dụ minh họa, phiên âm, loại từ, trạng thái ghi nhớ, số lần ôn tập và lịch ôn tiếp theo. Dữ liệu Flashcard giúp người học xây dựng bộ từ vựng cá nhân và hỗ trợ quá trình ôn luyện lâu dài.
+Từ góc độ kiến trúc dữ liệu, mô hình của hệ thống được tổ chức theo hướng phân tách rõ ràng giữa dữ liệu người dùng, dữ liệu đề thi, dữ liệu câu hỏi và dữ liệu học tập. Cách tổ chức này giúp giảm sự phụ thuộc giữa các thành phần, nâng cao khả năng mở rộng trong tương lai và hỗ trợ hiệu quả cho các hoạt động kiểm thử ở mức CRUD, API Route và Service. Đồng thời, việc ánh xạ dữ liệu thông qua các Model trong backend giúp đảm bảo tính nhất quán giữa lớp cơ sở dữ liệu và lớp xử lý nghiệp vụ của hệ thống.
+[Caption] Hình 2:Mô hình thực thể liên kết cơ sở dữ liệu quan hệ (ERD Diagram)
+[Heading2] 2.4 Giao diện chương trình
+Hệ thống giao diện người dùng được thiết kế theo trường phái tối giản, hiện đại và đặt trải nghiệm người học làm trọng tâm điều hướng. Màn hình Dashboard cung cấp các khối thẻ thống kê chỉ số học tập trực quan, đồ thị năng lực rõ ràng và bộ lọc đề thi thông minh theo kỹ năng. Giao diện làm bài phòng thi trực tuyến được phân chia thành hai khu vực chức năng khoa học: cột bên trái là vùng hiển thị nội dung câu hỏi (hình ảnh mô tả trực quan, văn bản đoạn văn, trình điều khiển phát audio nghe hiểu), cột bên phải là bảng lưới chứa danh sách tất cả các ô số câu hỏi giúp học viên dễ dàng theo dõi tiến độ câu đã chọn đáp án, câu bỏ qua và dễ dàng điều hướng nhanh qua lại bằng action click chuột mượt mà, kèm khối hiển thị đồng hồ đếm ngược được thiết lập hiệu ứng tự động đổi màu sắc sang sắc đỏ cảnh báo trực quan khi thời gian làm bài lùi về dưới mốc 2 phút cuối cùng.
+[Heading1] 3 Kiểm thử hộp đen
+[Heading2] 3.1 ROLE = MEMBER
+[Heading3] 3.1.1 Màn hình Dashboard (Trang chính hệ thống)
+[Caption] Bảng 1:Màn hình Dashboard (Trang chính hệ thống)
+
+--- [TABLE START] ---
+TC ID | Tên Test Case | Dữ liệu đầu vào | Bước thực hiện | Kết quả mong đợi | Kết quả thực tế
+TC_01 | Tìm kiếm hợp lệ | Từ khóa: "listening test 2" | Nhập từ khóa vào thanh tìm kiếm, click nút "Tìm kiếm" | Chuyển hướng đến trang kết quả, hiển thị danh sách các đề thi có chứa từ khóa "listening test 2". | Hệ thống trả về đúng kết quả cần tìm theo từ khóa gần đúng
+TC_02 | Tìm kiếm không có kết quả | Từ khóa: "xyz123999" (từ khóa không tồn tại) | Nhập từ khóa, click nút "Tìm kiếm" | Hiển thị thông báo "Không tìm thấy kết quả phù hợp" hoặc giao diện rỗng. | Hệ thống trả về 1 kết quả trắng không có thông tin
+TC_03 | Bỏ trống tìm kiếm | Không nhập gì | Để trống thanh tìm kiếm, click "Tìm kiếm" | Hệ thống không thực hiện action, hoặc hiển thị yêu cầu nhập từ khóa. | Hệ thống không phản hồi action thực hiện
+TC_04 | Điều hướng Header (Nâng cấp) | Không nhập gì | Click nút "NÂNG CẤP PRO" màu cam trên thanh điều hướng | Chuyển hướng đến màn hình thanh toán hoặc bảng giá gói cước Pro. | Hệ chuyển hướng đến trang tương ứng. Ngoại trừ trang Nâng Cấp Pro đang phát triển nên tạm thời chưa điều hướng tới được
+TC_05 | Menu Dropdown người dùng | Không nhập gì | Click vào tên/avatar user "T trung" ở góc trên cùng bên phải | Mở ra một menu thả xuống (Dropdown) chứa các tùy chọn như: Hồ sơ, Lịch sử học tập, Đăng xuất. | Hệ thống mở 1 menu dropdown gồm: Hồ sơ cá nhân, lịch sử bài làm và đăng xuất
+TC_06 | Lọc theo 4 Kỹ Năng Chính | Không nhập gì | Click vào thẻ "Speaking" trong khu vực 4 Kỹ Năng Chính | Chuyển hướng đến danh sách toàn bộ các bộ đề thuộc kỹ năng Speaking. | Hệ thống chuyển hướng đến các danh sách kỹ năng tương ứng
+TC_07 | Bắt đầu làm bài thi (Card Đề thi) | Không nhập gì | Click nút "Làm bài ngay ->" tại thẻ "reading test 1" | Điều hướng thẳng vào giao diện làm bài thi của đề "reading test 1", bắt đầu tính giờ. | Hệ thống điều hướng thẳng vào giao diện làm bài thi của đề thi tương ứng và bắt đầu tính thời gian làm bài
+TC_08 | Mở cửa sổ Chatbot AI | Không nhập gì | Click vào biểu tượng bong bóng chat màu cam ở góc dưới cùng bên phải | Cửa sổ popup Chatbot AI bật lên (trigger API /chatbot/chat), sẵn sàng nhận tin nhắn. | Cửa sổ popup Chatbot AI trợ lý Toeic hiện lên và sẵn sàng nhận tin nhắn
+TC_09 | Responsive UI (giao diện mobile) | N/A | Co nhỏ kích thước xuống còn 820x1180 | Hệ thống không bị tràn hay vỡ viền vẫn hiển thị đầy đủ các tính năng | Hệ thống bị ẩn mất đi phần Header gồm: Khám phá, Các cuộc thi, Các khóa học. (FAIL)
+TC_10 | Gợi ý bài làm | Không nhập gì | Tự động hiển thị gợi ý các bài thi | Hệ thống gợi ý các bài thi chính xác | Hệ thống gợi ý được bài thi dựa trên số lần làm lớn hơn hoặc bằng 3 lần
+TC_11 | Bài thi cần làm lại | Không nhập gì | Tự động hiển thị các bài thi làm dưới 60% câu đúng | Hệ thống hiển thị các bài thi cần làm lại dưới 60% câu đúng | Hệ thống chỉ tính những câu đã làm không tính những câu bỏ qua (ví dụ đề đó làm 5 câu thì 4 câu đúng kết quả hiện ra bài đó vẫn đạt) (FAIL)
+--- [TABLE END] ---
+
+[Heading3] 3.1.2 Giao diện Các cuộc thi (Contests)
+[Caption] Bảng 2:Giao diện Các cuộc thi (Contests)
+
+--- [TABLE START] ---
+TC ID | Tên Test Case | Dữ liệu đầu vào | Bước thực hiện | Kết quả mong đợi | Kết quả thực tế
+TC_01 | Nút "Quay lại" | Không nhập gì | Click nút "<- Quay lại" ở góc trên cùng bên trái | Hệ thống điều hướng về trang trước đó (ví dụ: màn hình Dashboard học viên). | Hệ thống điều hướng về trang trước đó
+TC_02 | Nút "Đăng ký ngay" | Không nhập gì | Click nút "Đăng ký ngay" màu cam | Mở ra form/modal điền thông tin đăng ký dự thi, hoặc chuyển hướng đến trang xác nhận tham gia. | Hệ thống đang phát triển tính năng đăng ký cuộc thi (FAIL)
+TC_03 | Nút "Xem thông tin" | Không nhập gì | Click nút "Xem thông tin" màu trắng | Giao diện tự động cuộn (scroll) xuống phần chi tiết bên dưới (Giải thưởng, Hình thức, Lịch thi), hoặc mở một popup hiển thị thể lệ. | Tự động hiển thị lên 1 giao diện thông tin và thể lệ cuộc thi
+TC_04 | Hiển thị hạn đăng ký | N/A | Quan sát text badge trên cùng | Hiển thị đúng định dạng ngày tháng "Đăng ký mở đến 31/03/2026" (cần khớp với dữ liệu cấu hình dưới Database). | Hiển thị đúng định dạng
+TC_05 | Hiển thị thông số tĩnh | N/A | Quan sát khối thống kê (12,480 Thí sinh, 50+ Đề thi, 98% Hài lòng) | Text không bị vỡ layout, render đúng số liệu thực tế từ API (hoặc đúng text tĩnh nếu Dev đang hardcode). | Đúng với thông tin số liệu đang hardcode
+TC_06 | Responsive UI Header | N/A | Co nhỏ trình duyệt về kích thước Mobile/Tablet | Banner tự động co bóp, ảnh minh họa bên phải có thể ẩn đi hoặc xếp xuống dưới để không làm tràn chữ. | Hình minh họa bị co bóp quá bé (FAIL)
+TC_07 | Mở Chatbot từ trang Cuộc thi | Không nhập gì | Click vào biểu tượng Chat màu cam (có số 1) ở góc phải dưới cùng | Cửa sổ popup Chatbot AI bật lên bình thường và không bị lỗi hiển thị đè lên các nút của banner. | Cửa sổ popup Chatbot AI hiển thị lên hoạt động bình thường và không bị lỗi font chữ đè lên nhau
+--- [TABLE END] ---
+
+[Heading3] 3.1.3 Giao diện các khóa học
+[Caption] Bảng 3:Giao diện các khóa học
+
+--- [TABLE START] ---
+TC ID | Tên Test Case | Dữ liệu đầu vào | Bước thực hiện | Kết quả mong đợi | Kết quả thực tế
+TC_01 | Tìm kiếm khóa học hợp lệ | Từ khóa: "TOEIC" | Nhập từ khóa vào ô "Tìm khóa học..." và nhấn Enter | Lưới (grid) cập nhật, chỉ hiển thị các khóa học có chữ "TOEIC" trong tiêu đề. Tag đếm số lượng (VD: "1 khóa") cập nhật tương ứng. | Hệ thống trả về đúng kết quả tìm kiếm không phân biệt chữ hoa, thường
+TC_02 | Tìm kiếm không có kết quả | Từ khóa: "Tiếng Pháp" | Nhập từ khóa không tồn tại và nhấn Enter | Hiển thị thông báo "Không tìm thấy khóa học nào phù hợp" (hoặc UI trống). | Hệ thống hiển thị kết quả tìm kiếm “Không tìm thấy khóa học nào phù hợp”
+TC_03 | Lọc theo Danh mục (Single) | Tích chọn "TOEIC" | Tích vào ô checkbox "TOEIC" ở cột BỘ LỌC | Lưới cập nhật ngay lập tức, chỉ hiển thị các khóa học thuộc danh mục TOEIC. | Hệ thống không trả về kết quả khi tích vào các ô phần bộ lọc (FAIL)
+TC_04 | Lọc theo Danh mục (Multi) | Tích "IELTS" và "Speaking" | Tích đồng thời 2 ô checkbox trong phần DANH MỤC | Lưới hiển thị danh sách gộp của cả khóa IELTS và khóa Speaking. | Hệ thống không trả về kết quả chính xác khi tích đồng thời 2 ô checkbox (FAIL)
+TC_05 | Lọc theo Trình độ | Tích chọn "Intermediate" | Tích vào ô checkbox "Intermediate" ở phần TRÌNH ĐỘ | Chỉ hiển thị các khóa học có tag trình độ là Intermediate (Ví dụ: Business English, TOEIC 900+). | Hệ thống không trả về kết quả chính xác khi tích ô checkbox (FAIL)
+TC_06 | Lọc kết hợp (Category + Level) | Tích "Business" + "Intermediate" | Tích chọn đồng thời 1 danh mục và 1 trình độ | Hiển thị chính xác khóa học thỏa mãn ĐỒNG THỜI 2 điều kiện (Khóa Business English for Professionals). | Hệ thống không trả về kết quả chính xác khi tích đồng thời 2 ô checkbox (FAIL)
+TC_07 | Chuyển Tab phân loại phí (Tab 1) | Không nhập gì | Click vào tab "Miễn phí" ở góc trên bên phải | Lưới khóa học lọc lại, chỉ hiển thị card "English Pronunciation & Accent Training" (Giá: Miễn phí). | Hệ thống hiển thị danh sách các khóa học theo tab Miễn phí
+TC_08 | Chuyển Tab phân loại phí (Tab 2) | Không nhập gì | Click vào tab "Trả phí" | Lưới lọc lại, ẩn các khóa Miễn phí, chỉ hiển thị các khóa có gắn giá tiền ($99.99, $59.99). | Hệ thống hiển thị danh sách các khóa học theo tab Trả phi
+TC_09 | Nút "Tham gia >" trên Card | Không nhập gì | Click vào nút "Tham gia >" của bất kỳ khóa học nào | Hệ thống điều hướng đến trang chi tiết khóa học đó (Course Detail) hoặc trang thanh toán. | Hệ thống không phản hồi, đang phát triển tính năng (FAIL)
+TC_10 | Đồng bộ bộ lọc và đếm số lượng | N/A | Tích ngẫu nhiên các bộ lọc để chỉ còn 2 khóa học hiển thị | Cái badge bên cạnh chữ "Khóa học nổi bật" (trong ảnh đang là "4 khóa") phải tự động nhảy số thành "2 khóa". | Hệ thống không trả về kết quả chính xác khi tích đồng thời 2 ô checkbox (FAIL)
+TC_11 | Đồng bộ số lượng khóa học trên 1 tab | N/A | Chuyển các tab “Trả phí”, “Miễn phí”, “Tất cả” | Hiển thị số lượng các khóa học trong tab được chuyển chính xác | Hiển thị số lượng các khóa học trong tab được chuyển chính xác
+TC_12 | Responsive UI (Giao diện Mobile) | N/A | Thu nhỏ trình duyệt web lại kích thước màn hình điện thoại | Cột "BỘ LỌC" bên trái ẩn đi (có thể chuyển thành nút Filter popup), các thẻ khóa học xếp dọc lại không bị tràn màn hình. | Hệ thống bị co bóp, vỡ , tràn màn hình (FAIL)
+--- [TABLE END] ---
+
+[Heading3] 3.1.4 Thông tin cá nhân
+[Caption] Bảng 4:Thông tin cá nhân
+
+--- [TABLE START] ---
+TC ID | Tên Test Case | Dữ liệu đầu vào | Bước thực hiện | Kết quả mong đợi | Kết quả thực tế
+TC_01 | Dropdown - Chọn "Hồ sơ cá nhân" | Không | Click menu thả xuống ở Avatar -> Chọn "Hồ sơ cá nhân" | Điều hướng đến trang quản lý Tài khoản | Hệ thống điều hướng đúng đến trang quản lý Tài khoản
+TC_02 | Dropdown - Chọn "Lịch sử bài làm" | Không | Click menu thả xuống ở Avatar -> Chọn "Lịch sử bài làm" | Điều hướng đến trang Lịch sử bài làm | Hệ thống điều hướng đúng đến trang Lịch sử làm bài
+TC_03 | Dropdown - Chọn "Đăng xuất" | Không | Click menu thả xuống ở Avatar -> Chọn "Đăng xuất" | Đăng xuất tài khoản, điều hướng về trang chủ hoặc trang đăng nhập | Hệ thống điều hướng đúng về trang đăng ký đăng nhập
+TC_04 | Hồ sơ - Nút "<- Quay lại" | Không | Click nút "<- Quay lại" ở góc trái trên cùng | Điều hướng về trang trước đó | Hệ thống đã điều hướng đúng quay lại trang trước đó
+TC_05 | Hồ sơ - Thay đổi Avatar | File ảnh hợp lệ (jpg, png) | Click vào icon camera ở góc phải Avatar -> Chọn file ảnh -> Lưu | Avatar mới được cập nhật trên giao diện | Hệ thống đang phát triển -> (FAIL)
+TC_06 | Thông tin cơ bản - Cập nhật tên thành công | Họ và tên: "Doan Quang Minh" | Nhập tên mới vào ô "HỌ VÀ TÊN" -> Click "Lưu thay đổi" | Hiển thị thông báo thành công, tên mới được cập nhật trên giao diện | => Đã test lại ok
+TC_07 | Thông tin cơ bản - Để trống Họ và tên | Rỗng | Xóa trắng ô "HỌ VÀ TÊN" -> Click "Lưu thay đổi" | Hiển thị thông báo lỗi yêu cầu nhập họ và tên, không lưu dữ liệu | => Đã test lại ok
+TC_08 | Thông tin cơ bản - Kiểm tra trường Email | Nhập ký tự bất kỳ | Click/nhập text vào ô "ĐỊA CHỈ EMAIL" | Trường Email bị vô hiệu hóa (disabled/read-only), không cho phép thay đổi | Hệ thống không cho phép đổi, bị vô hiệu hóa
+TC_09 | Bảo mật - Đổi mật khẩu thành công | Pass cũ đúng, Pass mới hợp lệ, Xác nhận trùng khớp | Nhập đầy đủ 3 trường mật khẩu -> Click "Cập nhật mật khẩu" | Hiển thị thông báo đổi mật khẩu thành công | Hệ thống hiển thị đổi mật khẩu thành công
+TC_10 | Bảo mật - Sai mật khẩu hiện tại | Mật khẩu hiện tại: "SaiPass123" | Nhập sai mật khẩu hiện tại, nhập đúng pass mới -> Click Cập nhật | Hiển thị thông báo lỗi sai mật khẩu hiện tại | Hệ thống hiển thị mật khẩu hiện tại không đúng
+TC_11 | Bảo mật - Mật khẩu xác nhận không khớp | Pass mới: "Mk123456", Xác nhận: "Mk123457" | Nhập mật khẩu mới và xác nhận khác nhau -> Click Cập nhật | Hiển thị thông báo lỗi mật khẩu xác nhận không khớp | Hệ thống hiện mật khẩu xác nhận không khớp
+TC_12 | Bảo mật - Mật khẩu mới quá ngắn | Pass mới: "123" | Nhập mật khẩu mới dưới mức quy định (VD: < 6 ký tự) -> Click Cập nhật | Hiển thị thông báo lỗi độ dài mật khẩu không đạt yêu cầu | => đã test lại Ok
+TC_13 | Bảo mật - Để trống trường bắt buộc | Rỗng | Bỏ trống 1 trong 3 trường mật khẩu -> Click "Cập nhật mật khẩu" | Hiển thị thông báo yêu cầu nhập đầy đủ các trường | Hệ thống yêu cầu phải nhập đủ mới đổi được mật khẩu
+TC_14 | Lịch sử - Hiển thị dữ liệu | Không | Truy cập trang "Lịch sử làm bài" | Hiển thị chính xác các thông số: Tổng lần làm, Điểm trung bình, Điểm cao nhất | Hệ thống hiển thị chính xác: Tổng lần làm, Điểm trung bình, Điểm cao nhất
+TC_15 | Lịch sử - Nút mũi tên xem chi tiết | Không | Click vào nút mũi tên ">" trên một bài test bất kỳ trong danh sách | Sổ xuống hoặc điều hướng đến trang chi tiết kết quả của bài test đó | Hệ thống sổ xuống hoặc điều hướng đến trang chi tiết kết quả của bài test đó
+TC_16 | Responsive UI - Trang Thông tin cá nhân | Không | Co nhỏ trình duyệt (375x812) khi đang ở màn hình thi | Giao diện hiển thị đầy đủ, không bị vỡ layout, không xuất hiện thanh cuộn ngang, các thành phần tương tác hoạt động bình thường | Hệ thống hiển thị đầy đủ, không bị vỡ layout, không xuất hiện thanh cuộn ngang, các thành phần tương tác hoạt động bình thường
+--- [TABLE END] ---
+
+[Heading3] 3.1.5 Lịch sử làm bài
+[Caption] Bảng 5:Lịch sử làm bài
+
+--- [TABLE START] ---
+TC ID | Tên Test Case | Dữ liệu đầu vào | Bước thực hiện | Kết quả mong đợi | Kết quả thực tế
+TC_01 | Nút "Quay lại" | Không nhập gì | Click nút "<- Quay lại" ở góc trên bên trái | Hệ thống điều hướng về trang trước đó (ví dụ: Member Dashboard). | Hệ thống điều hướng về trang trước đó
+TC_02 | Hiển thị Thống kê tổng quan (Top Cards) | N/A | Quan sát 3 thẻ thống kê trên cùng | Các chỉ số "Tổng lần làm", "Điểm trung bình", "Điểm cao nhất" phải được tính toán chính xác dựa trên toàn bộ lịch sử làm bài của User trong Database. | Hệ thống tính toán chính xác dựa trên lịch sử làm bài của User trong Database
+TC_03 | Bộ lọc: Tất cả | Không nhập gì | Click vào nút lọc "Tất cả (8)" | Danh sách bên dưới hiển thị toàn bộ 8 bài làm của học viên. | Hiển thị đầy đủ các lịch sử bài làm của học viên
+TC_04 | Bộ lọc: Reading | Không nhập gì | Click vào nút lọc "Reading (5)" | Danh sách chỉ hiển thị 5 bài test có tag màu xanh lá "Reading". Các bài Listening bị ẩn đi. | Hiển thị đúng các bài test được phân loại
+TC_05 | Bộ lọc: Listening | Không nhập gì | Click vào nút lọc "Listening (3)" | Danh sách chỉ hiển thị 3 bài test có tag màu xanh dương "Listening". | Hiển thị đúng các bài test được phân loại
+TC_06 | Sắp xếp theo thời gian (Sorting) | N/A | Quan sát mốc thời gian của các bài test trong danh sách | Danh sách phải được sắp xếp theo thời gian thực hiện giảm dần (Mới nhất xếp trên cùng). Ví dụ trong ảnh: 02:48 xếp trên 02:44 . | Hệ thống lưu thời gian ngày đúng nhưng thời gian đang lưu giờ của server (FAIL)
+TC_07 | Logic tính % và phân loại màu sắc | Bài làm có điểm < 60% (VD: đúng 5/100 câu) | Quan sát thẻ kết quả "reading test 1" (điểm 5%) | UI hiển thị vòng tròn % màu đỏ, hiện tag "Cần cố gắng", thanh progress bar bên dưới hiển thị đúng tỷ lệ tương ứng. | Hệ thống hiển thị vòng tròn % màu đỏ, hiện tag "Cần cố gắng", thanh progress bar bên dưới hiển thị đúng tỷ lệ tương ứng.
+TC_08 | Logic tính % và phân loại màu sắc (Biên) | Bài làm có điểm >= 80% (Dữ liệu giả lập qua Postman) | Bắn API tạo attempt mới với số câu đúng 85/100. Load lại trang. | Vòng tròn % phải đổi sang màu xanh lá, hiện tag "Xuất sắc". | Vòng tròn % đổi màu sang màu xanh lá, hiện tag là “Xuất sắc”
+TC_09 | Nút Xem chi tiết (Detail Modal) | Không nhập gì | Click vào nút mũi tên > ở bên phải của thẻ "reading test 1" | Hệ thống mở ra Modal/Trang chi tiết, hiển thị danh sách từng câu hỏi, đáp án User đã chọn và đáp án đúng. | Hệ thống mở ra chi tiết bài làm của User
+TC_10 | Đồng bộ số lượng bộ lọc | N/A | Quan sát con số trong ngoặc của các nút lọc | Tổng của các nút phụ phải bằng nút "Tất cả". (Ví dụ trong ảnh: Reading (5) + Listening (3) = Tất cả (8)). | Hiển thị đúng tổng số bài đã làm ở các tab
+TC_11 | Responsive UI mobile | N/A | Thu nhỏ trình duyệt web lại kích thước màn hình điện thoại | Giao diện không bị vỡ hay tràn viền, hiển thị đẹp trên mobile | Giao diện bị tràn viền bên phải (FAIL)
+--- [TABLE END] ---
+
+[Heading3] 3.1.6 Giao diện chi tiết kết quả bài làm
+[Caption] Bảng 6:Giao diện chi tiết kết quả bài làm
+
+--- [TABLE START] ---
+TC ID | Tên Test Case | Dữ liệu đầu vào | Bước thực hiện | Kết quả mong đợi | Kết quả thực tế
+TC_01 | Khớp dữ liệu tiêu đề | Click vào bài "listening test 2" đạt 81% ở màn hình ngoài | Từ màn hình Lịch sử, click nút > để mở popup chi tiết | Tên bài thi, tag kỹ năng (Listening), ngày giờ nộp bài và vòng tròn điểm số (81%) trên popup phải giống hệt dữ liệu ở card bên ngoài. | Hệ thống hiển thị giao diện đúng với card bên ngoài
+TC_02 | Logic tính tổng (Summary Cards) | N/A | Quan sát 3 thẻ màu: Câu đúng, Câu sai, Bỏ qua | Tổng số lượng của 3 thẻ này bắt buộc phải bằng tổng số câu hỏi của đề thi (VD: 81 + 19 + 0 = 100). | Hiển thị đúng tổng số câu hỏi
+TC_03 | Bộ lọc Tab: Tất cả | Không nhập gì | Click vào tab "Tất cả (100)" | Danh sách cuộn bên dưới hiển thị đủ 100 câu hỏi, bất kể đúng/sai. | Hiển thị đủ 100 câu hỏi kể cả đúng/sai
+TC_04 | Bộ lọc Tab: Đúng | Không nhập gì | Click vào tab "Đúng (81)" | Danh sách chỉ hiển thị các câu có icon check màu xanh lá (Đúng). Cuộn hết danh sách đếm đúng 81 dòng. | Chỉ hiển thị các câu hỏi có kết quả đúng nếu không có thì hiển thị “Không có câu nào. “
+TC_05 | Bộ lọc Tab: Sai | Không nhập gì | Click vào tab "Sai (19)" | Danh sách chỉ hiển thị các câu bị sai (chữ màu đỏ/icon x). Cuộn hết danh sách đếm đúng 19 dòng. | Chỉ hiển thị kết quả sai nếu không có thì hiển thị “Không có câu nào. “
+TC_06 | Bộ lọc Tab: Bỏ qua | Không nhập gì | Click vào tab "Bỏ qua (0)" | Màn hình hiển thị danh sách rỗng, hoặc thông báo "Không có câu hỏi nào bị bỏ qua". | Hiển thị các câu hỏi bỏ qua nếu không có thì hiển thị “Không có câu nào. “
+TC_07 | Mở rộng chi tiết câu hỏi (Expand) | Không nhập gì | Click vào biểu tượng mũi tên chỉ xuống (v) ở đuôi câu số 7 | Hàng câu hỏi trượt mở rộng ra (Accordion), hiển thị đầy đủ 4 đáp án A, B, C, D, đáp án người dùng đã chọn, đáp án đúng và phần giải thích (nếu có). | Hệ thống hiển thị chi tiết câu hỏi , audio, đáp án của người dùng chọn và đáp án đúng nhưng phần audio đang hiển thị cả 1 đoạn audio dài không phải đoạn ngắn cho từng câu trả lời (FAIL)
+TC_08 | Hiển thị nội dung văn bản dài | Dữ liệu câu hỏi có đoạn hội thoại/đoạn văn dài | Cuộn tìm và mở rộng một câu hỏi thuộc Part 3 hoặc Part 4 | Khung hiển thị phải tự động co giãn ôm trọn văn bản (Passage), không bị cắt chữ hay tràn ra ngoài popup. | Hiển thị khung bo trọn phần văn bản không bị cắt chữ hay tràn ra ngoài
+TC_09 | Đóng Popup (Nút X) | Không nhập gì | Click vào biểu tượng X ở góc trên bên phải popup | Popup đóng lại mượt mà, màn hình trở về danh sách Lịch sử làm bài giữ nguyên trạng thái trước đó. | Popup đóng lại mượt mà, màn hình trở về danh sách Lịch sử làm bài giữ nguyên trạng thái trước đó.
+TC_10 | Đóng Popup (Click outside) | Không nhập gì | Click chuột vào vùng nền tối bên ngoài popup | Popup tự động đóng lại tương tự như khi bấm nút X. | Popup tự động đóng lại tương tự như khi bấm nút X.
+TC_11 | Responsive UI mobile | N/A | Thu nhỏ trình duyệt web lại kích thước màn hình điện thoại | Giao diện không bị vỡ hay tràn viền, hiển thị đẹp trên mobile | Giao diện bị tràn viền bên phải (FAIL)
+--- [TABLE END] ---
+
+[Heading3] 3.1.7 Kỹ năng Listening
+[Caption] Bảng 7:Kỹ năng Listening
+
+--- [TABLE START] ---
+TC ID | Tên Test Case | Dữ liệu đầu vào | Bước thực hiện | Kết quả mong đợi | Kết quả thực tế
+TC_01 | Danh sách test - Truy cập kỹ năng Listening | Không | Từ Trang chủ, click vào thẻ "Listening" trong phần 4 Kỹ Năng Chính. | Điều hướng đến trang "Kỹ năng Listening", hiển thị danh sách các bài test. | Hệ thống điều hướng đến trang "Kỹ năng Listening", hiển thị danh sách các bài test.
+TC_02 | Danh sách test - Nút "Bắt đầu thi" | Không | Click vào nút "Bắt đầu thi" màu cam trên thẻ bài thi. | Điều hướng vào giao diện làm bài thi Listening chi tiết. Đồng hồ bắt đầu đếm ngược. | Hệ thống điều hướng vào giao diện làm bài thi Listening chi tiết. Đồng hồ bắt đầu đếm ngược.
+TC_03 | Giao diện thi - Audio player (Phát/Tạm dừng) | Không | Click nút Play/Pause trên khối "Audio bài nghe" ở cột phải. | File audio được phát/tạm dừng tương ứng. Thanh tiến trình chạy khớp với âm thanh. | Hệ thống File audio được phát/tạm dừng tương ứng. Thanh tiến trình chạy khớp với âm thanh.
+TC_04 | Giao diện thi - Audio player (Âm lượng) | Không | Click icon loa và kéo thanh trượt âm lượng. | Âm lượng thay đổi tương ứng theo thanh trượt (to/nhỏ/tắt tiếng). | Âm lượng thay đổi tương ứng theo thanh trượt (to/nhỏ/tắt tiếng)
+TC_05 | Giao diện thi - Chuyển tab nhóm câu hỏi | Không | Click vào các tab phân loại phía trên (VD: Câu 1-6, Câu 7-31...). | Giao diện chính tự động cuộn/chuyển đến câu hỏi đầu tiên của phần đó. | Hệ thống giao diện chính tự động cuộn/chuyển đến câu hỏi đầu tiên của phần đó.
+TC_06 | Giao diện thi - Chọn đáp án | Chọn "A" | Click chọn một đáp án (ví dụ A) cho một câu hỏi bất kỳ. | 1. đáp án A được highlight/đánh dấu chọn. 2. Số lượng câu đã làm trên nút "Nộp bài" tăng lên (VD: 1/100). 3. Ô số thứ tự tương ứng ở Lưới câu hỏi bên phải đổi màu (báo hiệu đã làm). | Hệ thống chạy đúng như những gì mong muốn
+TC_07 | Giao diện thi - Thay đổi đáp án | Chọn "B" | Đang ở đáp án A, click chọn sang đáp án B. | Đáp án B được chọn, bỏ chọn đáp án A. Số lượng câu đã làm không thay đổi. | Hệ thống chạy đúng : Đáp án B được chọn, bỏ chọn đáp án A. Số lượng câu đã làm không thay đổi.
+TC_08 | Giao diện thi - Nút "Câu sau ->" | Không | Click nút "Câu sau ->" ở dưới cùng bên phải vùng câu hỏi. | Chuyển hiển thị sang câu hỏi kế tiếp theo số thứ tự. | Hệ thống chuyển tiếp đúng sang câu tiếp theo
+TC_09 | Giao diện thi - Nút "<- Câu trước" | Không | Click nút "<- Câu trước" ở dưới cùng bên trái vùng câu hỏi. | Chuyển hiển thị về câu hỏi liền trước đó. | Hệ thống chuyển đúng sang câu trước câu hiện tại
+TC_10 | Giao diện thi - Điều hướng qua Lưới câu hỏi | Click ô "71" | Tại bảng số bên tay phải, click vào ô số 71. | Vùng nội dung chính lập tức cuộn/hiển thị câu hỏi số 71. | Hệ thống chuyển sang đúng vùng nội dung câu mong muốn
+TC_11 | Giao diện thi - Đồng hồ đếm ngược (Timer) | Không | Quan sát phần "THỜI GIAN CÒN LẠI" ở cột phải. | Thời gian đếm ngược chính xác theo từng giây từ lúc bắt đầu (VD: 47:00 xuống dần). | Hệ thống đếm ngược chính xác theo từng giây từ lúc bắt đầu
+TC_12 | Giao diện thi - Hết thời gian làm bài | Thời gian = 00:00 | Đợi đồng hồ đếm ngược chạy về 00:00. | Hệ thống tự động khóa chọn đáp án, thông báo hết giờ và tự động nộp bài. | Hệ thống tự động khóa chọn đáp án, thông báo hết giờ và tự động nộp bài.
+TC_13 | Giao diện thi - Nút "Thoát" | Không | Click nút "Thoát" ở góc phải trên cùng. | Hiển thị pop-up cảnh báo: "Bạn có chắc chắn muốn thoát? Kết quả bài làm sẽ không được lưu lại". (Có nút Xác nhận / Hủy). | Hệ thống thoát luôn không có cảnh báo -> (FAIL)
+TC_14 | Giao diện thi - Nút "Nộp bài" (Chưa làm hết) | Đã làm 5/100 câu | Click nút "Nộp bài (5/100)" màu xanh ở góc phải trên cùng. | Hiển thị pop-up cảnh báo: "Bạn chưa hoàn thành tất cả câu hỏi. Bạn có chắc chắn muốn nộp bài?". | Hệ thống hiển thị : "Bạn còn 95 câu chưa hoàn thành. Bạn có chắc chắn muốn nộp bài?"
+TC_15 | Giao diện thi - Nộp bài thành công | Không | Click "Nộp bài" -> Chọn "Xác nhận" trên pop-up. | Hệ thống lưu kết quả, tính điểm và điều hướng sang trang Kết quả chi tiết. | Hệ thống lưu kết quả, tính điểm và điều hướng sang trang Kết quả chi tiết.
+TC_16 | Responsive UI (Giao diện Mobile) | Không | Co nhỏ trình duyệt (375x812) khi đang ở màn hình thi | Giao diện co giãn phù hợp, không tràn viền. Cột thời gian và lưới câu hỏi thu gọn (dạng pop-up/ngăn kéo). Các tab cho phép cuộn ngang. Các thẻ bài test và footer tự động xếp chồng (stacking) thành 1 cột. Nút Chatbot không đè lên các nút thao tác khác | Cột bên phải (chứa Audio, Thời gian, Danh sách câu hỏi) không tự động đẩy xuống dưới mà đè trực tiếp lên phần nội dung câu hỏi bên trái, làm che khuất chữ và hình ảnh. -> FAIL
+TC_17 | Cảnh báo thời gian (2 phút cuối) | Thời gian = 02:00 | Quan sát đồng hồ đếm ngược ở cột phải khi thời gian lùi về mốc 02:00 | Số đếm thời gian tự động chuyển sang màu đỏ để cảnh báo sắp hết giờ | Số đếm thời gian tự động chuyển sang màu đỏ để cảnh báo sắp hết giờ
+--- [TABLE END] ---
+
+[Heading3] 3.1.8 Kỹ năng Reading
+[Caption] Bảng 8:Kỹ năng Reading
+
+--- [TABLE START] ---
+TC ID | Tên Test Case | Dữ liệu đầu vào | Bước thực hiện | Kết quả mong đợi | Kết quả thực tế
+TC_01 | Truy cập kỹ năng Reading | Không | Từ màn hình Dashboard/Trang chủ, click vào thẻ "Reading" ở mục 4 Kỹ Năng Chính | Điều hướng đến trang danh sách bài test "Kỹ năng Reading" | Hệ thống điều hướng đến trang danh sách bài test “Kỹ năng Reading”
+TC_02 | Nút "Bắt đầu thi" | Không | Click nút "Bắt đầu thi" màu cam | Điều hướng vào giao diện thi chi tiết. Timer (120 phút) bắt đầu đếm ngược, | Hệ thống điều hướng vào giao diện thi chi tiết. Timer (120 phút) bắt đầu đếm ngược,
+TC_03 | Điều hướng bằng Tab (Part 5, 6, 7) | Không | Click vào các tab "Part 5", "Part 6", "Part 7" ở phía trên cùng | Giao diện tự động chuyển đến câu hỏi đầu tiên của Part tương ứng (VD: Click Part 6 chuyển đến câu 131) | Giao diện tự động chuyển đến đúng phần thi tương ứng
+TC_04 | Thao tác chọn đáp án | Chọn "A" | Click chọn đáp án "A" (regional) cho câu hỏi hiện tại | Ô đáp án được highlight, số lượng câu trên nút "Nộp bài" tăng lên, ô số trên Lưới câu hỏi đổi màu xanh | Hệ thống ô đáp án được highlight, , số lượng câu trên nút "Nộp bài" tăng lên, ô số trên Lưới câu hỏi đổi màu xanh
+TC_05 | Thao tác thay đổi đáp án | Chọn "B" | Đang ở đáp án A, click chuyển sang đáp án B (regionally) | Đáp án B được chọn, bỏ chọn A. Số câu đã làm trên nút Nộp bài không đổi | Đáp án được chọn là B, bỏ chọn A , số câu đã làm không thay đổi
+TC_06 | Nút "Câu sau ->" và "<- Câu trước" | Không | Click nút "Câu sau ->" hoặc "<- Câu trước" | Hiển thị câu hỏi tiếp theo hoặc lùi lại một câu theo đúng số thứ tự | Hệ thống hiển thị đúng câu hỏi tiếp theo hoặc lùi lại câu hỏi trước đó theo đúng thứ tự
+TC_07 | Điều hướng qua Danh sách câu hỏi | Click ô "150" | Tại lưới "DANH SÁCH CÂU HỎI" bên phải, click vào ô số 150 (thuộc Part 7) | Màn hình chính lập tức hiển thị nội dung của câu hỏi số 150 | Màn hình chính hiện nội dung câu hỏi số 150
+TC_08 | Đồng hồ đếm ngược hết giờ | Thời gian 00:00 | Chờ đồng hồ ở cột phải đếm ngược về 00:00 | Hệ thống khóa chọn đáp án, hiển thị thông báo hết giờ và tự động nộp bài | Hệ thống khóa chọn đáp án, hiển thị thông báo hết giờ và tự động nộp bài
+TC_09 | Nút "Thoát" | Không | Click nút "Thoát" màu xám ở góc trên bên phải | Hiển thị pop-up xác nhận thoát, cảnh báo kết quả sẽ không được lưu | Hệ thống thoát luôn mà không có thông báo xác nhận thoát -> chưa fix(FAIL)
+TC_10 | Nộp bài khi chưa hoàn thành | Mới làm 10/100 câu | Click nút "Nộp bài (10/100)" màu xanh lá cây | Hiển thị pop-up cảnh báo bạn chưa hoàn thành tất cả các câu hỏi | Hệ thống hiển thị cảnh báo “Còn 90 câu chưa hoàn thành”
+TC_11 | Nộp bài thành công | Không | Click "Nộp bài" -> Chọn xác nhận trên pop-up | Hệ thống lưu kết quả, tiến hành chấm điểm và chuyển sang trang Kết quả chi tiết | Hệ thống thống lưu kết quả, tiến hành chấm điểm và chuyển sang trang Kết quả chi tiết
+TC_12 | Responsive UI | N/A | Co trình duyệt về kích thước điện thoại | Giao diện co giãn phù hợp, không tràn viền. Cột thời gian và lưới câu hỏi thu gọn (dạng pop-up/ngăn kéo). Các tab cho phép cuộn ngang. Các thẻ bài test và footer tự động xếp chồng (stacking) thành 1 cột. Nút Chatbot không đè lên các nút thao tác khác | Cột bên phải (chứa Audio, Thời gian, Danh sách câu hỏi) không tự động đẩy xuống dưới mà đè trực tiếp lên phần nội dung câu hỏi bên trái, làm che khuất chữ và hình ảnh. -> FAIL
+TC_13 | Cảnh báo thời gian (2 phút cuối) | Thời gian = 02:00 | Quan sát đồng hồ đếm ngược ở cột phải khi thời gian lùi về mốc 02:00 | Số đếm thời gian tự động chuyển sang màu đỏ để cảnh báo sắp hết giờ | Số đếm thời gian tự động chuyển sang màu đỏ để cảnh báo sắp hết giờ
+--- [TABLE END] ---
+
+[Heading3] 3.1.9 Kỹ năng Speaking
+[Caption] Bảng 9:Kỹ năng Speaking
+
+--- [TABLE START] ---
+TC ID | Tên Test Case | Dữ liệu đầu vào | Bước thực hiện | Kết quả mong đợi | Kết quả thực tế
+TC_01 | Truy cập kỹ năng Speaking | Không | Từ màn hình Trang chủ, click vào thẻ "Speaking" ở mục 4 Kỹ Năng Chính | Điều hướng đến trang danh sách bài test "Kỹ năng Speaking" | Hệ thống điều đúng đến trang danh sách bài test "Kỹ năng Speaking"
+TC_02 | Ô Tìm kiếm đề Speaking | Từ khóa (VD: "part 1") | Nhập từ khóa vào ô "Tìm kiếm đề Speaking..." và nhấn Enter | Danh sách cập nhật, hiển thị các bài test chứa từ khóa | Hệ thống đang phát triển thêm -> FAIL
+TC_03 | Nút "Bắt đầu thi" | Không | Click nút "Bắt đầu thi" màu cam trên thẻ bài | Điều hướng vào giao diện thi chi tiết. Đồng hồ (5:00) bắt đầu đếm ngược | Hệ thống điều hướng vào giao diện thi chi tiết. Đồng hồ (5:00) bắt đầu đếm ngược
+TC_04 | Giao diện phần thi & Hướng dẫn | Không | Quan sát giao diện câu hỏi (VD: Câu 1) | Hiển thị đúng Part (READ A SHORT TEXT ALOUD), Direction, thời gian Preparation và Response | Hệ thống hiển thị đúng Part
+TC_05 | Điều hướng bằng Tab nhóm câu | Không | Click vào các tab trên cùng (Câu 9, Câu 1, Câu 2-4, Câu 5-7...) | Giao diện hiển thị đúng nội dung của nhóm câu hỏi tương ứng | Giao diện hiển thị đúng nội dung của nhóm câu hỏi tương ứng
+TC_06 | Thao tác Nộp bài khi chưa thu âm | Không | Quan sát nút "Nộp câu này" khi mới vào câu hỏi | Nút bị vô hiệu hóa (màu xám), hiển thị dòng cảnh báo màu đỏ: "Bạn cần ghi âm trước khi nộp" | Nút bị vô hiệu hóa (màu xám), hiển thị dòng cảnh báo màu đỏ: "Bạn cần ghi âm trước khi nộp"
+TC_07 | Nút "THU ÂM" - Cấp quyền Micro | Không | Click nút "THU ÂM" màu đỏ | Trình duyệt hiển thị pop-up yêu cầu cấp quyền sử dụng Micro | Trình duyệt hiển thị pop-up yêu cầu cấp quyền sử dụng Micro
+TC_08 | Thao tác Ghi âm và Nộp câu | Audio (Giọng nói) | 1. Cấp quyền Mic và tiến hành nói. 2. Dừng ghi âm. 3. Click nút "Nộp câu này" (đã sáng lên) | File audio được lưu, hệ thống gửi dữ liệu và tự động chuyển sang câu hỏi tiếp theo | Hệ thống hiển thị thông báo “Lỗi gửi Speaking” -> FAIL
+TC_09 | Nút "Câu sau ->" và "<- Câu trước" | Không | Click nút "Câu sau ->" hoặc "<- Câu trước" | Điều hướng tiến/lùi giữa các câu hỏi theo đúng số thứ tự | Hệ thống điều hướng tiến/lùi giữa các câu hỏi theo đúng số thứ tự
+TC_10 | Điều hướng bằng Lưới câu hỏi | Click ô "5" | Tại lưới "DANH SÁCH CÂU HỎI" bên phải, click vào ô số 5 (thuộc Part 4) | Màn hình chính cập nhật hiển thị nội dung của câu hỏi số 5 | Hệ thống hiển thị đúng nội dung của câu hỏi số 5
+TC_11 | Đồng hồ đếm ngược hết giờ | Thời gian 00:00 | Chờ đồng hồ ở cột phải đếm ngược về 00:00 | Hệ thống tự động khóa chức năng thu âm, dừng bài thi và nộp dữ liệu | Hệ thống hiển thị thông báo hết thời gian và không lưu dữ liệu lịch sử làm bài -> FAIL
+TC_12 | Nút "Thoát" bài thi | Không | Click nút "Thoát" ở góc trên bên phải | Hiển thị pop-up xác nhận thoát, cảnh báo kết quả chưa nộp sẽ bị mất | Hệ thống không hiển thị thông báo và thoát ra luôn -> FAIL
+TC_13 | Giao diện Responsive (Mobile/Tablet) | N/A | Co nhỏ trình duyệt về kích thước Mobile (375x812) và thao tác các chức năng | Bố cục 2 cột chuyển thành 1 cột. Cột Thời gian và Lưới câu hỏi thu gọn (pop-up/ngăn kéo). Nút "THU ÂM" hiển thị rõ ràng, dễ chạm, không bị các phần tử khác đè lên | Cột bên phải (chứa Audio, Thời gian, Danh sách câu hỏi) không tự động đẩy xuống dưới mà đè trực tiếp lên phần nội dung câu hỏi bên trái, làm che khuất chữ và hình ảnh.
+TC_14 | Sắp xếp thứ tự Tab nhóm câu hỏi | Không | Truy cập vào giao diện làm bài thi Speaking, quan sát thanh chứa các tab nhóm câu hỏi ở phía trên cùng. | Các tab phải được sắp xếp theo thứ tự tăng dần hợp lý: "Câu 1", "Câu 2-4", "Câu 5-7", "Câu 8", "Câu 9". | Thứ tự các tab bị sắp xếp lộn xộn, không theo logic tuần tự (hiển thị thực tế là: "Câu 9", "Câu 1", "Câu 2-4", "Câu 5-7", "Câu 8"). -> FAIL
+TC_15 | Cảnh báo thời gian (2 phút cuối) | Thời gian = 02:00 | Quan sát đồng hồ đếm ngược ở cột phải khi thời gian lùi về mốc 02:00 | Số đếm thời gian tự động chuyển sang màu đỏ để cảnh báo sắp hết giờ | Số đếm thời gian tự động chuyển sang màu đỏ để cảnh báo sắp hết giờ
+--- [TABLE END] ---
+
+[Heading3] 3.1.10 Kỹ năng Writing
+[Caption] Bảng 10:Kỹ năng Writing
+
+--- [TABLE START] ---
+TC ID | Tên Test Case | Dữ liệu đầu vào | Bước thực hiện | Kết quả mong đợi | Kết quả thực tế
+TC_01 | Truy cập kỹ năng Writing | Không | Từ màn hình Dashboard/Trang chủ, click vào thẻ "Writing" ở mục 4 Kỹ Năng Chính | Hệ thống điều hướng đến trang danh sách bài test "Kỹ năng Writing" | Hệ thống điều hướng đến trang danh sách bài test "Kỹ năng Writing"
+TC_02 | Kiểm tra thông tin thẻ bài thi | Không | Quan sát thẻ bài thi Writing (VD: bài test tên "vit") | Hiển thị đủ thông tin: Tên đề, tags (#TOEIC Writing, #FREE), thời gian (2 phút), số câu/phần thi (2 phần thi), tag đánh giá (AI Feedback) | Hiển thị đủ thông tin: Tên đề, tags (#TOEIC Writing, #FREE), thời gian (2 phút), số câu/phần thi (2 phần thi), tag đánh giá (AI Feedback)
+TC_03 | Nút "Bắt đầu thi" | Không | Click nút "Bắt đầu thi" màu cam | Điều hướng vào giao diện thi chi tiết. Đồng hồ bắt đầu đếm ngược | Hệ thống Điều hướng vào giao diện thi chi tiết. Đồng hồ bắt đầu đếm ngược
+TC_04 | Giao diện phần thi & Hướng dẫn | Không | Quan sát giao diện câu hỏi | Hiển thị rõ yêu cầu đề bài (VD: WRITE A SENTENCE), giới hạn thời gian cho câu hỏi (Time limit: 90s), nội dung câu hỏi và khu vực nhập văn bản | Hiển thị rõ yêu cầu đề bài (VD: WRITE A SENTENCE), giới hạn thời gian cho câu hỏi (Time limit: 90s), nội dung câu hỏi và khu vực nhập văn bản
+TC_05 | Thao tác nhập văn bản | "I would like to suggest..." | Nhập câu trả lời vào ô "Write your sentence here..." | 1. Văn bản hiển thị chính xác trong ô nhập liệu. 2. Bộ đếm từ (Word count) ở góc dưới bên phải khung nhập tự động tăng lên theo số từ đã gõ (VD: Word count: 6) | Hệ thống hiển thị văn bản chính xác trong ô nhập dữ liệu và bộ đếm từ đã đúng với số từ nhập vào câu trả lời
+TC_06 | Thao tác Nộp câu khi để trống | Rỗng | Để trống ô nhập liệu và click nút "Nộp câu này" màu xanh lá | Hệ thống có thể cảnh báo yêu cầu nhập nội dung trước khi nộp, hoặc nút Nộp bị vô hiệu hóa (disabled) | Hệ thống hiển thị “Bạn chưa nhập câu trả lời ”
+TC_07 | Thao tác Nộp câu thành công | Câu trả lời hợp lệ | Nhập câu trả lời và click "Nộp câu này" | Hệ thống lưu câu trả lời, gửi cho AI chấm điểm và có thể tự động chuyển sang câu tiếp theo | Hệ thống hiển thị “Lỗi chấm điểm Writing ” -> FAIL
+TC_08 | Nút "Câu sau ->" và "<- Câu trước" | Không | Click nút "Câu sau ->" hoặc "<- Câu trước" | Điều hướng tiến/lùi giữa các câu hỏi theo đúng số thứ tự | Hệ thống điều hướng tiến/lùi giữa các câu hỏi theo đúng số thứ tự
+TC_09 | Điều hướng bằng Lưới câu hỏi | Click ô "2" | Tại phần "DANH SÁCH CÂU HỎI" bên phải, click vào ô số 2 | Màn hình chính cập nhật hiển thị nội dung của câu hỏi số 2 | Màn hình chính cập nhật hiển thị nội dung của câu hỏi số 2
+TC_10 | Cảnh báo thời gian (Màu đỏ) | Thời gian < 02:00 | Quan sát khối "THỜI GIAN CÒN LẠI" khi thời gian gần hết | Khối thời gian chuyển sang giao diện cảnh báo (nền đỏ nhạt, viền đỏ, icon cảnh báo tam giác) | Khối thời gian chuyển sang giao diện cảnh báo (nền đỏ nhạt, viền đỏ, icon cảnh báo tam giác)
+TC_11 | Đồng hồ đếm ngược hết giờ | Thời gian = 00:00 | Chờ đồng hồ đếm ngược về 00:00 | Hệ thống tự động khóa ô nhập văn bản, dừng bài thi và tự động nộp bài | Hệ thống hiển thị thông báo “Bạn đã hết giờ làm bài thi” bấm xác nhận OK -> Hệ thống thoát ra và không lưu lịch sử làm bài -> FAIL
+TC_12 | Nút "Thoát" bài thi | Không | Click nút "Thoát" ở góc trên bên phải | Hiển thị pop-up xác nhận thoát, cảnh báo kết quả chưa nộp sẽ bị mất | Hệ thống thoát luôn mà không có thông báo -> FAIL
+TC_13 | Giao diện Responsive (Mobile/Tablet) | N/A | Co nhỏ trình duyệt về kích thước Mobile (375x812) và thao tác thử | Bố cục 2 cột chuyển thành 1 cột (Thời gian/Lưới câu hỏi thu gọn lại). Khung nhập văn bản (textarea) co giãn chiều ngang vừa màn hình, bàn phím ảo không che khuất ô nhập liệu và nút bấm | Cột bên phải (chứa Audio, Thời gian, Danh sách câu hỏi) không tự động đẩy xuống dưới mà đè trực tiếp lên phần nội dung câu hỏi bên trái, làm che khuất chữ và hình ảnh.
+--- [TABLE END] ---
+
+[Heading2] 3.2 Auth
+[Heading3] 3.2.1 Màn hình Đăng ký (Sign up)
+[Caption] Bảng 11:Màn hình Đăng ký (Sign up)
+
+--- [TABLE START] ---
+TC ID | Tên Test Case | Dữ liệu đầu vào (Input) | Bước thực hiện | Kết quả mong đợi (Output) | Kết quả thực tế
+TC_01 | Đăng ký thành công | Name hợp lệ, Email chưa tồn tại, Pass >= 8 ký tự | Nhập đủ thông tin, mặc định role MEMBER, click "Sign Up" | Hiển thị thông báo đăng ký thành công, chuyển hướng về form Sign In. | Hệ thống chuyển hướng đến trang sign in.
+TC_02 | [Biên] Pass dưới 8 ký tự | Email hợp lệ, Pass = "1234567" (7 ký tự) | Nhập thông tin, click "Sign Up" | Form báo lỗi UI "Mật khẩu phải có ít nhất 8 ký tự", không gọi API backend. | Hệ thống alert 1 thông báo "Mật khẩu phải có ít nhất 8 ký tự"
+TC_03 | Email sai định dạng | Email = "trungvu.com" (thiếu @) | Nhập thông tin, click "Sign Up" | Báo lỗi định dạng email không hợp lệ. | Hệ thống vẫn cho phép đăng ký mặc dù sai định dạng Email(Chưa fix)-> đã fix=>Đã test lại Ok
+TC_04 | Trùng Email đã tồn tại | Email đã có trong Database | Nhập thông tin, click "Sign Up" | Báo lỗi "Email đã được sử dụng" (bắt từ response API). | Hệ thống báo “Email already exists”
+TC_05 | Nút ẩn/hiện mật khẩu | Pass bất kỳ | Nhập Pass, click icon con mắt | UI chuyển đổi trạng thái hiển thị text thường và dấu chấm (••••). | Hệ thống chuyển đổi được trạng thái ẩn hiện password
+TC_06 | Bỏ trống trường bắt buộc | Để trống 1 trong các ô | Nhấn thẳng "Sign Up" | Báo lỗi "Vui lòng không để trống" tại ô tương ứng. | Hệ thống tự bắt lỗi thiếu ô cần điền từ frontend
+TC_07 | Chuyển luồng Đăng nhập | Không nhập gì | Click nút "Sign In" bên trái | UI trượt (slide) sang form Sign In mượt mà. | Chuyển đổi 2 tab mượt mà
+--- [TABLE END] ---
+
+[Heading3] 3.2.2 Màn hình Đăng nhập (Sign In)
+[Caption] Bảng 12:Màn hình Đăng nhập (Sign In)
+
+--- [TABLE START] ---
+TC ID | Tên Test Case | Dữ liệu đầu vào (Input) | Bước thực hiện | Kết quả mong đợi (Output) | Kết quả thực tế
+TC_01 | Đăng nhập hợp lệ | Email & Pass đúng (có trong TC) | Nhập tài khoản, click "Sign In" | Đăng nhập thành công, lưu Token/Session, chuyển hướng vào Trang chủ. | Hệ thống đăng nhập thành công và chuyển đến Trang chủ
+TC_02 | Sai mật khẩu | Email đúng, Pass sai | Nhập tài khoản, click "Sign In" | Thông báo "Email hoặc mật khẩu không chính xác". | Hệ thống hiển thị thông báo "Email hoặc mật khẩu không đúng"
+TC_03 | Email không tồn tại | Email chưa từng đăng ký | Nhập tài khoản, click "Sign In" | Thông báo "Tài khoản không tồn tại" hoặc lỗi tương đương. | Hệ thống hiển thị thông báo "Email hoặc mật khẩu không đúng"
+TC_04 | Chuyển luồng Quên MK | Không nhập gì | Click "Forgot Password?" | UI chuyển sang form Reset Password. | UI chuyển đúng sang form Reset Password
+TC_05 | Test XSS / SQLi cơ bản | Pass = ' OR 1=1 -- | Nhập tài khoản, click "Sign In" | Hệ thống báo lỗi sai mật khẩu, không bị bypass hoặc crash hệ thống. | Hệ thống hiển thị thông báo "Email hoặc mật khẩu không đúng"
+--- [TABLE END] ---
+
+[Heading3] 3.2.3 Màn hình Quên mật khẩu (Reset Password)
+[Caption] Bảng 13:Màn hình Quên mật khẩu (Reset Password)
+
+--- [TABLE START] ---
+TC ID | Tên Test Case | Dữ liệu đầu vào (Input) | Bước thực hiện | Kết quả mong đợi (Output) | Kết quả thực tế
+TC_01 | Cập nhật MK thành công | Email đúng, Pass mới >= 8 ký tự | Nhập thông tin, click "Update Password" | Thông báo đổi mật khẩu thành công, yêu cầu quay lại đăng nhập. | Hệ thống trả về alert không phù hợp và chưa đổi được mật khẩu (FAIL)
+TC_02 | Email không tồn tại | Email ảo chưa đăng ký | Nhập thông tin, click "Update Password" | Báo lỗi "Email không tồn tại trong hệ thống". | Hệ thống trả về alert không phù hợp và chưa đổi được mật khẩu (FAIL)
+TC_03 | [Biên] MK mới quá ngắn | Pass = "1234567" (7 ký tự) | Nhập thông tin, click "Update Password" | Chặn ở UI, hiển thị thông báo yêu cầu mật khẩu tối thiểu 8 ký tự. | Hệ thống trả về alert “Mật khẩu mới phải có ít nhất 8 ký tự!”
+TC_04 | Trở lại màn Sign In | Không nhập gì | Click "Back to Sign In" | UI trượt về lại màn hình Đăng nhập (Sign In). | UI mượt mà return về màn hình sign in
+--- [TABLE END] ---
+
+[Heading2] 3.3 Landing Page
+[Heading3] 3.3.1 Giao diện Trang chủ (Homepage)
+[Caption] Bảng 14:Giao diện Trang chủ (Homepage)
+
+--- [TABLE START] ---
+TC ID | Tên Test Case | Dữ liệu đầu vào (Input) | Bước thực hiện | Kết quả mong đợi (Output) | Kết quả thực tế
+TC_01 | Nút "Đăng nhập" (Header) | Không nhập gì | Click nút "Đăng nhập" ở góc trên bên phải | Điều hướng chính xác tới trang Đăng nhập (/auth). | Điều hướng chính xác tới tab Đăng nhập
+TC_02 | Nút "Đăng ký miễn phí" | Không nhập gì | Click nút "Đăng ký miễn phí" ở góc trên cùng | Điều hướng chính xác tới trang Đăng ký (/auth). | Điều hướng chính xác tới tab Đăng ký
+TC_03 | Điều hướng "Bài thi TOEIC" | Không nhập gì | Cuộn xuống thẻ "Bài thi TOEIC", click vào thẻ | Chuyển hướng đến trang danh sách bộ đề thi Listening / Reading. | Không trả về gì vì đây chỉ là 1 trang landing page giới thiệu
+TC_04 | Responsive UI (Giao diện mobile) | N/A | Co nhỏ trình duyệt về kích thước Mobile (375x812) | Thanh menu ngang biến thành menu Hamburger (≡), các khối nội dung tự động căn dọc không bị vỡ chữ/tràn viền. | Không bị vỡ hay tràn viền
+--- [TABLE END] ---
+
+[Heading2] 3.4 ROLE = ADMIN
+[Heading3] 3.4.1 Giao diện quản lý người dùng
+[Caption] Bảng 15:Giao diện quản lý người dùng
+
+--- [TABLE START] ---
+TC ID | Tên Test Case | Dữ liệu đầu vào (Input) | Bước thực hiện | Kết quả mong đợi (Output) | Kết quả thực tế
+TC_01 | Điều hướng tab "Người dùng" | Không | Tại thanh Header (Navigation bar) của Admin, click vào tab "Người dùng" | Hệ thống điều hướng đến trang "Quản lý người dùng", menu "Người dùng" hiển thị trạng thái active (gạch chân màu xanh). | Hệ thống điều hướng đến trang "Quản lý người dùng", menu "Người dùng" hiển thị trạng thái active (gạch chân màu xanh).
+TC_02 | Nút "<- Quay lại" | Không | Tại trang Quản lý người dùng, click vào nút "<- Quay lại" ở góc trái | Hệ thống điều hướng trở về màn hình Dashboard (Tổng quan) hoặc trang truy cập trước đó. | Hệ thống điều hướng trở về màn hình Dashboard (Tổng quan) hoặc trang truy cập trước đó.
+TC_03 | Hiển thị bảng danh sách User | Không | Truy cập vào trang Quản lý người dùng | Hiển thị danh sách tài khoản dưới dạng bảng bao gồm các cột chính: ID, Tên, Email, Hành động. | Hiển thị danh sách tài khoản dưới dạng bảng bao gồm các cột chính: ID, Tên, Email, Hành động.
+TC_04 | Hiển thị Popup xác nhận xóa | Không | Click vào biểu tượng icon "Thùng rác" (màu đỏ) ở cột Hành động của một người dùng bất kỳ | Trình duyệt hiển thị hộp thoại (alert popup) với thông báo cảnh báo: "Bạn có chắc chắn muốn xóa người dùng này?" kèm hai nút OK và Cancel. | Trình duyệt hiển thị hộp thoại (alert popup) với thông báo cảnh báo: "Bạn có chắc chắn muốn xóa người dùng này?" kèm hai nút OK và Cancel.
+TC_05 | Hủy thao tác xóa User (Cancel) | Không | Trên hộp thoại xác nhận xóa, click nút "Cancel" | Hộp thoại đóng lại. Người dùng không bị xóa và vẫn tiếp tục hiển thị trong bảng danh sách. | Hộp thoại đóng lại. Người dùng không bị xóa và vẫn tiếp tục hiển thị trong bảng danh sách.
+TC_06 | Xác nhận thao tác xóa User (OK) | Không | Trên hộp thoại xác nhận xóa, click nút "OK" | Hộp thoại đóng. Hệ thống thực hiện xóa người dùng thành công, bảng danh sách tự động làm mới và dòng thông tin của người dùng đó biến mất. | Hộp thoại đóng. Hệ thống thực hiện xóa người dùng thành công, bảng danh sách tự động làm mới và dòng thông tin của người dùng đó biến mất.
+TC_07 | Thao tác xóa tài khoản đang đăng nhập | Không | Tìm đến dòng thông tin tài khoản Admin đang đăng nhập (ví dụ: tài khoản có tên "string") và click icon Thùng rác | Hệ thống có cơ chế bảo vệ: Ẩn/vô hiệu hóa icon thùng rác đối với tài khoản đang đăng nhập, hoặc nếu bấm được thì hiển thị thông báo lỗi "Không thể tự xóa tài khoản của chính mình". | Hệ thống vẫn xóa được tài khoản đang xử dụng -> FAIL
+TC_8 | Giao diện Responsive - Quản lý người dùng (Mobile) | Không | Co nhỏ kích thước trình duyệt về giao diện Mobile (hoặc truy cập bằng điện thoại) tại trang "Quản lý người dùng". | Bảng danh sách người dùng co giãn hợp lý (có thanh cuộn ngang cho bảng hoặc chuyển về dạng thẻ card). Tiêu đề cột, dữ liệu và các nút thao tác hiển thị rõ ràng, không bị chèn ép | Bố cục bảng bị vỡ nghiêm trọng. Cột "Tên" và "Email" bị dính chặt vào nhau (tiêu đề gộp thành "TênEmail", dữ liệu dính liền VD: "stringstring@gmail.com"). Icon Thùng rác (Xóa) ở cột Hành động bị đẩy khuất khỏi màn hình hoặc biến mất ở nhiều dòng. Nút "+ ĐĂNG ĐỀ THI" trên Header bị chèn ép. -> FAIL
+--- [TABLE END] ---
+
+[Heading3] 3.4.2  Đăng đề thi kỹ năng Speaking
+[Caption] Bảng 16:Đăng đề thi kỹ năng Speaking
+
+--- [TABLE START] ---
+TC ID | Tên Test Case | Dữ liệu đầu vào (Input) | Bước thực hiện | Kết quả mong đợi (Output) | Kết quả thực tế
+TC_01 | Mở màn hình Đăng đề thi | Không | Click "Đăng đề thi" trên Header | Hiển thị form Upload Đề TOEIC | Hiển thị form Upload Đề TOEIC
+TC_02 | Hiển thị đầy đủ trường dữ liệu | Không | Truy cập form | Hiển thị Title, Skill, Part TOEIC, Time, Direction, Question, Sample Answer | Hiển thị Title, Skill, Part TOEIC, Time, Direction, Question, Sample Answer
+TC_03 | Chọn Skill Speaking | Speaking | Chọn Skill | Skill được chọn thành công | Skill được chọn thành công
+TC_04 | Kiểm tra danh sách Part TOEIC | Speaking | Mở dropdown Part TOEIC | Hiển thị đầy đủ Part 1, Part 2, Part 3, Part 4, Part 5 | Hiển thị đầy đủ Part 1, Part 2, Part 3, Part 4, Part 5
+TC_05 | Đăng câu hỏi Part 1 hợp lệ | Dữ liệu hợp lệ | Điền đầy đủ thông tin và lưu | Lưu thành công câu hỏi Part 1 | Lưu thành công câu hỏi Part 1
+TC_06 | Bỏ trống Title | Title rỗng | Click Lưu | Hiển thị thông báo yêu cầu nhập Title | Hệ thống hiển thị thông báo cần điền thông tin của Title
+TC_07 | Bỏ trống Question | Question rỗng | Click Lưu | Hiển thị thông báo yêu cầu nhập Question | Hệ thống vẫn lưu -> FAIL
+TC_08 | Bỏ trống Sample Answer | Sample Answer rỗng | Click Lưu | Hiển thị thông báo yêu cầu nhập Sample Answer | Hệ thống vẫn lưu -> FAIL
+TC_09 | Time bằng 0 | 0 | Click Lưu | Không cho phép lưu, hiển thị lỗi validation | Hệ thống vẫn lưu -> FAIL
+TC_10 | Time âm | -1 | Click Lưu | Không cho phép nhập hoặc hiển thị lỗi | Hệ thống vẫn lưu -> FAIL
+TC_11 | Tăng thời gian bằng nút ↑ | Không | Click nút tăng Time | Giá trị Time tăng đúng | Giá trị Time tăng đúng
+TC_12 | Giảm thời gian bằng nút ↓ | Không | Click nút giảm Time | Giá trị Time giảm đúng | Giá trị Time giảm đúng
+TC_13 | Nhập trực tiếp Time | 5 phút | Gõ trực tiếp vào ô Time | Hệ thống nhận giá trị hợp lệ | Hệ thống nhận giá trị hợp lệ
+TC_14 | Lưu & Thêm câu tiếp theo | Dữ liệu hợp lệ | Click "Lưu & Thêm câu tiếp" | Lưu câu hỏi hiện tại và hiển thị form mới | Hệ thống Lưu câu hỏi hiện tại và hiển thị form mới
+TC_15 | Hoàn tất Part 1 | Đã nhập dữ liệu | Click "Hoàn tất Part 1" | Kết thúc Part 1 và lưu dữ liệu | Hệ thống hiện thông báo đã lưu dữ liệu part 1
+TC_16 | Chuyển sang Part 2 | Chọn Part 2 | Quan sát giao diện | Hiển thị thêm trường Upload Image và Describe Image | Hiển thị thêm trường Upload Image và Describe Image
+TC_17 | Upload ảnh hợp lệ Part 2 | File JPG/PNG | Upload ảnh | Upload thành công | Upload thành công File JPG/PNG
+TC_18 | Upload file không hợp lệ Part 2 | PDF/DOCX | Upload file | Hiển thị thông báo lỗi | Hệ thống không cho phép upload file PDF/DOCX
+TC_19 | Không upload ảnh ở Part 2 | Rỗng | Click Lưu | Hiển thị lỗi yêu cầu upload ảnh | Hệ thống vẫn lưu -> FAIL
+TC_20 | Bỏ trống Describe Image | Rỗng | Click Lưu | Hiển thị lỗi validation | Hệ thống vẫn lưu -> FAIL
+TC_21 | Chuyển sang Part 3 | Chọn Part 3 | Quan sát giao diện | Hiển thị thêm trường Information | Hiển thị thêm trường Information
+TC_22 | Bỏ trống Information Part 3 | Rỗng | Click Lưu | Hiển thị lỗi validation | Hệ thống vẫn lưu -> FAIL
+TC_23 | Chuyển sang Part 4 | Chọn Part 4 | Quan sát giao diện | Hiển thị trường Information và Upload Image | Hiển thị trường Information và Upload Image
+TC_24 | Không nhập Information Part 4 | Rỗng | Click Lưu | Hiển thị lỗi validation | Hệ thống vẫn lưu -> FAIL
+TC_25 | Không upload ảnh Part 4 | Rỗng | Click Lưu | Hiển thị lỗi validation | Hệ thống vẫn lưu -> FAIL
+TC_26 | Chuyển sang Part 5 | Chọn Part 5 | Quan sát giao diện | Giao diện giống Part 1 | Giao diện giống Part 1
+TC_27 | Đăng câu hỏi Part 5 hợp lệ | Dữ liệu hợp lệ | Điền form và lưu | Lưu thành công câu hỏi Part 5 | Hệ thống hiện thông báo lưu thành công câu hỏi Part 5
+TC_28 | Responsive UI màn hình Upload Speaking | Không | Mở giao diện trên Mobile/Tablet | Giao diện hiển thị đúng, không vỡ layout, các trường nhập liệu hoạt động bình thường | Menu dropdown của trường "Part TOEIC" khi mở ra bị tràn chiều ngang, văng ra khỏi khung viền của form (modal). nhập liệu "Time" bị mất hai nút mũi tên (lên/xuống) để điều chỉnh tăng/giảm thời gian -> FAIL
+--- [TABLE END] ---
+
+[Heading3] 3.4.3 Đăng đề thi kỹ năng Writing
+[Caption] Bảng 17:Đăng đề thi kỹ năng Writing
+
+--- [TABLE START] ---
+TC ID | Tên Test Case | Dữ liệu đầu vào (Input) | Bước thực hiện | Kết quả mong đợi (Output) | Kết quả thực tế
+TC_01 | Chọn Kỹ năng (Skill) Writing | Mở form đăng đề, chọn Skill "Writing" | 1. Mở modal "+ ĐĂNG ĐỀ THI".2. Tại dropdown "Skill", chọn "Writing". | Dropdown "Part TOEIC" tự động cập nhật danh sách các phần thi của Writing gồm 3 lựa chọn: Part 1, Part 2, Part 3. | Dropdown "Part TOEIC" tự động cập nhật danh sách các phần thi của Writing gồm 3 lựa chọn: Part 1, Part 2, Part 3.
+TC_02 | Kiểm tra hiển thị trường dữ liệu Part 1 | Chọn "Part 1 - Write a sentence based on a picture" | Tại trường Part TOEIC, chọn Part 1. | Hiển thị chính xác các trường: Title, Skill, Part TOEIC, Time (minutes), Question, Required word 1, Required word 2, Upload image, Describe image. | Hệ thống hiển thị chính xác các trường: Title, Skill, Part TOEIC, Time (minutes), Question, Required word 1, Required word 2, Upload image, Describe image.
+TC_03 | Thao tác trường Time (Tăng/giảm) | Click nút mũi tên | Tại ô "Time (minutes)", click các nút mũi tên lên/xuống tích hợp sẵn. | Giá trị thời gian tăng/giảm tương ứng với mỗi lần click. Không cho phép giảm xuống số âm. | Giá trị thời gian tăng/giảm tương ứng với mỗi lần click. Không cho phép giảm xuống số âm.
+TC_04 | Validate các trường bắt buộc Part 1 | Bỏ trống các trường bắt buộc (VD: Required word, Question) | Để trống một hoặc nhiều trường nhập liệu quan trọng và click "Lưu & Thêm câu tiếp". | Hệ thống chặn lưu, hiển thị thông báo lỗi yêu cầu điền đầy đủ các trường bắt buộc. | Hệ thống hiển thị thông báo Upload thất bại
+TC_05 | Upload ảnh Part 1 (File không hợp lệ) | File .pdf, .docx | Tại mục "Upload image" của Part 1, chọn file sai định dạng | Hệ thống từ chối file, hiển thị thông báo lỗi định dạng . | Hệ thống từ chối file, hiển thị thông báo lỗi định dạng
+TC_06 | Lưu thành công Part 1 | Nhập đầy đủ thông tin + Upload ảnh hợp lệ | Điền dữ liệu hợp lệ vào tất cả các trường của Part 1 -> Click "Lưu & Thêm câu tiếp". | Câu hỏi được lưu thành công. Các ô nhập liệu (Question, Required words, Ảnh) được làm mới (clear) để nhập câu tiếp theo, giữ nguyên Title, Skill và Part. | Hệ thống lưu thành công. Các ô nhập liệu (Question, Required words, Ảnh) được làm mới (clear) để nhập câu tiếp theo, giữ nguyên Title, Skill và Part.
+TC_07 | Kiểm tra hiển thị trường dữ liệu Part 2 | Chọn "Part 2 - Respond to a written request" | Tại trường Part TOEIC, chuyển sang chọn Part 2. | Giao diện thay đổi: Ẩn các trường upload ảnh và Required words. Bổ sung thêm trường mới là "Passage / Email" và "Sample Answer". | Giao diện thay đổi: Ẩn các trường upload ảnh và Required words. Bổ sung thêm trường mới là "Passage / Email" và "Sample Answer"
+TC_08 | Validate trường Passage / Email Part 2 | Bỏ trống Passage / Email | Ở Part 2, để trống ô "Passage / Email" và điền các ô khác -> Click Lưu. | Hệ thống báo lỗi yêu cầu nhập nội dung đoạn văn/email tham chiếu cho câu hỏi. | Hệ thống vẫn lưu -> FAIL
+TC_09 | Lưu thành công Part 2 | Dữ liệu hợp lệ | Nhập đầy đủ Time, Passage/Email, Question, Sample Answer -> Click "Lưu & Thêm câu tiếp". | Hệ thống lưu câu hỏi Part 2 thành công và sẵn sàng form mới cho câu tiếp theo. | Hệ thống lưu câu hỏi Part 2 thành công và sẵn sàng form mới cho câu tiếp theo.
+TC_10 | Kiểm tra hiển thị trường dữ liệu Part 1 | Chọn "Part 3 - Write an opinion essay" | Tại trường Part TOEIC, chuyển sang chọn Part 3. | Giao diện thay đổi: Ẩn trường "Passage / Email". Chỉ giữ lại các trường cơ bản: Title, Skill, Part TOEIC, Time (minutes), Question, Sample Answer. | Giao diện thay đổi: Ẩn trường "Passage / Email". Chỉ giữ lại các trường cơ bản: Title, Skill, Part TOEIC, Time (minutes), Question, Sample Answer.
+TC_11 | Lưu thành công Part 3 | Dữ liệu hợp lệ | Điền đầy đủ câu hỏi tự luận và bài mẫu (Sample Answer) -> Click "Lưu & Thêm câu tiếp". | Dữ liệu Part 3 (bài luận) được lưu vào cơ sở dữ liệu thành công. | Hệ thống lưu vào cơ sở dữ liệu thành công.
+TC_12 | Thao tác nút "Hoàn tất Part X" | Không | Nhập xong câu hỏi cuối của Part (VD: Hoàn tất Part 1) -> Click nút màu xám "Hoàn tất Part X". | Hệ thống lưu câu Part X và được làm mới (clear) để nhập câu tiếp theo. | Hệ thống lưu câu Part X và được làm mới (clear) để nhập câu tiếp theo.
+TC_14 | Lỗi bảo mật nhập liệu | Nhập mã <script>alert('test')</script> | Nhập mã HTML/JS độc hại vào trường "Sample Answer" hoặc "Question" -> Click Lưu. | Dữ liệu được mã hóa (escape) an toàn, lưu dưới dạng text tĩnh thay vì thực thi script. | Hệ thống vẫn lưu -> FAIL
+TC_15 | Giao diện Responsive UI (Mobile) | Co nhỏ trình duyệt (375x812) | Mở form đăng đề ở giao diện Mobile và đổi qua lại giữa 3 Part. | Form không bị vỡ bố cục, không có thanh cuộn ngang. Các trường nhập liệu co bóp vừa khung hình, dropdown Part TOEIC hiển thị đúng vị trí không bị tràn viền (rút kinh nghiệm từ lỗi ở Speaking). | Menu dropdown của trường "Part TOEIC" khi mở ra bị tràn chiều ngang, văng ra khỏi khung viền của form (modal). nhập liệu "Time" bị mất hai nút mũi tên (lên/xuống) để điều chỉnh tăng/giảm thời gian -> FAIL
+--- [TABLE END] ---
+
+[Heading3] 3.4.4 Đăng đề thi kỹ năng Listening
+[Caption] Bảng 18:Đăng đề thi kỹ năng Listening
+
+--- [TABLE START] ---
+TC ID | Tên Test Case | Dữ liệu đầu vào (Input) | Bước thực hiện | Kết quả mong đợi (Output) | Kết quả thực tế
+TC_01 | Chọn Kỹ năng (Skill) Listening | Không | Tại màn hình Đăng đề thi, chọn Skill là "Listening" | Form cập nhật giao diện: Không có dropdown "Part TOEIC", hiển thị khu vực "Upload file JSON câu hỏi" và nút "Tải template JSON". | Form cập nhật giao diện: Không có dropdown "Part TOEIC", hiển thị khu vực "Upload file JSON câu hỏi" và nút "Tải template JSON".
+TC_02 | Tải template JSON | Không | Click vào nút "Tải template JSON" (màu xanh viền) | Trình duyệt tự động tải xuống file template dạng .json đúng định dạng chuẩn của hệ thống. | Trình duyệt tự động tải xuống file template dạng .json đúng định dạng chuẩn của hệ thống.
+TC_03 | Tải file sai định dạng | File .txt, .pdf, .docx | Kéo thả hoặc click vào vùng "Click để chọn file .json" và tải lên một file không phải .json. | Hệ thống từ chối file, hiển thị thông báo lỗi "Chỉ chấp nhận file định dạng .json". | Hệ thống từ chối file, hiển thị thông báo lỗi "Chỉ chấp nhận file định dạng .json"
+TC_04 | Tải file JSON sai cấu trúc | File .json thiếu trường (VD: thiếu đáp án, sai key) | Tải lên một file .json không tuân thủ theo template đã cho. | Hệ thống đọc file, phát hiện lỗi cấu trúc và báo lỗi cụ thể (VD: "File JSON không đúng định dạng template"). | Hệ thống đọc file, phát hiện lỗi cấu trúc và báo lỗi cụ thể
+TC_05 | Kiểm tra hiển thị số lượng câu hỏi động | File .json hợp lệ chứa 100 câu hỏi | Tải lên file .json chuẩn có chứa 100 câu hỏi Listening. | File được nhận diện. Text trên nút submit màu xanh đổi từ "Upload 0 câu hỏi" thành "Upload 100 câu hỏi". | File được nhận diện. Text trên nút submit màu xanh đổi từ "Upload 0 câu hỏi" thành "Upload 100 câu hỏi".
+TC_06 | Xóa file JSON đã chọn | Có file .json đang được chọn | Đang có sẵn một file được chọn, tiếp tục click vào khu vực upload để tải lên một file .json khác. | File cũ bị xóa/thay thế bằng file mới. Số lượng câu hỏi trên nút submit được cập nhật lại theo file mới. | File cũ bị xóa/thay thế, nút submit quay về trạng thái "Upload 0 câu hỏi".
+TC_07 | Bỏ trống trường Title | Bỏ trống Title | Điền Time, tải file .json hợp lệ, bỏ trống Title -> Click nút "Upload...". | Hệ thống chặn thao tác, hiển thị lỗi yêu cầu nhập Title. | Hệ thống chặn thao tác, hiển thị lỗi yêu cầu nhập Title.
+TC_08 | Bỏ trống trường Time | Bỏ trống Time | Điền Title, tải file .json hợp lệ, bỏ trống Time -> Click nút "Upload...". | Hệ thống chặn thao tác, hiển thị lỗi yêu cầu nhập Time (minutes). | Hệ thống chặn thao tác, hiển thị lỗi yêu cầu nhập Time (minutes).
+TC_09 | Validation trường Time | Chữ cái (abc), số âm (-10), số 0 | Nhập kí tự không hợp lệ vào trường Time. | Hệ thống báo lỗi, yêu cầu nhập số nguyên dương hợp lệ (>0). | Hệ thống vẫn chấp nhận thời gian âm VD -3 -> FAIL
+TC_10 | Bỏ trống file JSON | Không tải file | Điền đầy đủ Title, Time nhưng không tải file .json -> Click nút "Upload 0 câu hỏi". | Hệ thống chặn thao tác, hiển thị lỗi yêu cầu tải lên file dữ liệu JSON. | Hệ thống hiển thị thông báo “Vui lòng chọn file Json hợp lệ”
+TC_11 | Submit hợp lệ (Tạo đề Listening thành công) | Title hợp lệ, Time hợp lệ, File .json hợp lệ | Nhập đầy đủ thông tin: Title, Time (VD: 45), tải file JSON đúng chuẩn -> Click nút "Upload X câu hỏi". | Nút chuyển trạng thái loading. Sau khi hoàn tất, hệ thống thông báo tạo đề thành công, lưu vào Database và đóng modal/chuyển hướng trang. | Nút chuyển trạng thái loading. Sau khi hoàn tất, hệ thống thông báo tạo đề thành công
+TC_12 | Đóng Modal (Nút X) | Đang nhập dở dữ liệu | Click vào nút "X" ở góc trên cùng bên phải của modal. | Modal đóng lại. Toàn bộ dữ liệu nhập dở bị xóa (reset). | Modal đóng lại. Toàn bộ dữ liệu nhập dở bị xóa (reset).
+TC_13 | Giao diện Responsive UI (Mobile) | Co nhỏ trình duyệt về kích thước 375x812 | Mở modal Upload Đề TOEIC Listening trên giao diện Mobile. | Modal co bóp vừa khung hình, không có thanh cuộn ngang. Khu vực kéo/thả file hiển thị tốt, có thể chạm (tap) để mở thư mục chọn file trên điện thoại. Nút bấm không bị đè khuất. | Menu dropdown của trường "Part TOEIC" khi mở ra bị tràn chiều ngang, văng ra khỏi khung viền của form (modal). nhập liệu "Time" bị mất hai nút mũi tên (lên/xuống) để điều chỉnh tăng/giảm thời gian -> FAIL
+--- [TABLE END] ---
+
+[Heading3] 3.4.5 Đăng đề thi kỹ năng Reading
+[Caption] Bảng 19:Đăng đề thi kỹ năng Reading
+
+--- [TABLE START] ---
+TC ID | Tên Test Case | Dữ liệu đầu vào (Input) | Bước thực hiện | Kết quả mong đợi (Output) | Kết quả thực tế
+TC_01 | Chọn Kỹ năng (Skill) Reading | Không | Tại form Đăng đề thi, click dropdown Skill và chọn "Reading". | Form hiển thị các trường: Title, Skill (Reading), Time (minutes), khu vực "Upload file JSON câu hỏi" (có nút Tải template) và nút submit màu xanh. Không hiển thị dropdown Part. | Form hiển thị các trường: Title, Skill (Reading), Time (minutes), khu vực "Upload file JSON câu hỏi" (có nút Tải template) và nút submit màu xanh. Không hiển thị dropdown Part.
+TC_02 | Tải template JSON Reading | Không | Click vào nút "Tải template JSON" (viền xanh). | Trình duyệt tự động tải xuống file template dạng .json theo chuẩn cấu trúc đề Reading của hệ thống. | Trình duyệt tự động tải xuống file template dạng .json theo chuẩn cấu trúc đề Reading của hệ thống.
+TC_03 | Upload file sai định dạng | File .pdf, .docx, .xls | Tại khu vực "Click để chọn file .json", tải lên một file không phải định dạng JSON. | Hệ thống chặn tải lên, hiển thị thông báo lỗi "Chỉ chấp nhận file định dạng .json" (hoặc tương đương). | Hệ thống chặn tải lên, hiển thị thông báo lỗi.
+TC_04 | Upload file JSON sai cấu trúc | File .json bị thiếu trường dữ liệu hoặc sai key | Tải lên một file .json không tuân thủ theo template chuẩn của bài Reading. | Hệ thống kiểm tra cấu trúc (validate), phát hiện lỗi và báo lỗi cấu trúc file không hợp lệ. | Hệ thống kiểm tra cấu trúc (validate), phát hiện lỗi và báo lỗi cấu trúc file không hợp lệ
+TC_05 | Nhận diện số lượng câu hỏi động | File .json hợp lệ (VD: chứa 100 câu hỏi Reading) | Tải lên file .json có cấu trúc chuẩn. | File được nhận diện thành công. Nút submit thay đổi text từ "Upload 0 câu hỏi" thành "Upload 100 câu hỏi". | File được nhận diện thành công. Nút submit thay đổi text từ "Upload 0 câu hỏi" thành "Upload 100 câu hỏi"
+TC_06 | Thay đổi file JSON đã chọn | File .json mới | Đang có sẵn một file được chọn, tiếp tục click vào khu vực upload để tải lên một file .json khác. | File cũ bị xóa/thay thế bằng file mới. Số lượng câu hỏi trên nút submit được cập nhật lại theo file mới. | File cũ bị xóa/thay thế bằng file mới. Số lượng câu hỏi trên nút submit được cập nhật lại theo file mới.
+TC_07 | Bỏ trống trường Title | Rỗng | Nhập Time, tải file JSON hợp lệ, nhưng để trống ô "Title" -> Click nút "Upload...". | Hệ thống chặn thao tác, hiển thị thông báo lỗi yêu cầu nhập Title. | Hệ thống chặn thao tác, hiển thị thông báo lỗi yêu cầu nhập Title.
+TC_08 | Bỏ trống trường Time (minutes) | Rỗng | Nhập Title, tải file JSON hợp lệ, nhưng để trống ô "Time (minutes)" -> Click nút "Upload...". | Hệ thống chặn thao tác, hiển thị thông báo lỗi yêu cầu nhập thời gian. | Hệ thống chặn thao tác, hiển thị thông báo lỗi yêu cầu nhập thời gian.
+TC_09 | Validation dữ liệu trường Time | abc, -5, 0 | Nhập chữ cái, số âm hoặc số 0 vào ô "Time (minutes)" -> Click nút "Upload...". | Hệ thống báo lỗi, yêu cầu nhập giá trị thời gian là số nguyên dương hợp lệ. | Hệ thống nhấn chấp nhận VD -5 -> FAIL
+TC_10 | Upload khi chưa có file JSON | Rỗng (không chọn file) | Nhập đầy đủ Title và Time hợp lệ, không tải file JSON -> Click nút "Upload 0 câu hỏi". | Hệ thống chặn thao tác, hiển thị thông báo yêu cầu người dùng phải chọn file .json câu hỏi. | Hệ thống chặn thao tác, hiển thị thông báo yêu cầu người dùng phải chọn file .json câu hỏi.
+TC_11 | Upload đề Reading thành công | Dữ liệu hợp lệ tất cả các trường | Điền đầy đủ Title, Time và tải lên file .json đề Reading chuẩn -> Click nút "Upload X câu hỏi". | Nút submit hiển thị trạng thái loading. Sau đó hệ thống thông báo tải đề thành công, lưu dữ liệu. | Nút submit hiển thị trạng thái loading. Sau đó hệ thống thông báo tải đề thành công, lưu dữ liệu.
+TC_12 | Đóng Modal (Nút X) | Đang nhập dở dữ liệu | Click vào nút "X" ở góc trên cùng bên phải của modal. | Modal đóng lại. Toàn bộ dữ liệu nhập dở bị xóa (reset). | Modal đóng lại. Toàn bộ dữ liệu nhập dở bị xóa (reset).
+TC_13 | Giao diện Responsive UI (Mobile) | Không | Co nhỏ trình duyệt (kích thước Mobile) và mở modal Upload đề Reading. | Form co bóp linh hoạt không vỡ layout, không tràn viền. Khu vực "Click để chọn file" dễ dàng chạm (tap) trên màn hình cảm ứng. | Menu dropdown của trường "Part TOEIC" khi mở ra bị tràn chiều ngang, văng ra khỏi khung viền của form (modal). nhập liệu "Time" bị mất hai nút mũi tên (lên/xuống) để điều chỉnh tăng/giảm thời gian -> FAIL
+--- [TABLE END] ---
+
+[Heading3] 3.4.6 Trang Dashboard của Admin
+[Caption] Bảng 20:Trang Dashboard của Admin
+
+--- [TABLE START] ---
+TC ID | Tên Test Case | Dữ liệu đầu vào (Input) | Bước thực hiện | Kết quả mong đợi (Output) | Kết quả thực tế
+TC_01 | Hiển thị giao diện Dashboard Admin | Không | Truy cập vào trang quản trị Admin (Tổng quan) | Hiển thị đầy đủ các phần: Thanh điều hướng (Header), Thanh tìm kiếm, Danh mục Kỹ năng (4 thẻ), và khu vực "Đề thi vừa đăng" với các thẻ bài thi. | Hiển thị đầy đủ các phần: Thanh điều hướng (Header), Thanh tìm kiếm, Danh mục Kỹ năng (4 thẻ), và khu vực "Đề thi vừa đăng" với các thẻ bài thi.
+TC_02 | Thanh tìm kiếm đề thi | "Listening Test 1" | Nhập từ khóa vào ô "Tìm mã đề, tên đề thi hoặc email..." | Hệ thống tự động lọc hoặc hiển thị kết quả các đề thi có tên chứa từ khóa tương ứng. | Hệ thống tự động lọc hoặc hiển thị kết quả các đề thi có tên chứa từ khóa tương ứng. Nhưng tìm theo ID lại không tìm ra gì -> FAIL
+TC_03 | Hiển thị thông tin Thẻ bài thi (Card) | Không | Quan sát một thẻ bài thi trong phần "Đề thi vừa đăng" (VD: bài Listening Test 1) | Thẻ hiển thị đầy đủ: ID tag ở góc, Hashtag (#TOEIC Bridge, #Listening), Tên đề, Thời gian có icon sửa, Số câu hỏi, nút "Xem đề" và icon Xóa (Thùng rác). | Thẻ hiển thị đầy đủ: ID tag ở góc, Hashtag (#TOEIC Bridge, #Listening), Tên đề, Thời gian có icon sửa, Số câu hỏi, nút "Xem đề" và icon Xóa (Thùng rác).
+TC_04 | Hiển thị Tooltip sửa thời gian | Không | Di chuột (Hover) vào vùng chứa thời gian và icon cây bút trên thẻ bài thi. | Hiển thị tooltip màu trắng với dòng chữ "Click để sửa thời gian". | Hiển thị tooltip màu trắng với dòng chữ "Click để sửa thời gian".
+TC_05 | Chỉnh sửa thời gian hợp lệ | Số: 60 | 1. Click vào icon cây bút cạnh thời gian.2. Nhập giá trị mới (VD: 60).3. Bấm Enter hoặc click ra ngoài để lưu. | Hệ thống cập nhật thời gian mới cho đề thi thành "60 phút". | Hệ thống cập nhật thời gian mới cho đề thi thành "60 phút".
+TC_06 | Chỉnh sửa thời gian không hợp lệ | Chữ cái (abc), Số âm (-5) | 1. Click vào icon cây bút.2. Nhập dữ liệu sai định dạng.3. Bấm Enter để lưu. | Hệ thống chặn thao tác lưu, khôi phục lại giá trị cũ hoặc hiển thị thông báo lỗi yêu cầu nhập số nguyên dương. | Hệ thống không cho phép điền chữ cái , nhập số âm VD -5 thì bị cảnh báo “Thời gian phải là số nguyên dương(phút)”
+TC_07 | Thao tác nút "Xem đề" | Không | Click vào nút "Xem đề" màu xanh trên một thẻ bài thi bất kỳ. | Hệ thống điều hướng sang trang chi tiết của đề thi đó (để xem danh sách câu hỏi bên trong). | Hệ thống điều hướng sang trang chi tiết của đề thi đó (để xem danh sách câu hỏi bên trong).
+TC_08 | Điều hướng "Quản lý kho đề ->" | Không | Click vào text link "Quản lý kho đề ->" ở góc phải khu vực Đề thi vừa đăng. | Chuyển hướng đến màn hình danh sách toàn bộ đề thi trong hệ thống (kho dữ liệu). | Hệ thống đang phát triển thêm -> FAIL
+TC_09 | Xóa đề thi - Hủy thao tác | Không | 1. Click icon Thùng rác trên thẻ bài thi.2. Hiển thị popup xác nhận xóa.3. Bấm "Cancel" / Hủy. | Popup đóng lại, đề thi vẫn giữ nguyên trạng thái hiển thị trên Dashboard. | Popup đóng lại, đề thi vẫn giữ nguyên trạng thái hiển thị trên Dashboard.
+TC_10 | Xóa đề thi (Chứa câu hỏi) | Đề thi có 4 câu hỏi | 1. Chọn một đề thi đang có sẵn 4 câu hỏi.2. Click icon Thùng rác.3. Bấm "OK/Xác nhận" để xóa. | Hệ thống gọi API xóa 1 lần duy nhất, Database tự động xóa đề thi cùng toàn bộ 4 câu hỏi liên kết (xóa cascade). Cập nhật lại giao diện, thẻ bài thi biến mất. | FAIL (Lỗi Nghiêm trọng): Lỗi không xóa dứt điểm đề thi có chứa câu hỏi. API không xóa đề thi ngay mà xóa "rụng dần" câu hỏi (VD: xóa lần 1 còn 2 câu, xóa lần 2 còn 0 câu, xóa lần 3 đề thi mới thực sự biến mất khỏi DB). Cần bấm lặp lại nhiều lần.=> Đã fix
+--- [TABLE END] ---
+
+[Heading2] 3.5 Test API Postman
+[Heading3] 3.5.1 Test Case API: Module Auth
+[Caption] Bảng 21:Test Case API: Module Auth
+
+--- [TABLE START] ---
+TC ID | Tên API (Endpoint) | Method | Kịch bản test | Dữ liệu gửi đi | Kết quả mong đợi theo tài liệu | Kết quả thực tế trên Postman | Trạng thái
+TC_AUTH_LOG_01 | /api/auth/login | POST | Đăng nhập thành công với tài khoản hợp lệ | {"email": "user@example.com", "password": "12345678"} | Status: 200. Body: Trả về Token object chứa access_token và role. | Status: 200 OK. Trả về access_token chuẩn xác. | PASS
+TC_AUTH_LOG_02 | /api/auth/login | POST | Đăng nhập thất bại do sai mật khẩu | {"email": "user123!example.com", "password": "12345678"} | Status: 401. Body: {"detail": "Invalid credentials"}. | Status: 401 Unauthorized. Body trả về đúng detail lỗi. | PASS
+TC_AUTH_REG_01 | /api/auth/register | POST | Đăng ký thất bại do thiếu Validation (Email format, Password length, Role) | email thiếu @ (user123!example.com), password ngắn (12345), role sai định dạng (membe). | Status: 422. Body: Trả về danh sách Pydantic validation error chặn dữ liệu rác. | Status: 200 OK. Hệ thống vẫn lưu thành công user rác với thông tin sai lệch vào DB. | FAIL
+TC_AUTH_REG_02 | /api/auth/register | POST | Kiểm tra tính bảo mật của dữ liệu trả về (Data Exposure) | Gửi payload đăng ký hợp lệ. | Status: 200. Body: UserOut object KHÔNG chứa thông tin nhạy cảm. | Status: 200 OK. Body: Làm lộ trường password_hash ra ngoài response. | FAIL
+TC_AUTH_CPW_01 | /api/auth/change-password/{user_id} | PUT | Đổi mật khẩu thành công (Happy Path) | Path Param: user_id hợp lệ. Body: current_password đúng, new_password có từ 8 ký tự trở lên. | Status: 200. Body: {"message": "Password updated successfully"}. | Status: 200 OK. Trả về đúng thông báo thành công. | PASS
+TC_AUTH_CPW_02 | /api/auth/change-password/{user_id} | PUT | Đổi mật khẩu thất bại do sai mật khẩu hiện tại | Path Param: user_id hợp lệ. Body: Cố tình nhập sai current_password. | Status: 400. Body: {"detail": "Current password incorrect"}. | Status: 400 Bad Request. Bắt đúng logic sai mật khẩu cũ. | PASS
+TC_AUTH_CPW_03 | /api/auth/change-password/{user_id} | PUT | Đổi mật khẩu thất bại do mật khẩu mới quá ngắn | Body: new_password có dưới 8 ký tự. | Status: 422. Body: Trả về chi tiết lỗi validation yêu cầu tối thiểu 8 ký tự. | Status: 422 Unprocessable Entity. FastAPI chặn đúng validation. | PASS
+TC_AUTH_CPW_04 | /api/auth/change-password/{user_id} | PUT | Đổi mật khẩu cho user không tồn tại | Path Param: Đổi user_id thành một số không có thật trong DB. | Status: 404. Body: {"detail": "User not found"}. | Status: 404 Not Found. Bắt đúng logic user không tồn tại. | PASS
+TC_AUTH_CPW_05 | /api/auth/change-password/{user_id} | PUT | Truyền user_id sai kiểu dữ liệu | Path Param: Truyền chữ thay vì số (VD: abc). | Status: 422. Body: Lỗi FastAPI path param validation. | Status: 422 Unprocessable Entity. Bắt đúng định dạng số nguyên. | PASS
+--- [TABLE END] ---
+
+[Heading3] 3.5.2 Test Case API: Chatbot
+[Caption] Bảng 22:Test Case API: Chatbot
+
+--- [TABLE START] ---
+TC ID | Tên API (Endpoint) | Method | Kịch bản test (Scenario) | Dữ liệu gửi đi (Request Body / Header) | Kết quả mong đợi theo tài liệu | Kết quả thực tế trên Postman | Trạng thái
+TC_CHAT_01 | /api/chatbot/chat | POST | Gửi tin nhắn thành công (User có dữ liệu học tập) | Header: Authorization: Bearer <token>. Body: user_id hợp lệ, message hợp lệ, history chuẩn (role: user/assistant). | Status: 200. Trả về StreamingResponse phân tích điểm yếu dựa trên lịch sử. | Status: 200 OK. Trả về chunk text liên tục, phân tích đúng tỷ lệ phần trăm các kỹ năng. | PASS
+TC_CHAT_02 | /api/chatbot/chat | POST | Gửi tin nhắn ẩn danh (Không truyền user_id) | Header: Token hợp lệ. Body: user_id là null, message hợp lệ. | Status: 200. Trả về StreamingResponse. Bot trả lời bình thường nhưng không cá nhân hóa. | Status: 200 OK. Trả về xin lỗi vì chưa có dữ liệu trên hệ thống. Không bị sập lỗi | PASS
+TC_CHAT_03 | /api/chatbot/chat | POST | Lỗi truyền sai định dạng role trong mảng history | Body: Mảng history chứa role không hợp lệ (VD: "bot", "ai"). | Status: 422 (nếu có Pydantic validation) hoặc 400 từ Groq. | Status: 200 OK nhưng Response rỗng (Trắng tinh). Đồng thời Terminal Backend văng lỗi groq.BadRequestError: 400. | FAIL
+TC_CHAT_04 | /api/chatbot/chat | POST | Không truyền Header Authorization (Lỗi JWT) | Header: Không đính kèm Token. Body: Dữ liệu hợp lệ. | Status: 401. Body: {"detail": "Unauthorized: missing or invalid Authorization header"}. | Status: 401. Body: {"detail": "Unauthorized: missing or invalid Authorization header"}. | PASS
+TC_CHAT_05 | /api/chatbot/chat | POST | Validation lỗi: Thiếu field message bắt buộc | Header: Token hợp lệ. Body: Truyền user_id và history, xóa hẳn trường message. | Status: 422. Body: Trả về Pydantic validation error báo thiếu trường message. | Status: 422. Body: Trả về Pydantic validation error báo thiếu trường message. | PASS
+TC_CHAT_06 | /api/chatbot/chat | POST | User mới tinh nhắn tin (Chưa từng thi) | Header: Token hợp lệ. Body: user_id của tài khoản mới lập. | Status: 200. AI stream bình thường và nhận biết được "Học viên chưa có dữ liệu làm bài nào". | Status: 200. AI stream bình thường và nhận biết được "Học viên chưa có dữ liệu làm bài nào". | PASS
+--- [TABLE END] ---
+
+[Heading3] 3.5.3 Test Case API: User Attempt
+[Caption] Bảng 23:Test Case API: User Attempt
+
+--- [TABLE START] ---
+TC ID | Tên API (Endpoint) | Method | Kịch bản test (Scenario) | Dữ liệu gửi đi (Request Body / Header) | Kết quả mong đợi theo tài liệu | Kết quả thực tế trên Postman | Trạng thái
+TC_ATT_SUB_01 | /api/user-attempts/submit-mcq | POST | Nộp bài thành công (Happy Path) | Header: Token hợp lệ. Body: user_id, section_id, skill ("listening"), answers (VD: {"12": "A", "13": "C"}). | Status: 200. Body: MCQSubmitResult hiển thị score, total, và mảng results đánh giá đúng/sai từng câu. | Status: 200 Trả về chính xác schema MCQSubmitResult. Hệ thống tính toán thành công score (81), total (100), có đủ section_id, created_at và mảng results đánh giá đúng/sai chi tiết cho từng câu hỏi. | PASS
+TC_ATT_SUB_02 | /api/user-attempts/submit-mcq | POST | Nộp bài trắng (Bỏ qua tất cả câu hỏi) | Header: Token hợp lệ. Body: Trường answers truyền mảng rỗng {}. | Status: 200. Body: score=0, total=N (tổng số câu của đề), results=[]. | Status: 200. Body: score=0, total=N (tổng số câu của đề), results=[]. | PASS
+TC_ATT_SUB_03 | /api/user-attempts/submit-mcq | POST | Trả lời câu hỏi không tồn tại trong đề | Body: Cố tình truyền ID câu hỏi sai vào answers (VD: {"99999": "A"}). | Status: 200. Body: Backend tự động bỏ qua câu này, không báo lỗi sập. | Status: 200. Body: Backend tự động bỏ qua câu này, không báo lỗi sập. | PASS
+TC_ATT_HIS_01 | /api/user-attempts/user/{user_id}/history | GET | Lấy lịch sử làm bài (Sắp xếp mới nhất lên đầu) | Path Param: user_id đã từng làm bài. Header: Token hợp lệ. | Status: 200. Body: Trả về mảng các phiên làm bài. Kiểm tra xem phiên mới nhất có nằm ở đầu mảng không. | Status: 200. Body: Trả về mảng các phiên làm bài. Kiểm tra xem phiên mới nhất có nằm ở đầu mảng không. | PASS
+TC_ATT_HIS_02 | /api/user-attempts/user/{user_id}/history | GET | Lấy lịch sử của user mới (Chưa từng thi) | Path Param: user_id của một tài khoản mới lập. | Status: 200. Body: Trả về mảng rỗng []. | Status: 200. Body: Trả về mảng rỗng []. | PASS
+TC_ATT_DET_01 | /api/user-attempts/user/{user_id}/session-detail | GET | Xem lại chi tiết 1 phiên thi Listening hợp lệ | Query Params: section_id và attempted_at chuẩn ISO. | Status: 200. Body: Trả về chi tiết các câu, có kèm audio_url, image_url và user_ans. | Status: 200. Body: Trả về chi tiết các câu, có kèm audio_url, image_url và user_ans. | PASS
+TC_ATT_DET_02 | /api/user-attempts/user/{user_id}/session-detail | GET | Truyền sai định dạng biến thời gian attempted_at | Query Params: Truyền chữ linh tinh (VD: attempted_at=ngay-hom-qua). | Status: 400. Body: {"detail": "Invalid attempted_at format"}. | Status: 400. Body: {"detail": "Invalid attempted_at format"} | PASS
+TC_ATT_WEAK_01 | /api/user-attempts/user/{user_id}/weak-areas | GET | Phân tích điểm yếu (Chỉ tính khi có >= 3 câu) | Path Param: user_id hợp lệ. | Status: 200. Body: Danh sách weak_areas. Điều kiện hiện ra: Số câu (total) >= 3 và Tỷ lệ đúng (accuracy) < 0.60. | Status: 200. Body: Danh sách weak_areas. Điều kiện hiện ra: Số câu (total) >= 3 và Tỷ lệ đúng (accuracy) < 0.60. | PASS
+TC_CRUD_01 | /api/user-attempts/ | POST | Tạo mới dữ liệu thành công | Header: Có JWT.Body: {"user_id": 1, "section_id": 5, "question_id": 22, "user_ans": "A", "ai_ans": null} | Status: 200.Body: Trả về object UserAttemptOut. | Status: 200.Body: Trả về object UserAttemptOut. | PASS
+TC_CRUD_02 | /api/user-attempts/ | POST | Lỗi thiếu field hoặc sai kiểu dữ liệu | Header: Có JWT.Body: Thiếu user_id hoặc truyền sai kiểu (VD: truyền chuỗi chữ vào ID). | Status: 422.Body: Báo lỗi Pydantic validation error. | Status: 422.Body: Báo lỗi Pydantic validation error. | PASS
+TC_CRUD_03 | /api/user-attempts/user/{user_id} | GET | Lấy tất cả attempt của user (đã làm bài) | Header: Có JWT.Path Param: user_id đã từng làm bài. | Status: 200.Body: Array UserAttemptOut (sắp xếp giảm dần theo created_at). | Status: 200.Body: Array UserAttemptOut (sắp xếp giảm dần theo created_at) | PASS
+TC_CRUD_04 | /api/user-attempts/user/{user_id}/section/{section_id} | GET | Lọc attempt theo user và section (Có dữ liệu) | Header: Có JWT.Path Param: user_id và section_id hợp lệ có data. | Status: 200.Body: Array UserAttemptOut. | Status: 200.Body: Array UserAttemptOut. | PASS
+TC_CRUD_05 | /api/user-attempts/user/{user_id}/section/{section_id} | GET | Lọc attempt theo user và section (Không có) | Header: Có JWT.Path Param: Truyền section_id mà user chưa từng làm. | Status: 200.Body: [] (Mảng rỗng). | Status: 200.Body: [] (Mảng rỗng). | PASS
+TC_CRUD_07 | /api/user-attempts/question/{question_id} | GET | Tìm attempt theo question_base_id | Header: Có JWT.Path Param: question_id (question_base.id) hợp lệ có tồn tại. | Status: 200.Body: UserAttemptOut (chỉ 1 object). | Status: 200.Body: UserAttemptOut (chỉ 1 object) | PASS
+TC_CRUD_08 | /api/user-attempts/question/{question_id} | GET | Tìm attempt với question_id không tồn tại | Header: Có JWT.Path Param: question_id truyền một ID ảo không có trong DB. | Status: 404.Body: {"detail": "Attempt not found"}. | Status: 404.Body: {"detail": "Attempt not found"}. | PASS
+TC_CRUD_09 | /api/user-attempts/{attempt_id} | PUT | Update attempt thành công | Header: Có JWT.Path Param: attempt_id hợp lệ.Body: {"user_ans": "B", "ai_ans": "Giải thích..."}. | Status: 200.Body: UserAttemptOut đã được cập nhật. | Status: 200.Body: UserAttemptOut đã được cập nhật. | PASS
+TC_CRUD_10 | /api/user-attempts/{attempt_id} | PUT | Update attempt không tồn tại | Header: Có JWT.Path Param: attempt_id ảo (không tồn tại trong DB).Body: {"user_ans": "C"}. | Status: 404.Body: {"detail": "Attempt not found"}. | Status: 404.Body: {"detail": "Attempt not found"}. | PASS
+TC_CRUD_11 | /api/user-attempts/{attempt_id} | DELETE | Xóa attempt thành công | Header: Có JWT.Path Param: attempt_id hợp lệ. | Status: 204.Body: Trống (Không có body). | Status: 204.Body: Trống (Không có body). | PASS
+TC_CRUD_12 | /api/user-attempts/{attempt_id} | DELETE | Xóa attempt không tồn tại | Header: Có JWT.Path Param: attempt_id ảo (không tồn tại trong DB). | Status: 404.Body: {"detail": "Attempt not found"}. | Status: 404.Body: {"detail": "Attempt not found"}. | PASS
+--- [TABLE END] ---
+
+[Heading1] 4 Kiểm thử hộp trắng
+[Heading2] 4.1 Tổng quan chiến lược kiểm thử
+Hệ thống backend của Website TOEIC được kiểm thử theo kiến trúc tách biệt ba tầng độc lập hoàn toàn, gồm: tầng Service chịu trách nhiệm xử lý logic nghiệp vụ và liên kết các dịch vụ AI; tầng CRUD chịu trách nhiệm thao tác dữ liệu và truy vấn cơ sở dữ liệu; tầng Route chịu trách nhiệm tiếp nhận HTTP request, kiểm tra phân quyền và điều phối luồng xử lý đến các lớp bên dưới. Cách tổ chức này cho phép từng tầng được kiểm thử riêng, nhờ đó khi phát sinh lỗi có thể khoanh vùng chính xác nguyên nhân nằm ở logic, truy vấn dữ liệu hay API endpoint
+
+--- [TABLE START] ---
+Công cụ sử dụng | Mục đích sử dụng cụ thể trong hệ thống test suite
+pytest | Framework kiểm thử chính chịu trách nhiệm quản lý vòng đời và điều phối luồng chạy.
+FastAPI TestClient | Giả lập luồng truyền dữ liệu và gửi HTTP request đến API endpoint không cần chạy server thật.
+SQLAlchemy + SQLite in-memory | Tạo database tạm thời trong RAM, xóa sạch sau mỗi test, không ảnh hưởng dữ liệu thật.
+unittest.mock (patch) | Giả lập các dịch vụ bên ngoài mạng cục bộ như Groq API, Whisper, subprocess hệ thống.
+pytest fixtures | Tái sử dụng dữ liệu mẫu và cấu hình chung cho toàn hệ thống file test.
+--- [TABLE END] ---
+
+Kết quả:
+Bộ công cụ kiểm thử được sử dụng gồm pytest làm framework kiểm thử chính, FastAPI TestClient để gửi request trực tiếp đến API mà không cần khởi động server thật, SQLAlchemy + SQLite in-memory để tạo database tạm trong RAM và xóa sạch sau mỗi test, unittest.mock (patch) để giả lập các dịch vụ bên ngoài như Groq API, Whisper và subprocess, cùng với pytest fixtures để tái sử dụng dữ liệu mẫu và cấu hình chung. Mô hình kiểm thử này cho phép toàn bộ test suite chạy độc lập với môi trường thật, không phụ thuộc dữ liệu phát sinh ngoài ý muốn.
+Kỹ thuật cô lập test được áp dụng xuyên suốt toàn bộ backend. Database được reset hoàn toàn sau từng test case thông qua fixture clean_tables với cơ chế autouse=True, bảo đảm các test không tác động lẫn nhau. Dependency Injection của FastAPI thông qua get_db được ghi đè bằng session test riêng, nên không cần kết nối tới database thật. Tất cả lời gọi đến Groq LLM và Whisper đều được mock, nhờ đó test có thể chạy offline hoàn toàn và không tiêu tốn API key của hệ thống. Theo tài liệu white_box, tổng số test case backend là 271 test, phân bổ trên 22 file test.
+[Heading2] 4.2 Kiểm thử bảo mật (Security Testing)
+Nhằm đảm bảo an toàn cho dữ liệu người dùng, ngăn chặn truy cập trái phép và duy trì tính toàn vẹn của phiên đăng nhập, hệ thống triển khai nhóm kiểm thử bảo mật tập trung vào hai cơ chế cốt lõi là mã hóa mật khẩu và xác thực bằng JSON Web Token (JWT). Theo bộ tài liệu whitebox và mã nguồn backend, các kịch bản này được xây dựng tại hai tệp kiểm thử chính là test_security.py và test_services_auth.py, với tổng cộng 24 test case chuyên sâu. Các test này không chỉ xác minh đầu ra của từng hàm mà còn đi sâu vào luồng xử lý nội bộ của lớp bảo mật, từ việc băm mật khẩu, tạo token, giải mã token cho đến cơ chế chặn request ở middleware.
+Toàn bộ kiểm thử bảo mật được thiết kế theo hướng kiểm thử hộp trắng, nghĩa là nhóm kiểm thử không chỉ quan sát hành vi bên ngoài của API mà còn kiểm tra trực tiếp các hàm xử lý bên trong như hash_password, verify_password, create_access_token, register_user, login_user, change_password và lớp middleware xác thực JWT. Môi trường kiểm thử được cô lập bằng SQLite in-memory kết hợp với pytest, giúp dữ liệu giữa các test case không ảnh hưởng lẫn nhau và bảo đảm kết quả phản ánh đúng logic của mã nguồn. Đây cũng là cách phù hợp để kiểm thử những thành phần nhạy cảm như bảo mật, vì có thể chạy offline, không phụ thuộc vào dữ liệu thật hay dịch vụ ngoài.
+[Heading3] 4.2.1 Cơ chế hash mật khẩu bằng Argon2
+Hệ thống sử dụng cơ chế băm mật khẩu bằng Argon2 trước khi lưu vào cơ sở dữ liệu. Trong mã nguồn, lớp bảo mật được xây dựng thông qua CryptContext với thuật toán băm Argon2, còn phía service đăng ký và đổi mật khẩu đều bắt buộc đi qua bước hash trước khi ghi xuống bảng người dùng. Điều này có ý nghĩa rất quan trọng vì mật khẩu người dùng không bao giờ được lưu dưới dạng văn bản thuần, qua đó giảm đáng kể nguy cơ lộ dữ liệu nếu cơ sở dữ liệu bị truy cập trái phép.
+Nhóm kiểm thử tiến hành xác minh nhiều khía cạnh của cơ chế này. Trước hết, hàm hash_password phải luôn trả về một chuỗi khác rỗng và khác hoàn toàn với mật khẩu gốc. Tiếp theo, cùng một mật khẩu khi băm hai lần liên tiếp phải cho ra hai giá trị khác nhau, vì cơ chế salt ngẫu nhiên được sinh ra trong quá trình băm. Đây là chi tiết rất quan trọng để tránh tấn công dò ngược kiểu rainbow table. Ngoài ra, hàm verify_password được kiểm tra trong cả trường hợp mật khẩu đúng, mật khẩu sai và mật khẩu rỗng; kết quả mong đợi là True khi hợp lệ và False khi không hợp lệ. Các test trong test_security.py và test_services_auth.py cũng xác nhận rằng việc đăng ký tài khoản mới luôn sinh ra password hash đúng chuẩn, không phải plaintext.
+Ở mức nghiệp vụ, cơ chế này còn được phản ánh rõ trong luồng đăng ký và đổi mật khẩu. Khi người dùng đăng ký mới, hệ thống kiểm tra trùng email trước, sau đó mới băm mật khẩu và tạo bản ghi người dùng. Khi đổi mật khẩu, hệ thống xác minh lại mật khẩu cũ trước khi tạo hash mới cho mật khẩu mới. Cách làm này vừa đảm bảo đúng luồng xác thực, vừa tránh việc thay đổi mật khẩu khi người dùng không chứng minh được quyền sở hữu tài khoản.
+[Heading3] 4.2.2 Quản lý JSON Web Token (JWT)
+Sau khi đăng nhập thành công, hệ thống sinh ra JWT access token để quản lý trạng thái phiên làm việc. Theo source code và bộ test whitebox, token được tạo ra từ dữ liệu đầu vào có chứa trường sub đại diện cho mã người dùng, đồng thời luôn được bổ sung trường exp để quy định thời điểm hết hạn. Các test trong test_security.py kiểm tra trực tiếp rằng token sinh ra là chuỗi hợp lệ, có thể giải mã bằng SECRET_KEY của hệ thống, và payload chứa đúng thông tin đã truyền vào.
+Nhóm kiểm thử cũng xác minh những tình huống liên quan đến độ an toàn của token. Khi token đã quá thời hạn, quá trình giải mã phải ném ra lỗi ExpiredSignatureError. Khi dùng secret key sai để giải mã, hệ thống phải ném ra JWTError, từ đó ngăn chặn việc giả mạo token bằng khóa không hợp lệ. Ngoài ra, token được kiểm tra ở cả trường hợp tùy chỉnh thời gian hết hạn và trường hợp hết hạn mặc định, nhằm bảo đảm cơ chế sinh token hoạt động ổn định trong nhiều ngữ cảnh sử dụng khác nhau.
+Ở mức đăng nhập thực tế, service xác thực trả về đúng cấu trúc phản hồi gồm access_token, token_type = bearer và role. Điều này cho thấy JWT không chỉ dùng để xác thực danh tính mà còn phục vụ phân quyền theo vai trò người dùng ngay từ thời điểm đăng nhập. Trong bộ test route, hệ thống cũng được kiểm tra để bảo đảm token trả về có thể giải mã hợp lệ và chứa trường sub, đúng với cách backend đang tổ chức luồng xác thực.
+[Heading3] 4.2.3 Lớp bảo vệ Middleware xác thực JWT trên toàn bộ hệ thống API
+Bên cạnh việc tạo và kiểm tra token ở mức service, hệ thống còn triển khai một lớp JWTAuthMiddleware ở tầng toàn cục để bảo vệ các API cần xác thực. Theo source code, middleware cho phép một số đường dẫn công khai đi qua mà không cần token, gồm nhóm tài nguyên như /docs, /redoc, /openapi.json, các route bắt đầu bằng /api/auth/, /images/ và /audio/. Tất cả các request còn lại đều phải đính kèm header Authorization: Bearer <token> hợp lệ. Đây là cơ chế rất phù hợp với hệ thống thi trực tuyến vì vừa mở cho tài nguyên công khai, vừa khóa chặt các route nghiệp vụ quan trọng.
+Luồng kiểm thử middleware được triển khai theo ba nhánh chính. Thứ nhất, nếu request không có token hoặc header Authorization không đúng định dạng Bearer, hệ thống phải trả về 401 Unauthorized với thông báo tương ứng. Thứ hai, nếu token bị sửa nội dung, sai chữ ký, hoặc không thể giải mã bằng khóa của hệ thống, middleware cũng phải chặn ngay và phản hồi 401 Unauthorized. Thứ ba, nếu token hợp lệ và còn hạn sử dụng, middleware sẽ gán payload vào request.state.user rồi cho request đi tiếp đến tầng xử lý phía dưới. Như vậy, middleware không chỉ là lớp chặn đầu vào mà còn đóng vai trò là cổng phân quyền trung tâm cho toàn bộ API bảo vệ.
+Từ góc độ kiểm thử, cách tổ chức này giúp tách rất rõ trách nhiệm giữa các lớp: core/security.py chịu trách nhiệm sinh và kiểm tra token; services/auth_service.py xử lý nghiệp vụ đăng ký, đăng nhập, đổi mật khẩu; còn core/middleware.py bảo vệ toàn bộ request đi vào hệ thống. Nhờ cách phân tầng rõ ràng đó, các test security vừa có thể kiểm tra từng hàm riêng lẻ, vừa có thể kiểm tra hành vi toàn hệ thống dưới góc nhìn bảo mật, từ đó phát hiện lỗi sớm và khoanh vùng nguyên nhân nhanh hơn.
+[Heading2] 4.3 Kiểm thử tầng CRUD (Database Layer Testing)
+Tầng CRUD là lớp chịu trách nhiệm trực tiếp thao tác với cơ sở dữ liệu, nơi toàn bộ dữ liệu của hệ thống được tạo mới, truy vấn, cập nhật và xóa thông qua các model SQLAlchemy. Đối với một hệ thống TOEIC có nhiều nhóm thực thể như người dùng, đề thi, câu hỏi, lịch sử làm bài và các thực thể AI đi kèm, việc kiểm thử tầng CRUD có ý nghĩa đặc biệt quan trọng vì chỉ cần một lỗi nhỏ trong ánh xạ dữ liệu, quan hệ khóa ngoại hoặc điều kiện lọc cũng có thể làm sai toàn bộ kết quả thống kê và chấm điểm. Vì vậy, nhóm 5 xây dựng bộ kiểm thử CRUD riêng biệt cho từng phân hệ, với mục tiêu xác minh rằng các hàm truy vấn hoạt động đúng, dữ liệu được lưu đúng cấu trúc, và các quan hệ giữa bảng luôn được duy trì nhất quán. Theo tài liệu whitebox, nhóm kiểm thử tầng CRUD bao gồm test_crud_user.py (15 test), test_crud_section.py (14 test), test_crud_listening.py (13 test), test_crud_reading.py (13 test), test_crud_speaking.py (6 test), test_crud_writing.py (7 test) và test_crud_user_attempt.py (21 test).
+[Heading3] 4.3.1 Phân hệ quản lý thực thể tài khoản người dùng — test_crud_user.py
+Phân hệ người dùng được kiểm thử theo đúng vòng đời dữ liệu từ lúc tạo mới cho đến khi cập nhật và xóa. Khi gọi hàm tạo người dùng, hệ thống phải sinh ra bản ghi có khóa chính ID tự động tăng, đồng thời lưu giá trị mật khẩu dưới dạng chuỗi đã băm chứ không phải plaintext. Bộ test xác minh rõ rằng dữ liệu người dùng được lưu đúng các trường cơ bản như name, email, role, còn password_hash phải là đầu ra của cơ chế bảo mật. Bên cạnh đó, ràng buộc duy nhất trên email cũng được kiểm tra rất chặt: nếu cố gắng tạo hai tài khoản có cùng địa chỉ email, hệ thống phải phát sinh lỗi ở tầng cơ sở dữ liệu thay vì ghi đè dữ liệu hoặc tạo bản ghi trùng. Các phép kiểm thử đọc dữ liệu theo ID, theo email, truy vấn toàn bộ danh sách, cập nhật tên hiển thị, cập nhật mật khẩu và xóa người dùng đều phải phản hồi đúng giá trị mong đợi; nếu ID không tồn tại, các hàm cập nhật phải trả về None để biểu diễn trạng thái an toàn, tránh làm sập luồng xử lý của ứng dụng.
+Nhìn từ mã nguồn, tầng CRUD của user được tổ chức khá gọn: get_by_id, get_by_email, get_all, create, update_name, update_password và delete đều thao tác trực tiếp trên model User, sau đó commit và refresh lại đối tượng để đảm bảo dữ liệu trả về luôn đồng bộ với trạng thái thật trong database. Chính vì vậy, bộ test không chỉ kiểm tra đầu ra của từng hàm riêng lẻ mà còn xác minh luôn hành vi của transaction, khả năng trả về bản ghi sau commit và phản ứng của hệ thống khi bản ghi không tồn tại. Cách kiểm thử này phù hợp với mục tiêu của tầng CRUD, vì đây là nơi mọi thao tác nghiệp vụ đều cuối cùng đi qua trước khi chạm vào dữ liệu thật.
+[Heading3] 4.3.2 Phân hệ quản lý đề thi (Section CRUD Layer) — test_crud_section.py
+Phân hệ Section là trung tâm điều phối giữa bộ đề, thời gian làm bài và nhóm câu hỏi đi kèm. Khi tạo một section mới, trường attempt_count phải khởi tạo bằng 0, vì tại thời điểm đó chưa có học viên nào làm bài. Bộ test cũng xác minh rằng các section khác nhau phải có ID khác nhau để bảo đảm tính định danh duy nhất. Ở chiều truy vấn, hàm lấy toàn bộ section và hàm lọc theo skill phải trả về đúng danh sách theo yêu cầu, chẳng hạn chỉ lấy các đề thuộc reading thì không được lẫn các section listening hay speaking. Điều này phản ánh đúng cách hệ thống tổ chức dữ liệu theo kỹ năng, giúp giao diện và các chức năng thống kê hoạt động nhất quán.
+Một điểm đáng chú ý trong tầng này là cách tính attempt_count. Theo source code, số lượt làm bài không được lưu cứng mà được tính động từ bảng user_attempt, thông qua truy vấn tổng hợp và đếm các phiên làm bài thực tế. Bộ test vì thế không chỉ kiểm tra việc tạo section, mà còn kiểm tra xem section có phản ánh đúng số lượt làm bài hay không khi đã phát sinh dữ liệu liên quan. Với những section chưa từng có lượt làm bài, kết quả phải luôn là 0; còn khi đã có attempt tương ứng, giá trị phải tăng chính xác theo dữ liệu trong database. Cách kiểm thử này đảm bảo dashboard và các màn hình thống kê không bị sai số khi hiển thị lượng người làm từng đề.
+[Heading3] 4.3.3 Phân hệ quản lý ngân hàng câu hỏi 4 kỹ năng
+Bộ kiểm thử CRUD cho ngân hàng câu hỏi được chia thành bốn nhóm riêng tương ứng với Listening, Reading, Speaking và Writing, với tổng cộng 49 test cases. Việc chia tách như vậy là hợp lý vì mỗi loại câu hỏi có cấu trúc dữ liệu khác nhau, cách lưu trường thông tin khác nhau và quan hệ với QuestionBase cũng khác nhau. Nhóm kiểm thử không chỉ xác minh việc tạo một câu hỏi đơn lẻ mà còn kiểm tra luôn luồng tạo hàng loạt từ dữ liệu đầu vào, qua đó bảo đảm hệ thống có thể nhận cấu trúc JSON lớn mà vẫn chèn đúng dữ liệu xuống database. Theo tài liệu whitebox, Listening và Reading mỗi nhóm có 13 test, Speaking có 6 test, Writing có 7 test; tất cả đều nhằm bao phủ toàn bộ vòng đời CRUD của các câu hỏi đặc thù.
+Ở mức logic lưu trữ, mỗi câu hỏi được kiểm tra không chỉ ở bảng con mà còn ở bảng liên kết trung gian QuestionBase. Điều này rất quan trọng vì QuestionBase là lớp nối giữa Section và từng loại câu hỏi cụ thể, giúp hệ thống truy vấn theo section mà vẫn tách riêng được cấu trúc dữ liệu chuyên biệt của từng kỹ năng. Khi tạo mới hoặc tạo hàng loạt, test phải xác minh rằng bản ghi QuestionBase được sinh ra đồng thời với bản ghi câu hỏi thực tế, đúng section_id, đúng skill, và đúng khóa liên kết sang bảng câu hỏi tương ứng. Nếu đầu vào là mảng rỗng, hệ thống phải xử lý an toàn, không sinh exception và không tạo dữ liệu rác.
+Với Listening, bộ test tập trung vào thứ tự câu hỏi, câu hỏi đơn lẻ và khả năng đồng bộ giữa nội dung câu hỏi với dữ liệu âm thanh hoặc hình ảnh. Với Reading, test phải bao phủ thêm các trường đặc thù như part_number, passage_id, passage_title, sentence và cấu trúc đoạn văn dài của Part 6/7. Với Speaking và Writing, bộ test kiểm tra các trường phục vụ AI chấm điểm như sample_answer, required_word_1, required_word_2, image_describe, passage, đảm bảo khi truy vấn lại câu hỏi thì dữ liệu đầu vào cho mô hình chấm điểm vẫn giữ nguyên và đầy đủ. Cách kiểm thử này giúp bảo đảm rằng tầng CRUD không làm mất dữ liệu đầu vào quan trọng trước khi các service AI xử lý tiếp.
+[Heading3] 4.3.4 Phân hệ lịch sử làm bài học viên (UserAttempt) — test_crud_user_attempt.py
+Phân hệ UserAttempt là một trong những phần quan trọng nhất của tầng CRUD vì nó lưu toàn bộ lịch sử làm bài, dữ liệu chấm điểm và các thông tin phục vụ chatbot phân tích học tập. Khi học viên bỏ qua một câu hỏi, hệ thống vẫn phải lưu bản ghi với user_ans = null hợp lệ, thay vì bỏ qua hoàn toàn. Điều này rất cần thiết vì điểm số và tỷ lệ chính xác của học viên phải phản ánh đầy đủ cả câu đã làm lẫn câu bỏ qua. Bộ test cũng xác minh rằng lịch sử trả về phải được sắp xếp theo thời gian giảm dần, tức phiên làm bài mới nhất luôn hiển thị trước, đúng với cách người dùng thường tra cứu kết quả gần nhất.
+Ngoài các thao tác CRUD cơ bản, user_attempt còn chứa hai hàm tổng hợp rất quan trọng là get_chatbot_context và get_weak_areas. Bộ test kiểm thử get_chatbot_context để bảo đảm hệ thống trả về đúng cấu trúc thống kê học tập gồm tổng số phiên làm bài, điểm trung bình, kỹ năng luyện nhiều nhất, danh sách 5 phiên gần nhất và thông tin xu hướng cải thiện. Theo tài liệu whitebox, phần xu hướng chỉ được tính khi học viên đã có từ 4 phiên làm bài trở lên; nếu ít hơn thì hệ thống không nên suy luận xu hướng, tránh đưa ra kết luận thiếu dữ liệu. Tương tự, get_weak_areas phải phân tích được điểm yếu theo từng part, từng kỹ năng, đồng thời khi học viên chưa có dữ liệu thì toàn bộ kết quả phải an toàn bằng 0, không phát sinh lỗi chia cho 0.
+[Heading2] 4.4 Kiểm thử tầng API Route (HTTP Integration Testing)
+Tầng API Route là cửa ngõ tiếp nhận request từ frontend, nơi hệ thống nhận payload, kiểm tra trạng thái xác thực, chuyển dữ liệu xuống service hoặc CRUD và trả kết quả JSON ra ngoài. Ở tầng này, nhóm 5 sử dụng FastAPI TestClient để kiểm thử trực tiếp các endpoint, từ đó xác minh cả mã trạng thái HTTP lẫn cấu trúc phản hồi. So với CRUD, kiểm thử route phản ánh sát hơn hành vi thực tế của ứng dụng khi người dùng thao tác qua giao diện, vì nó bao phủ toàn bộ chuỗi từ request vào đến response trả ra. Theo whitebox, nhóm đã xây dựng bộ kiểm thử route cho xác thực, quản lý section, quản lý câu hỏi, nộp bài, speaking AI, writing AI và chatbot AI; đây là một phần lớn trong tổng số 271 test case backend của dự án.
+[Heading3] 4.4.1 Phân hệ xác thực người dùng — test_routes_auth.py
+Các endpoint xác thực được kiểm thử trên ba luồng chính: đăng ký, đăng nhập và đổi mật khẩu. Khi gọi POST /api/auth/register, nếu dữ liệu hợp lệ thì hệ thống phải trả về mã thành công và thông tin người dùng, còn nếu email đã tồn tại thì phải phản hồi lỗi 400 với thông báo trùng email. Khi gọi POST /api/auth/login, hệ thống phải trả về access_token, token_type = bearer và role nếu người dùng nhập đúng thông tin; nếu sai email hoặc sai mật khẩu thì phải trả về 401 Unauthorized. Với endpoint đổi mật khẩu PUT /api/auth/change-password/{id}, test phải bảo đảm hệ thống chấp nhận mật khẩu hiện tại đúng, từ chối mật khẩu hiện tại sai bằng lỗi 400, và từ chối user không tồn tại bằng lỗi 404. Những kiểm thử này xác minh rằng toàn bộ luồng xác thực không chỉ chạy đúng về mặt nghiệp vụ mà còn trả mã trạng thái đúng chuẩn REST.
+Mã nguồn backend cho auth cũng cho thấy cách tầng route và service phối hợp chặt chẽ: service đăng ký phải kiểm tra trùng email trước khi hash mật khẩu, login phải so khớp mật khẩu bằng hàm verify, còn JWT phải được sinh ra sau khi xác thực thành công. Vì vậy, bộ test route ở phần này không đơn giản là test phản hồi giao diện, mà là test toàn bộ chuỗi xử lý thật của backend, từ validate dữ liệu đến kiểm soát lỗi nghiệp vụ.
+[Heading3] 4.4.2 Phân hệ API Route quản lý đề thi — test_routes_sections.py
+Các endpoint quản lý section bao gồm tạo mới, lấy danh sách, lọc theo kỹ năng, cập nhật thông tin và xóa section. Khi gọi API với ?skill=listening, kết quả phản hồi phải chỉ chứa các section thuộc kỹ năng Listening, đồng thời mỗi section phải đi kèm trường attempt_count phản ánh số lượt làm bài thực tế. Nếu request không có JWT hợp lệ thì hệ thống phải trả về 401 Unauthorized, vì đây là nhóm API quản trị cần bảo vệ chặt chẽ. Bộ test cũng xác minh rằng thao tác xóa section không chỉ xóa section mà còn phải dọn dẹp các bản ghi liên quan để không để lại dữ liệu mồ côi trong các bảng câu hỏi và lịch sử làm bài.
+Điểm đáng chú ý là Section CRUD trong source code không chỉ trả dữ liệu thô mà còn có bước bổ sung attempt_count động bằng truy vấn tổng hợp từ bảng user_attempt. Vì vậy, test route của section không dừng ở việc kiểm tra JSON response, mà còn kiểm tra việc response có đồng bộ với trạng thái dữ liệu thật hay không. Điều này đặc biệt hữu ích cho các màn hình thống kê của admin và member, nơi số liệu lượt làm bài phải chính xác tuyệt đối.
+[Heading3] 4.4.3 Phân hệ API Route quản lý câu hỏi 4 kỹ năng và nộp bài MCQ
+Nhóm kiểm thử tiến hành xây dựng bộ kiểm thử tích hợp cho các API quản lý ngân hàng câu hỏi của bốn kỹ năng Listening, Reading, Speaking và Writing nhằm đảm bảo toàn bộ dữ liệu đề thi được tiếp nhận, xử lý và lưu trữ chính xác trước khi phục vụ quá trình làm bài và chấm điểm. Các kịch bản kiểm thử tập trung vào việc xác minh luồng xử lý dữ liệu từ thời điểm nhận HTTP Request, kiểm tra dữ liệu đầu vào, gọi tầng Service/CRUD cho đến khi phản hồi kết quả dưới dạng JSON cho phía giao diện người dùng.
+Đối với kỹ năng Listening và Reading, hệ thống cung cấp các API cho phép tạo câu hỏi đơn lẻ, tạo hàng loạt từ tệp JSON và nhập dữ liệu từ các bộ đề ETS chuẩn. Các test case xác minh rằng dữ liệu được phân tích đúng cấu trúc và lưu chính xác xuống các bảng dữ liệu liên quan. Đặc biệt, tệp kiểm thử test_routes_listening_ets.py gồm 14 test case được xây dựng nhằm kiểm tra khả năng phân tích cú pháp bộ đề ETS Listening. Quá trình kiểm thử xác nhận hệ thống bóc tách chính xác dữ liệu hình ảnh của Part 1, nội dung hội thoại của Part 3 và dữ liệu bài nói ngắn của Part 4 trước khi lưu vào cơ sở dữ liệu.
+Một nội dung quan trọng khác được kiểm thử là cơ chế chuẩn hóa đường dẫn tài nguyên (URL Normalization). Trong thực tế dữ liệu đầu vào có thể chứa đường dẫn tuyệt đối của hệ điều hành Windows, đường dẫn cục bộ hoặc chỉ đơn thuần là tên tệp âm thanh và hình ảnh. Bộ test xác minh rằng hệ thống tự động chuyển đổi các định dạng này về cấu trúc chuẩn sử dụng trong dự án bằng cách bổ sung tiền tố thư mục audio/ hoặc images/ tương ứng. Trường hợp không tìm thấy tài nguyên phù hợp, hệ thống phải trả về giá trị None an toàn thay vì phát sinh lỗi trong quá trình xử lý.
+Đối với kỹ năng Reading, các test case kiểm tra khả năng xử lý dữ liệu của các dạng bài đọc hiểu TOEIC, bao gồm Passage, Part 6 và Part 7. Hệ thống phải lưu trữ đầy đủ nội dung đoạn văn, tiêu đề bài đọc, mã Passage và các thông tin liên quan phục vụ cho quá trình hiển thị đề thi.
+Đối với Speaking và Writing, nhóm kiểm thử tập trung vào việc xác minh các API tạo câu hỏi chuyên biệt. Các test case đảm bảo dữ liệu được lưu đầy đủ các trường thông tin quan trọng như sample_answer, passage, required_word_1, required_word_2 và các trường mô tả nội dung phục vụ cho quá trình chấm điểm bằng AI. Sau khi tạo mới thành công, dữ liệu phải được truy vấn lại chính xác thông qua Section tương ứng mà không xảy ra sai lệch hoặc mất dữ liệu.
+Bên cạnh nhóm API quản lý câu hỏi, hệ thống còn được kiểm thử thông qua endpoint nộp bài trắc nghiệm POST /api/user-attempts/submit-mcq. Các test case xác minh thuật toán chấm điểm tự động hoạt động chính xác đối với cả hai kỹ năng Listening và Reading. Khi đáp án học viên trùng với đáp án đúng, hệ thống phải thiết lập is_correct = True và score = 1; ngược lại nếu trả lời sai hoặc bỏ qua câu hỏi thì hệ thống ghi nhận is_correct = False cùng điểm số bằng 0. Phản hồi JSON trả về phải chứa đầy đủ các trường question_id, user_ans và is_correct cho từng câu hỏi nhằm phục vụ việc hiển thị kết quả chi tiết trên giao diện người dùng.
+[Heading3] 4.4.4 Phân hệ API Route quản lý câu hỏi 4 kỹ năng và Nộp bài MCQ (23 tests)
+Phân hệ Speaking được xây dựng dựa trên cấu trúc bài thi TOEIC Speaking và tích hợp cơ chế chấm điểm bằng trí tuệ nhân tạo. Bộ kiểm thử gồm 16 test case được thiết kế nhằm xác minh toàn bộ luồng xử lý từ thời điểm tiếp nhận file ghi âm của người học cho đến khi dữ liệu được chuyển đến các hàm đánh giá tương ứng.
+Đối với nhóm câu hỏi Q1–Q2 (Read Aloud), hệ thống phải tiếp nhận tệp âm thanh, thực hiện nhận dạng giọng nói thông qua hàm transcribe_audio và truyền kết quả văn bản thu được vào hàm chấm điểm score_toeic_sp_q1_2. Bộ test xác minh rằng đoạn văn chuẩn của câu hỏi được truyền chính xác vào bộ chấm điểm và kết quả trả về đúng định dạng mong đợi.
+Đối với nhóm Q3–Q4 (Describe a Picture), các test case kiểm tra khả năng truy xuất trường dữ liệu image_description từ cơ sở dữ liệu và đưa nội dung này vào prompt đánh giá. Điều này bảo đảm AI luôn có đầy đủ ngữ cảnh về bức ảnh trước khi thực hiện quá trình chấm điểm.
+Đối với nhóm Q5–Q7 (Respond to Questions), hệ thống phải truyền chính xác câu hỏi gốc cùng nội dung nhận dạng từ file ghi âm của học viên đến bộ đánh giá. Bộ kiểm thử xác nhận rằng dữ liệu không bị thiếu hoặc sai lệch trong quá trình xử lý.
+Đối với nhóm Q8–Q10 (Using Information Provided), các test case tập trung kiểm tra việc chèn đầy đủ nội dung thông báo, biểu mẫu hoặc poster vào prompt đánh giá. Đây là nhóm câu hỏi yêu cầu AI phải hiểu được toàn bộ ngữ cảnh của tài liệu trước khi đưa ra nhận xét và chấm điểm.
+Đối với câu hỏi Q11 (Express an Opinion), hệ thống phải tiếp nhận các bài nói có độ dài lớn và truyền nguyên vẹn nội dung sang bộ chấm điểm. Các test case xác minh rằng dữ liệu không bị cắt ngắn, không phát sinh lỗi khi xử lý chuỗi dài và kết quả phản hồi được trả về đầy đủ cho người dùng.
+[Heading3] 4.4.5 Phân hệ API Route chấm điểm Speaking với AI test_routes_speaking.py
+Phân hệ Writing sử dụng mô hình AI để đánh giá chất lượng bài viết của học viên theo cấu trúc TOEIC Writing. Bộ kiểm thử gồm 7 test case tập trung vào việc xác minh dữ liệu đầu vào được truyền đầy đủ và chính xác tới các hàm đánh giá.
+Đối với nhóm câu hỏi Q1–Q5 (Write a Sentence Based on a Picture), hệ thống yêu cầu dữ liệu đầu vào phải bao gồm hai từ khóa bắt buộc required_word_1 và required_word_2. Các test case xác minh rằng hai từ khóa này luôn được truy xuất đúng từ cơ sở dữ liệu và được đính kèm đầy đủ trong quá trình tạo prompt gửi tới mô hình AI. Endpoint phải phản hồi thành công cùng nội dung nhận xét và đánh giá lỗi ngữ pháp của học viên.
+Đối với nhóm câu hỏi Q6–Q7 (Respond to a Written Request), hệ thống phải trích xuất chính xác nội dung email hoặc yêu cầu viết thư từ cơ sở dữ liệu. Bộ kiểm thử xác nhận rằng phần đề bài và hướng dẫn viết được đưa đầy đủ vào prompt trước khi thực hiện chấm điểm.
+Đối với câu hỏi Q8 (Write an Opinion Essay), endpoint phải tiếp nhận và xử lý an toàn các bài luận có độ dài lớn. Các test case được xây dựng nhằm bảo đảm dữ liệu bài viết không bị mất mát hoặc cắt ngắn trong quá trình truyền sang mô hình AI, đồng thời phản hồi cuối cùng phải chứa đầy đủ thông tin đánh giá theo tiêu chí TOEIC Writing.
+[Heading3] 4.4.6 Phân hệ API Route chấm điểm Writing với AI — test_routes_writing.py
+Phân hệ Writing được thiết kế nhằm đánh giá năng lực viết của học viên theo cấu trúc TOEIC Writing và sử dụng mô hình AI để trả về nhận xét, phân tích lỗi và gợi ý cải thiện. Bộ kiểm thử gồm 7 test case tập trung vào việc xác minh rằng dữ liệu đầu vào của từng dạng câu hỏi được trích xuất đầy đủ, truyền đúng sang tầng chấm điểm và trả kết quả phản hồi theo đúng định dạng quy định. Trong whitebox, nhóm kiểm thử xác định rõ ba nhóm chức năng chính của Writing gồm Q1–5, Q6–7 và Q8, tương ứng với ba endpoint POST /api/writing/q1_5, POST /api/writing/q6_7 và POST /api/writing/q8.
+Đối với nhóm câu hỏi Q1–5, nội dung kiểm thử tập trung vào việc tạo câu theo từ cho trước. Theo source code, dữ liệu truyền sang mô hình AI phải bao gồm đầy đủ hai từ khóa bắt buộc required_word_1 và required_word_2, vì đây là điều kiện trực tiếp để hệ thống đánh giá mức độ hoàn thành yêu cầu của câu trả lời. Bộ test kiểm tra rằng hai từ khóa này luôn được lấy đúng từ cơ sở dữ liệu, không bị thiếu khi đóng gói prompt và không bị mất trong quá trình truyền sang service chấm điểm. Khi yêu cầu hợp lệ, endpoint phải trả về phản hồi 200 OK cùng chuỗi nhận xét lỗi ngữ pháp, độ phù hợp ngữ nghĩa và một phiên bản câu viết tốt hơn theo phong cách TOEIC.
+Đối với nhóm Q6–7, hệ thống kiểm thử luồng viết email phản hồi theo tình huống. Tại tầng route, endpoint phải trích xuất chính xác email_prompt và directions để tạo prompt chấm điểm, sau đó chuyển toàn bộ dữ liệu này sang mô hình AI. Bộ test đảm bảo rằng đề bài email gốc và hướng dẫn viết không bị cắt ngắn, không bị đảo thứ tự và không bị thiếu thông tin bắt buộc. Điều này rất quan trọng vì chỉ cần mất một chi tiết nhỏ trong đề bài, kết quả chấm điểm của mô hình có thể lệch khỏi yêu cầu thực tế của đề.
+Với câu hỏi Q8, hệ thống cho phép học viên viết bài luận dài hơn và phức tạp hơn. Bộ kiểm thử xác minh rằng endpoint có thể tiếp nhận an toàn chuỗi văn bản dung lượng lớn, truyền nguyên vẹn nội dung bài làm sang bộ chấm điểm và trả về feedback mà không gây lỗi cắt cụt chuỗi hoặc lỗi bộ nhớ khi xử lý đầu vào dài. Như vậy, nhóm test Writing không chỉ kiểm tra phản hồi 200 OK mà còn kiểm tra độ bền của luồng dữ liệu khi xử lý bài viết thực tế của người học.
+[Heading3] 4.4.7 Phân hệ API Route quản lý Chatbot AI — test_routes_chatbot.py
+Phân hệ Chatbot AI được xây dựng để hỗ trợ người học tra cứu kiến thức TOEIC, phân tích kết quả làm bài và gợi ý lộ trình học tập cá nhân hóa. Bộ kiểm thử gồm 14 test cases tập trung vào hai phần chính: xây dựng system prompt dựa trên dữ liệu học viên và kiểm tra endpoint chat trả về dữ liệu streaming đúng chuẩn. Trong whitebox, phần này được mô tả rõ là kiểm thử cấu trúc prompt theo từng trạng thái người dùng, gồm trường hợp chưa có dữ liệu, có dữ liệu, có xu hướng cải thiện hay giảm sút, và có vùng kiến thức yếu cần ưu tiên ôn tập.
+Ở trường hợp tài khoản mới chưa có lịch sử làm bài, prompt phải chèn đúng thông báo rằng người dùng chưa có dữ liệu làm bài thi trên hệ thống. Điều này giúp chatbot phản hồi đúng ngữ cảnh thay vì cố suy đoán thông tin không tồn tại. Với tài khoản đã có lịch sử, prompt phải tự động nhúng các dữ liệu thực như số phiên làm bài, điểm trung bình, 5 phiên gần nhất kèm tỷ lệ câu trả lời đúng. Theo source code, hệ thống còn gom thêm thống kê theo kỹ năng và theo từng part để chatbot có cơ sở trả lời cụ thể hơn, thay vì chỉ phản hồi chung chung.
+Một lớp kiểm thử khác tập trung vào phân tích xu hướng học tập. Nếu điểm số tăng liên tục, prompt phải thể hiện chuỗi “Đang cải thiện”; nếu kết quả giảm thì phải thể hiện “Chưa cải thiện”. Ngoài ra, khi hàm CRUD trả về dữ liệu vùng yếu, prompt cần đưa các phần học sinh đang yếu vào nội dung tư vấn để đề xuất hướng ôn luyện trọng tâm. Cách tổ chức này cho thấy chatbot không chỉ là công cụ hỏi đáp mà còn là mô-đun phân tích dữ liệu học tập, lấy thông tin từ UserAttempt để cá nhân hóa câu trả lời.
+Về endpoint POST /api/chatbot/chat, whitebox yêu cầu phản hồi 200 OK, trả về dạng streaming text và vẫn hoạt động khi không truyền user_id. Source code của route cho thấy hệ thống ghép system prompt với lịch sử hội thoại gần nhất rồi gọi Groq ở chế độ stream; trong vòng lặp stream, các chunk rỗng hoặc None được bỏ qua an toàn để không làm đứt luồng trả về giao diện. Đây là chi tiết rất quan trọng vì chatbot là thành phần tương tác thời gian thực, nên độ ổn định của streaming phải được đảm bảo trong mọi tình huống.
+[Heading2] 4.5 Kiểm thử logic nghiệp vụ phức tạp tầng Service
+Tầng Service là nơi thực hiện các thuật toán nghiệp vụ nặng nhất của hệ thống, đồng thời là nơi giao tiếp trực tiếp với các dịch vụ trí tuệ nhân tạo bên ngoài như Groq và Whisper. Nhóm 5 kiểm thử riêng tầng này để đảm bảo các hàm chấm điểm và nhận dạng giọng nói hoạt động ổn định ngay cả khi không thông qua môi trường HTTP. Theo whitebox, tầng Service bao gồm hai nhóm kiểm thử chính: test_services_toeic_scorer.py với 16 test và test_services_groq_whisper.py với 6 test.
+[Heading3] 4.5.1 Dịch vụ chấm điểm TOEIC — test_services_toeic_scorer.py
+Bộ kiểm thử test_services_toeic_scorer.py tập trung vào việc xác minh từng hàm chấm điểm riêng lẻ trong module TOEIC scorer, không đi qua tầng API Route. Mục tiêu chính là kiểm tra rằng prompt truyền sang AI luôn chứa đúng dữ liệu đầu vào cần thiết cho từng dạng câu hỏi và phản ánh đúng cấu trúc chấm điểm của TOEIC Speaking/Writing. Whitebox quy định rõ nhóm kiểm thử này phải bao phủ các hàm cho Speaking Q1–2, Q3–4, Q5–7, Q8–10, Q11 và Writing Q1–5, Q6–7, Q8.
+Với Speaking Q1–2, prompt phải chứa đúng reference_text và transcript để mô hình có thể so sánh phần đọc của học viên với văn bản chuẩn. Với Speaking Q3–4, prompt phải bao gồm image_description và transcript, vì đây là dữ liệu quyết định việc chấm mức độ mô tả bức ảnh. Với Speaking Q5–7, prompt phải truyền đầy đủ câu hỏi và câu trả lời của học viên; còn với Speaking Q8–10, prompt phải bao gồm cả information của poster/thông báo, câu hỏi và transcript để mô hình chấm đúng ngữ cảnh. Riêng Speaking Q11, prompt phải chứa câu hỏi thảo luận mở và toàn bộ bài nói cá nhân của người học, vì đây thường là phần dài nhất và đòi hỏi mô hình đánh giá tổng hợp.
+Đối với Writing Q1–5, hàm chấm điểm phải chèn chính xác hai từ khóa bắt buộc required_word_1 và required_word_2 vào prompt để AI kiểm tra mức độ hoàn thành yêu cầu. Với Writing Q6–7, prompt phải bao gồm email_prompt và directions để mô hình đánh giá khả năng viết email phản hồi trong đúng bối cảnh. Với Writing Q8, prompt phải chứa đầy đủ câu hỏi luận và bài làm dài của học viên, nhằm bảo đảm mô hình có đủ ngữ cảnh để phân tích ý tưởng, ngữ pháp và độ mạch lạc. Cách kiểm thử này giúp khẳng định rằng các hàm chấm điểm không bị thiếu dữ liệu đầu vào quan trọng trước khi gửi sang Groq.
+[Heading3] 4.5.2 Dịch vụ kết nối mạng và nhận dạng giọng nói —test_services_groq_whisper.py
+Nhóm kiểm thử test_services_groq_whisper.py tập trung vào hai chức năng nền tảng của hệ thống AI là gửi prompt sang Groq và chuyển đổi âm thanh sang văn bản bằng Whisper. Đây là hai dịch vụ hỗ trợ trực tiếp cho Speaking, Writing và chatbot nên việc kiểm thử ở mức service là cần thiết để xác minh chúng hoạt động độc lập và đúng với hợp đồng đầu vào/đầu ra của hệ thống. Whitebox nêu rõ nhóm này có 6 test, gồm kiểm thử hàm send_message của Groq và hàm transcribe_audio của Whisper.
+Đối với Groq API, test phải xác minh hàm send_message thực hiện gọi đúng chat.completions.create với prompt đã dựng và với model constant được định nghĩa sẵn trong hệ thống. Kết quả trả về phải được bóc tách đúng từ phản hồi của API và đưa ra đúng chuỗi văn bản để các tầng trên sử dụng tiếp. Đây là bước quan trọng vì nếu dữ liệu prompt bị truyền sai hoặc model bị gọi sai tham số, toàn bộ chuỗi chấm điểm AI sẽ không còn đúng nữa.
+Đối với Whisper, hàm transcribe_audio được kiểm thử bằng cách mock mô hình nhận dạng giọng nói và kiểm tra việc gọi model.transcribe với đúng đường dẫn tệp âm thanh vật lý. Bộ test xác minh rằng hàm phải trả về chính xác trường text từ kết quả nhận dạng và xử lý an toàn trường hợp âm thanh rỗng. Trường hợp học viên bật mic nhưng không nói gì hoặc tệp ghi âm bị trắng cũng phải được xử lý ổn định, trả về chuỗi rỗng thay vì làm lỗi hệ thống. Điều này rất quan trọng vì Whisper là bước tiền xử lý bắt buộc trước khi chuyển văn bản sang bộ chấm điểm Speaking.
+[Heading2] 4.6 Kiểm thử WhiteBox-Testing FE
+[Caption] Hình 3:Kết quả kiểm thử hộp trắng FE
+[Heading3] 4.6.1 Tổng quan
+
+--- [TABLE START] ---
+Hạng mục | Số lượng
+Test tự động white-box | 25
+File test | 7 file .test.js
+Module | 6 (M01–M06)
+Helper dùng chung | 4 file (test/helpers/)
+--- [TABLE END] ---
+
+[Heading3] 4.6.2 Điều kiện chạy test
+
+--- [TABLE START] ---
+Thành phần | Lệnh | Bắt buộc
+Frontend | cd frontend && npm run dev | Có — http://localhost:5173
+Backend | cd backend && uvicorn main:app --reload | Có — login, API, exam
+Tài khoản MEMBER | test/helpers/test-env.js hoặc env | Có
+Tài khoản ADMIN | TEST_ADMIN_EMAIL, TEST_ADMIN_PASSWORD | Một số TC (skip nếu thiếu)
+Dữ liệu DB | Đề Listening / Writing | Một số TC exam
+--- [TABLE END] ---
+
+[Heading3] 4.6.3 Kết quả chạy gần nhất
+Lệnh: npm run test:white-box  |  Thời gian: ~193 giây
+
+--- [TABLE START] ---
+Chỉ số | Giá trị
+Test Suites | 3 failed, 4 passed / 7 total
+Tests | 22 passed, 3 failed / 25 total
+Tỷ lệ Pass | 88% (22/25)
+--- [TABLE END] ---
+
+[Heading3] 4.6.4 Chi tiết theo module
+
+--- [TABLE START] ---
+Module | Folder | Số TC | Pass | Fail | Ghi chú
+M01 — Routing | 01-routing/ | 6 | 5 | 1 | WB-M01-04 Fail
+M02 — Auth | 02-auth/ | 6 | 5 | 1 | WB-M02-12 Fail
+M03 — API | 03-api/ | 3 | 3 | 0 | 
+M04 — Exam | 04-exam/ | 5 | 4 | 1 | WB-M03-03 Fail
+M05 — Admin | 05-admin/ | 3 | 3 | 0 | 2 TC skip (thiếu ADMIN env)
+M06 — Landing | 06-landing/ | 2 | 2 | 0 | 
+Tổng |  | 25 | 22 | 3 | 
+--- [TABLE END] ---
+
+[Heading3] 4.6.5 Nguyên nhân Test Fail
+
+--- [TABLE START] ---
+TC_ID | Lỗi | Nguyên nhân
+WB-M01-04 | UnexpectedAlertOpenError: Không thể tải dữ liệu | TC trước (M01-03, fake token) để alert treo; afterEach routing chỉ clearStorage, chưa clearAlerts
+WB-M02-12 | TimeoutError: element is visible | Panel 'Create Account' chưa hiện sau ?mode=signup — timing React / state từ TC login trước
+WB-M03-03 | confirmText = null | Không bắt được confirm() 'câu chưa trả lời' — timeout hoặc context exam/DB khác
+--- [TABLE END] ---
+
+[Heading3] 4.6.6 Coverage (Nhánh logic)
+Test chạy trên trình duyệt thật — không dùng jest --coverage (Istanbul) làm số liệu chính thức.
+Công thức: Coverage nhánh = (Số nhánh Pass) / (Tổng nhánh đã liệt kê) × 100%
+
+--- [TABLE START] ---
+Chỉ số | Giá trị
+Nhánh logic đã map | 25
+Pass (lần chạy gần nhất) | 22
+Fail | 3
+Coverage nhánh | 22/25 = 88%
+--- [TABLE END] ---
+
+[Heading3] 4.6.7 Bảng map Test Case – Source code
+[Caption] Bảng 24:Bảng map Test Case – Source code
+
+--- [TABLE START] ---
+TC_ID | Module | File test | Source | Nhánh logic | Kết quả
+WB-M01-01 | Routing | 01-routing | ProtectedRoute.jsx L7-8 | !token → /auth | Pass
+WB-M01-02 | Routing | 01-routing | ProtectedRoute.jsx L15 | token + role khớp | Pass
+WB-M01-03 | Routing | 01-routing | ProtectedRoute.jsx L11-12 | ADMIN → /member → /admin | Pass
+WB-M01-04 | Routing | 01-routing | ProtectedRoute.jsx L11-12 | MEMBER → /admin → /member | Fail
+WB-M01-05 | Routing | 01-routing | main.jsx | Route /member load portal | Pass
+WB-M01-06 | Routing | 01-routing | main.jsx | Route /admin load portal | Skip*
+WB-M01-07 | API | 03-api | api.js L10-12 | Interceptor gắn token | Pass
+WB-M01-09 | API | 03-api | api.js L20-24 | 401 → logout + /auth | Pass
+WB-M02-01 | Auth | 02-auth | Login.jsx L63-66 | Sign up password < 8 | Pass
+WB-M02-05 | Auth | 02-auth | Login.jsx L109-134 | Login MEMBER thành công | Pass
+WB-M02-06 | Auth | 02-auth | Login.jsx L136-138 | Login fail → không lưu token | Pass
+WB-M02-09 | Auth | 02-auth | Login.jsx L147-149 | Forgot password < 8 | Pass
+WB-M02-10 | Auth | 02-auth | Login.jsx L152-155 | Forgot password ≥ 8 (demo) | Pass
+WB-M02-12 | Auth | 02-auth | Login.jsx L51-53 | ?mode=signup → Sign Up panel | Fail
+WB-M03-01 | Exam | 04-exam | ToeicMember.jsx L548 | Listening → có nút Nộp | Pass
+WB-M03-02 | Exam | 04-exam | ToeicMember.jsx L548 | Writing → không nút Nộp MCQ | Pass
+WB-M03-03 | Exam | 04-exam | ToeicMember.jsx L700-702 | Nộp thiếu câu → Cancel confirm | Fail
+WB-M04-02 | Exam | 04-exam | ExamResult.jsx L7-11 | Badge Đúng/Sai/Bỏ qua | Pass
+WB-M04-06 | Exam | 04-exam | ExamResult.jsx | Nút quay lại / làm lại | Pass
+WB-M05-01 | Landing | 06-landing | LandingPage.jsx L18 | Đăng nhập → /auth | Pass
+WB-M05-02 | Landing | 06-landing | LandingPage.jsx L21 | Đăng ký → ?mode=signup | Pass
+WB-M05-03 | API | 03-api | ToeicMember.jsx L593-601 | Logout xóa storage | Pass
+WB-M05-04 | Admin | 05-admin | UploadModal.jsx | ADMIN mở modal | Skip*
+WB-M05-04b | Admin | 05-admin | Dashboard.jsx | MEMBER không nút ĐĂNG ĐỀ | Pass
+WB-M05-05 | Admin | 05-admin | UploadModal.jsx | Upload thiếu JSON → alert | Skip*
+--- [TABLE END] ---
+
+[Heading1] 5 Kiểm thử tự động
+Nhằm bảo đảm chất lượng phát hành của hệ thống trong suốt quá trình phát triển, Nhóm 5 xây dựng một cơ chế kiểm thử tự động cho cả backend và frontend theo hướng tách biệt từng lớp kiểm thử, từ đó giảm thiểu lỗi hồi quy và duy trì tính ổn định của các luồng chức năng quan trọng. Theo cấu trúc trong báo cáo và bộ test thực tế của dự án, phần tự động hóa không chỉ dừng ở việc chạy lại các kịch bản kiểm thử lặp đi lặp lại, mà còn được tổ chức theo từng nhóm màn hình và từng nhóm nghiệp vụ cụ thể để khi phát sinh lỗi có thể khoanh vùng nhanh nguyên nhân nằm ở giao diện, API hay service xử lý bên trong hệ thống.
+Ở phía frontend, nhóm kiểm thử sử dụng Jest để chạy bộ test black-box tự động cho giao diện người dùng, đồng thời kết hợp thêm Selenium cho các kịch bản mô phỏng thao tác thực tế trên trình duyệt. Trong source code, các file test frontend được tổ chức theo từng màn hình chức năng như auth, dashboard, exam, history, course, contest, chatbot, profile và các module quản trị admin-exams, admin-users, admin-upload. Cách chia này giúp mỗi nhóm giao diện có bộ kiểm thử riêng, dễ chạy độc lập khi cần kiểm tra một phần chức năng cụ thể, đồng thời tránh việc phải chạy toàn bộ hệ thống mỗi khi chỉ thay đổi một màn hình nhỏ. Theo phụ lục E của báo cáo, toàn bộ bộ test tự động frontend gồm 49 test case, được phân bổ trên 11 file test, phản ánh đúng các luồng sử dụng cốt lõi của cả học viên lẫn quản trị viên.
+Các test frontend không thay thế cho kiểm thử hộp đen thủ công mà đóng vai trò bổ trợ và tự động hóa những luồng đã được xác định là quan trọng. Nhóm test này tập trung vào các hành vi có tính lặp lại cao như đăng nhập, điều hướng dashboard, mở bài thi, tra cứu lịch sử, thao tác với hồ sơ cá nhân, tương tác chatbot, các màn hình thi, cùng những màn hình quản trị dữ liệu. Nhờ vậy, khi giao diện được chỉnh sửa hoặc refactor, nhóm có thể chạy lại từng file test riêng lẻ để xác minh rằng các thay đổi mới không làm gãy luồng sử dụng cũ. Đây là một cách tiếp cận phù hợp với dự án có nhiều màn hình và nhiều nhánh điều hướng như hệ thống TOEIC của nhóm.
+Ở phía backend, hệ thống sử dụng pytest làm framework kiểm thử chính, kết hợp với FastAPI TestClient để gửi request trực tiếp đến API mà không cần khởi động server thật. Theo phần mô tả whitebox, môi trường test backend được thiết kế bằng SQLAlchemy + SQLite in-memory, giúp dữ liệu được tạo trong RAM và bị xóa sạch sau mỗi lần chạy test, không ảnh hưởng tới cơ sở dữ liệu thật của hệ thống. Bên cạnh đó, nhóm còn sử dụng unittest.mock (patch) để giả lập các dịch vụ ngoài như Groq API, Whisper và các lời gọi hệ thống bên ngoài, cùng với pytest fixtures để tái sử dụng dữ liệu mẫu, cấu hình test và session kết nối database. Cách tổ chức này giúp bộ test backend chạy hoàn toàn độc lập với môi trường thật, đồng thời vẫn bao phủ được các luồng logic quan trọng nhất.
+Một điểm quan trọng trong thiết kế kiểm thử backend là cơ chế cô lập dữ liệu giữa các test case. Trong file conftest.py, nhóm thiết lập fixture create_tables để tạo bảng một lần cho toàn bộ session test, sau đó dùng fixture clean_tables có cơ chế tự động chạy sau mỗi test nhằm xóa sạch dữ liệu trong tất cả bảng trước khi chuyển sang test tiếp theo. Bên cạnh đó, dependency get_db của FastAPI được override bằng session test riêng, nhờ đó mọi thao tác CRUD và route đều chạy trên SQLite in-memory thay vì database thật. Đồng thời, nhóm còn sinh sẵn token JWT test bằng fixture auth_headers để phục vụ các endpoint yêu cầu xác thực. Cách làm này bảo đảm rằng mỗi test case có đầu vào và trạng thái độc lập, không bị nhiễu bởi dữ liệu sinh ra từ test trước.
+Theo thống kê trong phần phụ lục của báo cáo, toàn bộ bộ test backend gồm 271 test case và được chia trên 22 file test. Các nhóm lớn nhất tập trung vào CRUD, route và service, đặc biệt là các mô-đun liên quan đến user_attempt, speaking, writing, xác thực người dùng và các hàm AI. Cấu trúc này phản ánh đúng tính chất của hệ thống: những phần cần kiểm thử nhiều nhất chính là nơi hội tụ giữa dữ liệu người dùng, logic chấm điểm, lịch sử làm bài và các dịch vụ AI bên ngoài. Nhờ phân bổ test theo từng lớp như vậy, nhóm có thể kiểm tra được cả chức năng đơn lẻ lẫn chuỗi xử lý phức tạp xuyên suốt backend.
+Về mặt quy trình, kiểm thử tự động của dự án được tổ chức theo hướng chạy lại thường xuyên trong quá trình phát triển, đặc biệt sau khi chỉnh sửa các module có độ nhạy cao như auth, user_attempt, speaking, writing và chatbot. Mục tiêu của cơ chế này là phát hiện sớm các lỗi phá vỡ logic, lỗi dữ liệu, lỗi route hoặc lỗi tương thích giữa frontend và backend trước khi chuyển sang giai đoạn kiểm thử thủ công hoặc nghiệm thu. Nhờ vậy, bộ test tự động không chỉ là công cụ xác nhận chất lượng mà còn là lớp bảo vệ liên tục cho toàn bộ hệ thống khi mã nguồn thay đổi.
+[Heading1] 6 Kiểm thử nâng cao
+Bên cạnh các kịch bản kiểm thử chức năng và kiểm thử hộp trắng đã được triển khai ở các phần trước, Nhóm 5 còn tiến hành kiểm thử nâng cao đối với những luồng xử lý có độ phức tạp cao, dễ phát sinh lỗi biên hoặc lỗi đồng bộ giữa các tầng của hệ thống. Trong bối cảnh mã nguồn hiện tại, phần kiểm thử nâng cao không tập trung vào một bộ load-testing riêng biệt, mà hướng nhiều hơn vào các tình huống khó của hệ thống thực tế như: xử lý dữ liệu đầu vào không đầy đủ, mô phỏng phản hồi từ dịch vụ AI bằng mock, kiểm tra trạng thái rỗng, kiểm tra luồng streaming, kiểm tra chuyển đổi định dạng tài nguyên và kiểm tra tính ổn định của các màn hình có nhiều thành phần động. Cách tiếp cận này phù hợp với đặc thù của dự án TOEIC, nơi các chức năng Speaking, Writing, Chatbot và lịch sử làm bài đều phụ thuộc vào sự phối hợp chặt chẽ giữa giao diện, API, dịch vụ AI và cơ sở dữ liệu.
+Trọng tâm của kiểm thử nâng cao trong dự án là những thành phần có khả năng tạo ra lỗi dây chuyền nếu chỉ kiểm tra ở mức chức năng cơ bản. Thứ nhất là các luồng liên quan đến xử lý âm thanh và chuyển giọng nói thành văn bản trong Speaking, nơi hệ thống phải tiếp nhận đúng tệp tin âm thanh, truyền chính xác đường dẫn vật lý cho bộ nhận dạng và vẫn hoạt động an toàn ngay cả khi file âm thanh rỗng hoặc không có nội dung. Thứ hai là các luồng gửi prompt sang mô hình AI trong Speaking, Writing và Chatbot, vì chỉ cần sai một tham số đầu vào, thiếu một trường dữ liệu hoặc đóng gói prompt không đúng cấu trúc thì kết quả chấm điểm và phản hồi tư vấn sẽ lệch ngay. Thứ ba là các luồng hiển thị lịch sử làm bài và chi tiết kết quả, vốn phụ thuộc vào dữ liệu tổng hợp từ nhiều bảng khác nhau, nên phải kiểm tra kỹ khả năng sắp xếp theo thời gian, tính toán tỷ lệ đúng/sai, hiển thị số liệu thống kê và mở rộng chi tiết câu hỏi mà không làm vỡ giao diện.
+Một nhóm kiểm thử nâng cao quan trọng khác là các tình huống biên dữ liệu ở tầng backend. Ở đây, hệ thống được kiểm tra với đầu vào rỗng, dữ liệu thiếu trường, timestamp sai định dạng, chuỗi văn bản dài, và trường hợp không tồn tại bản ghi tương ứng trong cơ sở dữ liệu. Những ca kiểm thử này đặc biệt cần thiết đối với user_attempt, chatbot và các route chấm Speaking/Writing, vì đây là nơi hệ thống vừa phải xử lý logic nghiệp vụ vừa phải đảm bảo không phát sinh exception ngoài ý muốn. Với user_attempt, hệ thống phải trả về dữ liệu lịch sử, điểm số và phân tích vùng yếu một cách an toàn kể cả khi người dùng chưa có phiên làm bài nào. Với chatbot, hệ thống phải sinh prompt đúng ngữ cảnh kể cả khi không có dữ liệu lịch sử, đồng thời giữ luồng streaming ổn định ngay cả khi mô hình trả về chunk rỗng.
+Ngoài ra, kiểm thử nâng cao còn được áp dụng để quan sát khả năng đồng bộ trạng thái giữa các lớp xử lý. Ví dụ, khi người học làm bài Listening hoặc Reading, việc chọn đáp án, bỏ qua câu hỏi, nộp bài và xem kết quả phải phản ánh đúng trên cả giao diện lẫn dữ liệu lưu trữ; khi xem chi tiết kết quả, các thống kê như câu đúng, câu sai, câu bỏ qua và tỷ lệ phần trăm phải khớp với dữ liệu gốc trong bảng user_attempt. Tương tự, với phần Speaking và Writing, dữ liệu câu hỏi đặc thù như sample_answer, required_word_1, required_word_2, image_description, directions hay email_prompt phải được giữ nguyên khi đi qua route, service và tầng AI. Đây là những điểm mà kiểm thử nâng cao giúp phát hiện lỗi sâu hơn so với kiểm thử giao diện thông thường, vì chúng kiểm tra sự nhất quán của toàn bộ chuỗi xử lý chứ không chỉ một màn hình riêng lẻ.
+Từ kết quả kiểm thử nâng cao, có thể thấy hệ thống đạt độ ổn định tốt ở những luồng đã được thiết kế và kiểm thử đầy đủ, đặc biệt là các chức năng liên quan đến lịch sử làm bài, phân tích kết quả, chấm Speaking/Writing và chatbot tư vấn. Tuy nhiên, các luồng nâng cao cũng cho thấy những khu vực cần tiếp tục hoàn thiện như xử lý lỗi giao diện responsive, tối ưu một số màn hình có nhiều thành phần động, và tăng cường khả năng xử lý tình huống bất thường ở các dịch vụ AI. Vì vậy, kiểm thử nâng cao không chỉ là bước xác nhận hệ thống hoạt động, mà còn là cơ sở để nhận diện các rủi ro tiềm ẩn trước khi đưa sản phẩm vào sử dụng thực tế.
+[Heading1] 7 Đánh giá và nhận xét
+[Heading2] 7.1 Đánh giá hiệu quả bộ test
+Sự kết hợp đồng bộ giữa ma trận 126 kịch bản kiểm thử hộp đen giao diện người dùng và hệ thống 271 test case kiểm thử hộp trắng backend tự động hóa đã xây dựng một nền tảng quản lý chất lượng phần mềm vô cùng vững chắc cho Website TOEIC. Toàn bộ các luồng rẽ nhánh điều kiện logic, các ràng buộc dữ liệu biên rỗng và cơ chế an toàn an ninh đều đạt tỷ lệ bao phủ mã nguồn (Code Coverage) cực cao, đem lại độ tin cậy tuyệt đối cho dự án phần mềm trước khi bàn giao vận hành.
+[Heading2] 7.2 Các lỗi phát hiện được
+Những lỗi trong kiểm thử giao diện được ghi nhận theo đúng màn hình phát sinh. Phần lớn lỗi rơi vào nhóm responsive và hoàn thiện tính năng, đặc biệt ở màn hình Courses, Speaking và Writing. Bảng sau không nhằm liệt kê lại toàn bộ 126 test, mà tập trung vào các lỗi hoặc hành vi cần chú ý khi nghiệm thu.
+
+--- [TABLE START] ---
+Màn hình | Ghi nhận | Trạng thái
+Dashboard | Hệ thống gợi ý bài làm dựa vào số lần làm >= 3 | Đạt
+Dashboard | Màn hình mobile ẩn bớt header | Còn lỗi
+Contests | Nút đăng ký cuộc thi | Chưa hoàn thiện
+Contests | Chatbot hiển thị chồng banner | Đạt
+Courses | Lọc một điều kiện | Chưa đúng
+Courses | Lọc nhiều điều kiện | Chưa đúng
+Courses | Responsive mobile | Còn lỗi
+Profile | Đổi tên | Đạt sau khi test lại
+Profile | Đổi mật khẩu | Đạt
+History | Sắp xếp theo thời gian | Cần kiểm tra lại múi giờ server
+History | Vòng tròn % và màu sắc | Đạt
+Detail | Tab đúng/sai/bỏ qua | Đạt
+Listening | Timer và audio player | Đạt
+Listening | Thoát bài có popup | Chưa hoàn thiện
+Listening | Responsive mobile | Còn lỗi
+Reading | Part 5/6/7 và điều hướng câu | Đạt
+Reading | Thoát bài có popup | Chưa hoàn thiện
+Reading | Responsive mobile | Còn lỗi
+Speaking | Thu âm và gửi bài | Đạt
+Speaking | Ô tìm kiếm đề speaking | Chưa hoàn thiện
+Speaking | Responsive mobile | Còn lỗi
+Writing | Nhập bài và chấm điểm | Đạt
+Writing | Nút nộp câu khi chưa thu âm | Đạt
+Writing | Responsive mobile | Còn lỗi
+--- [TABLE END] ---
+
+Các lỗi được phân loại thành hai nhóm chính. Nhóm thứ nhất là lỗi hiển thị và responsive: phần này thường xuất hiện khi màn hình bị co nhỏ xuống kích thước điện thoại, khiến khối bên phải hoặc menu lọc bị tràn. Nhóm thứ hai là lỗi luồng tính năng chưa hoàn thiện, ví dụ đăng ký cuộc thi hoặc một số nút chuyển trang chưa hoạt động đầy đủ. Cả hai nhóm đều không phá hỏng lõi chấm điểm nhưng cần được dọn sạch trước khi công bố hệ thống cho người dùng cuối.
+[Heading2] 7.3 Ưu điểm của hệ thống
+Hệ thống sở hữu cấu trúc phân rã 3 tầng backend tách biệt rõ ràng giúp mã nguồn tường minh, dễ dàng thực hiện bảo trì nâng cấp. Cơ chế an toàn thông tin mã hóa Argon2id phối hợp lớp middleware giải mã token JWT vận hành an toàn, chống chịu tốt trước các hình thức tấn công giả mạo cơ bản. Ưu điểm nổi bật nhất là tính thực tiễn đột phá trong việc ứng dụng thành công trí tuệ nhân tạo để giải quyết mượt mà bài toán tự động chấm điểm và nhận xét sửa lỗi chi tiết cho phần thi tự luận Nói và Viết.
+[Heading2] 7.4 Hạn chế của hệ thống
+Giao diện tương thích Responsive UI tại phân hệ phòng thi chuyên sâu chưa đạt độ mượt mà tối ưu trên thiết bị di động màn hình dọc. Đồng thời, do đặc thù luồng chấm điểm Nói/Viết phụ thuộc vào kết nối API bên thứ ba, tốc độ phản hồi kết quả đôi khi bị ảnh hưởng trực tiếp bởi sự ổn định của đường truyền băng thông internet internet máy chủ ngoài.
+[Heading2] 7.5 Hướng phát triển
+Trong tương lai gần, Nhóm 5 định hướng tập trung sửa đổi dứt điểm các lỗi giao diện responsive trên Mobile. Đồng thời, triển khai nâng cấp kiến trúc backend ứng dụng cơ chế hàng đợi nhắn (Message Queue qua RabbitMQ hoặc Celery) để chuyển đổi luồng gọi chấm điểm AI từ cơ chế đồng bộ sang xử lý bất đồng bộ, loại bỏ hoàn toàn hiện tượng nghẽn luồng tải file âm thanh và nâng cao năng lực tải của toàn hệ thống lên gấp nhiều lần.
+
+--- [TABLE START] ---
+Hạng mục | Việc cần theo dõi
+Responsive mobile | Sửa các màn hình có layout hai cột hoặc nhiều khối chồng nhau.
+Tốc độ AI | Tách xử lý chấm Speaking/Writing sang bất đồng bộ nếu cần.
+Import đề thi | Chuẩn hóa hơn nữa dữ liệu JSON và ETS JSON.
+Chatbot context | Giữ ngữ cảnh dài hơn khi tư vấn cho học viên.
+Flashcard review | Hoàn thiện lịch ôn và đề xuất từ cần học lại.
+CI/CD | Đưa test backend và frontend vào pipeline tự động hoàn toàn.
+Sao lưu | Tự động hóa backup database và kiểm tra khôi phục.
+--- [TABLE END] ---
+
+[Heading1] KẾT LUẬN
+Báo cáo bài tập lớn môn học Đánh giá và Kiểm định chất lượng phần mềm đã minh chứng cho quy trình làm việc khoa học, bài bản của Nhóm 5 trong việc làm chủ công nghệ và kiểm soát chất lượng sản phẩm giáo dục trực tuyến. Hệ thống "Website TOEIC - Quản lý đề thi và chấm điểm tự động" sau khi trải qua chuỗi quy trình ma trận 126 kịch bản kiểm thử hộp đen toàn diện giao diện frontend và hệ thống 271 test case kiểm thử hộp trắng backend tự động đồ sộ đã khẳng định được mức độ hoàn thiện cao, cấu trúc logic nghiệp vụ vững chắc và cơ chế an toàn an ninh thông tin an toàn.
+Thông qua việc tự tay thiết kế và lập trình hàng trăm kịch bản mã test thực tế, các thành viên trong nhóm không chỉ củng cố sâu sắc các kiến thức lý thuyết chuyên ngành về vòng đời kiểm thử, kỹ thuật mock dữ liệu cô lập môi trường chạy, thiết lập pipeline CI/CD tự động hóa mà còn tích lũy được những kinh nghiệm thực chiến vô cùng quý báu về tối ưu hóa cơ sở dữ liệu quan hệ, quản lý tài nguyên máy chủ và tư duy lập trình mã nguồn sạch dễ kiểm thử (Testable Code). Đây chính là những hành trang công nghệ vô cùng vững chắc cho công việc thực tế của các thành viên sau này.
+[Heading1] PHÂN CÔNG NHIỆM VỤ
+
+--- [TABLE START] ---
+STT | Họ và tên thành viên | Mã số sinh viên | Nhiệm vụ chuyên trách phân công đảm nhận trong dự án | Đánh giá
+1 | Vũ Minh Trung | 23010361 | Xây dựng bộ test tự động hóa UI bằng Selenium, kiểm thử tích hợp API qua Postman và lập Bug Report. | 100% - Đạt
+2 | Đoàn Quang Minh | 23010392 | Thiết kế kịch bản kiểm thử (Test Case) chức năng giao diện dưới góc độ người dùng cuối (End-User). | 100% - Đạt
+3 | Lương Hồng Quân | 23010423 | Xây dựng và thực hiện Unit Test cho các chức năng của hệ thống nhằm đảm bảo chất lượng mã nguồn, kiểm tra tính ổn định sau khi tích hợp và tham gia phát hiện, sửa lỗi (Fix Bug) trong quá trình phát triển dự án | 100% - Đạt
+4 | Nguyễn Thanh Nam | 23010056 | Phân tích cấu trúc dự án và mã nguồn, tổng hợp nội dung từ các thành viên, biên soạn và hoàn thiện báo cáo cuối cùng theo đúng mẫu quy định. | 100% - Đạt
+5 | Nguyễn Tá Đặng Minh | 22010072 | Thiết kế và triển khai kiểm thử white-box Frontend (Jest + Selenium): map nhánh logic với mã nguồn với | 100% - Đạt
+--- [TABLE END] ---
+
+[Heading1] PHỤ LỤC
+[Heading1] PHỤ LỤC A
+CẤU TRÚC DỰ ÁN VÀ DANH MỤC API
+[ListParagraph] CẤU TRÚC DỰ ÁN:
+API và nghiệp vụ, còn bộ test thực hiện kiểm định chất lượng trên từng lớp. Việc mô tả đúng cấu trúc thư mục giúp người đọc nắm được cách tổ chức dự án, đồng thời thuận tiện hơn khi triển khai, bảo trì và mở rộng.
+
+--- [TABLE START] ---
+Đường dẫn | Vai trò chính
+tester_project-main/ | Thư mục gốc của dự án, chứa frontend, backend và tài liệu phụ trợ.
+tester_project-main/backend/ | Mã nguồn FastAPI, CRUD, models, schemas, services, tests và dữ liệu mẫu.
+tester_project-main/frontend/ | Mã nguồn React/Vite cho giao diện học viên và quản trị viên.
+tester_project-main/exam_management/ | Tệp SQL project phục vụ quản lý cơ sở dữ liệu nếu cần.
+tester_project-main/package.json | Cấu hình gói ở cấp dự án gốc cho các tác vụ cài đặt hoặc tích hợp.
+tester_project-main/backend/requirements.txt | Danh sách thư viện Python cần thiết cho backend.
+tester_project-main/frontend/package.json | Danh sách thư viện JavaScript và các script chạy frontend.
+--- [TABLE END] ---
+
+Ở tầng backend, cấu trúc được chia thành các vùng chức năng rõ ràng: api để khai báo router, core để đặt cấu hình và middleware, crud để thao tác dữ liệu, db để khởi tạo phiên và database, models để ánh xạ ORM, schemas để mô tả dữ liệu vào/ra, services để chứa logic nghiệp vụ và các dịch vụ AI, tests để kiểm thử tự động. Cách chia này phù hợp với FastAPI vì mỗi lớp có trách nhiệm riêng, giảm coupling giữa giao diện API và phần xử lý nghiệp vụ phía sau.
+
+--- [TABLE START] ---
+Thành phần | Chức năng
+backend/main.py | Khởi tạo FastAPI app, middleware, CORS và mount static files.
+backend/api/routes/ | Khai báo toàn bộ endpoint của hệ thống.
+backend/core/ | Cấu hình, bảo mật, middleware JWT.
+backend/crud/ | Các hàm truy vấn và thao tác cơ sở dữ liệu.
+backend/models/ | Định nghĩa bảng ORM.
+backend/schemas/ | Định nghĩa Pydantic schema cho request/response.
+backend/services/ | Các hàm xử lý nghiệp vụ, chấm điểm và gọi AI.
+backend/tests/ | Bộ kiểm thử pytest cho CRUD, routes, security và services.
+backend/images/ | Lưu ảnh tải lên cho listening/speaking/writing.
+backend/audio/ | Lưu file âm thanh mẫu hoặc file phát sinh khi kiểm thử.
+backend/db/init_db.py | Khởi tạo bảng và cập nhật cột mới cho dữ liệu.
+backend/db/session.py | Cấu hình SessionLocal và kết nối database.
+--- [TABLE END] ---
+
+
+--- [TABLE START] ---
+Thành phần | Chức năng
+frontend/src/landing/ | Trang chào mừng và điều hướng ban đầu.
+frontend/src/auth/ | Đăng nhập và bảo vệ route.
+frontend/src/member/ | Toàn bộ giao diện học viên.
+frontend/src/member/Dashboard.jsx | Trang tổng quan cá nhân.
+frontend/src/member/ContestPage.jsx | Màn hình danh sách cuộc thi.
+frontend/src/member/Course.jsx | Màn hình khóa học và bộ lọc.
+frontend/src/member/History.jsx | Lịch sử làm bài và thống kê.
+frontend/src/member/Profile.jsx | Trang thông tin cá nhân.
+frontend/src/member/Listening.jsx | Giao diện làm bài Listening.
+frontend/src/member/Reading.jsx | Giao diện làm bài Reading.
+frontend/src/member/Speaking.jsx | Giao diện làm bài Speaking.
+frontend/src/member/Writing.jsx | Giao diện làm bài Writing.
+frontend/src/member/ChatBot.jsx | Cửa sổ chatbot hỗ trợ học tập.
+frontend/src/member/Flashcard.jsx | Quản lý từ vựng và ôn tập.
+frontend/src/admin/ | Các màn hình quản trị: đề thi, người dùng, tải dữ liệu.
+--- [TABLE END] ---
+
+Nhóm giao diện học viên được tổ chức thành các màn hình chuyên biệt theo đúng luồng sử dụng thực tế: người dùng đi từ Landing Page vào Dashboard, rồi chọn Contest, Course hoặc trực tiếp chọn kỹ năng Listening, Reading, Speaking, Writing. Tại mỗi màn hình, các thành phần như chatbot, lịch sử làm bài, hồ sơ cá nhân và flashcard được tái sử dụng để tạo trải nghiệm thống nhất. Về mặt kiểm thử hộp đen, đây là lý do hệ thống có nhiều ca kiểm thử UI khác nhau nhưng vẫn giữ được cùng một logic điều hướng.
+
+--- [TABLE START] ---
+File | Nhiệm vụ chính
+LandingPage.jsx | Trang mở đầu, giới thiệu hệ thống và điều hướng vào vùng học viên hoặc quản trị.
+Login.jsx | Đăng nhập bằng email/mật khẩu, nhận JWT và chuyển vai trò tương ứng.
+ProtectedRoute.jsx | Bảo vệ các route yêu cầu xác thực, tránh truy cập khi chưa đăng nhập.
+ToeicMember.jsx | Layout chính cho khu vực học viên, gom menu, header và vùng nội dung.
+Dashboard.jsx | Hiển thị chỉ số học tập, các bài nên làm, bài cần làm lại và khối gợi ý.
+ContestPage.jsx | Danh sách cuộc thi, banner sự kiện và điều hướng đến thông tin chi tiết.
+Course.jsx | Danh sách khóa học với bộ lọc theo danh mục, trình độ và trạng thái phí.
+Profile.jsx | Thông tin tài khoản, đổi tên, đổi mật khẩu, trạng thái email chỉ đọc.
+History.jsx | Lịch sử làm bài, các tab lọc theo kỹ năng và thống kê tổng quan.
+InfoModal.jsx | Chi tiết kết quả của từng phiên làm bài với câu đúng/sai/bỏ qua.
+Listening.jsx | Giao diện làm bài nghe, có audio player, lưới câu hỏi và đồng hồ đếm ngược.
+Reading.jsx | Giao diện làm bài đọc, hỗ trợ chuyển Part 5/6/7 và điều hướng câu.
+Speaking.jsx | Giao diện nói, có nút thu âm và gửi file để chấm qua Whisper + Groq.
+Writing.jsx | Giao diện viết, nhập bài tự luận và gửi lên dịch vụ chấm điểm.
+ChatBot.jsx | Khung hội thoại trợ lý học tập, khai thác dữ liệu điểm yếu và lịch sử làm bài.
+Flashcard.jsx | Quản lý từ vựng, lịch ôn và thao tác ghi nhớ theo thuật toán lặp lại ngắt quãng.
+HighlightTranslate.jsx | Dịch nhanh cụm từ được bôi đen thành flashcard phục vụ học từ vựng.
+ExamResult.jsx | Khu vực quản trị/chi tiết kết quả đánh giá bài làm.
+ToeicAdmin.jsx | Layout chính của khu vực quản trị viên.
+Users.jsx | Quản lý người dùng, danh sách tài khoản và thao tác cập nhật/xóa.
+UploadModal.jsx | Hộp thoại tải dữ liệu đề thi hoặc file JSON.
+--- [TABLE END] ---
+
+DANH MỤC API:
+
+--- [TABLE START] ---
+Module | Method | Endpoint | Mô tả | Auth
+auth | POST | /api/auth/register | Đăng ký tài khoản học viên | Public
+auth | POST | /api/auth/login | Đăng nhập và cấp JWT | Public
+auth | PUT | /api/auth/change-password/{user_id} | Đổi mật khẩu tài khoản | Public
+users | GET | /api/users/ | Lấy danh sách người dùng | JWT
+users | GET | /api/users/{user_id} | Lấy hoặc xóa người dùng theo ID | JWT
+users | DELETE | /api/users/{user_id} | Lấy hoặc xóa người dùng theo ID | JWT
+users | PUT | /api/users/update-name/{user_id} | Cập nhật tên hiển thị | JWT
+user_attempt | POST | /api/user-attempt/ | Tạo lượt làm bài | JWT
+user_attempt | POST | /api/user-attempt/submit-mcq | Nộp bài trắc nghiệm | JWT
+user_attempt | GET | /api/user-attempt/user/{user_id}/history | Lấy lịch sử làm bài | JWT
+user_attempt | GET | /api/user-attempt/user/{user_id}/session-detail | Lấy chi tiết phiên làm bài | JWT
+user_attempt | GET | /api/user-attempt/user/{user_id}/weak-areas | Phân tích điểm yếu theo kỹ năng | JWT
+user_attempt | GET | /api/user-attempt/user/{user_id} | Quản lý attempt và thống kê | JWT
+user_attempt | GET | /api/user-attempt/user/{user_id}/section/{section_id} | Quản lý attempt và thống kê | JWT
+user_attempt | GET | /api/user-attempt/question/{question_id} | Lấy chi tiết câu hỏi | JWT
+user_attempt | PUT | /api/user-attempt/{attempt_id} | Quản lý attempt và thống kê | JWT
+user_attempt | DELETE | /api/user-attempt/{attempt_id} | Quản lý attempt và thống kê | JWT
+sections | POST | /api/sections/create | Tạo section mới | JWT
+sections | GET | /api/sections/ | Lấy danh sách section | JWT
+sections | PUT | /api/sections/{section_id} | Sửa hoặc xóa section | JWT
+sections | DELETE | /api/sections/{section_id} | Sửa hoặc xóa section | JWT
+listening | POST | /api/listening/section/{section_id} | Tạo câu hỏi Listening theo section | JWT
+listening | POST | /api/listening/upload-json | Tải đề Listening từ JSON | JWT
+listening | POST | /api/listening/upload-ets-json | Tải đề Listening chuẩn ETS JSON | JWT
+listening | GET | /api/listening/section/{section_id} | Lấy câu hỏi Listening theo section | JWT
+listening | DELETE | /api/listening/{question_id} | Xóa câu hỏi Listening | JWT
+reading | POST | /api/reading/section/{section_id} | Tạo câu hỏi Reading theo section | JWT
+reading | POST | /api/reading/upload-json | Tải đề Reading từ JSON | JWT
+reading | POST | /api/reading/upload-ets-rc-json | Tải đề Reading RC chuẩn ETS | JWT
+reading | GET | /api/reading/section/{section_id} | Lấy câu hỏi Reading theo section | JWT
+reading | DELETE | /api/reading/{question_id} | Xóa câu hỏi Reading | JWT
+writing | POST | /api/writing/ | Tạo câu hỏi Writing | JWT
+writing | GET | /api/writing/section/{section_id} | Lấy câu hỏi Writing theo section | JWT
+writing | POST | /api/writing/q1_5 | Chấm Writing Q1-5 | JWT
+writing | POST | /api/writing/q6_7 | Chấm Writing Q6-7 | JWT
+writing | POST | /api/writing/q8 | Chấm Writing Q8 | JWT
+speaking | POST | /api/speaking/ | Tạo câu hỏi Speaking | JWT
+speaking | GET | /api/speaking/section/{section_id} | Lấy câu hỏi Speaking theo section | JWT
+speaking | POST | /api/speaking/q1-2 | Chấm Speaking Q1-2 | JWT
+speaking | POST | /api/speaking/q3-4 | Chấm Speaking Q3-4 | JWT
+speaking | POST | /api/speaking/q5-7 | Chấm Speaking Q5-7 | JWT
+speaking | POST | /api/speaking/q8-10 | Chấm Speaking Q8-10 | JWT
+speaking | POST | /api/speaking/q11 | Chấm Speaking Q11 | JWT
+chatbot | POST | /api/chatbot/chat | Hội thoại trợ lý TOEIC | JWT
+--- [TABLE END] ---
+
+[Heading2] PHỤ LỤC B
+TỔNG HỢP SỐ LIỆU THỐNG KÊ KIỂM THỬ
+B.1. Tổng hợp kiểm thử hộp đen giao diện
+
+--- [TABLE START] ---
+Màn hình | Tổng TC | Pass | Fail | Tỷ lệ Pass
+Dashboard | 11 | 9 | 2 | 81.8%
+Contests | 7 | 6 | 1 | 85.7%
+Courses | 12 | 7 | 5 | 58.3%
+Profile | 16 | 16 | 0 | 100%
+History | 11 | 10 | 1 | 90.9%
+Detail | 11 | 10 | 1 | 90.9%
+Listening | 17 | 15 | 2 | 88.2%
+Reading | 13 | 11 | 2 | 84.6%
+Speaking | 15 | 10 | 5 | 66.7%
+Writing | 13 | 8 | 5 | 61.5%
+Tổng | 126 | 102 | 24 | 81.0%
+--- [TABLE END] ---
+
+Các lỗi còn tồn tại trong kiểm thử hộp đen tập trung chủ yếu vào responsive mobile và một số luồng chưa hoàn thiện như đăng ký cuộc thi, lọc khóa học theo nhiều điều kiện, nút tham gia khóa học và một số trường hợp xử lý hết giờ hoặc thoát bài thi. Nhìn chung, các lỗi này thuộc nhóm hoàn thiện giao diện và logic phụ trợ, không làm ảnh hưởng đến lõi nghiệp vụ chấm điểm hay lưu kết quả làm bài.
+B.2. Tổng hợp bộ test backend (pytest)
+
+--- [TABLE START] ---
+File test | Số test | Nhóm
+test_crud_listening.py | 13 | Kiểm thử lớp CRUD
+test_crud_reading.py | 13 | Kiểm thử lớp CRUD
+test_crud_section.py | 14 | Kiểm thử lớp CRUD
+test_crud_speaking.py | 6 | Kiểm thử lớp CRUD
+test_crud_user.py | 15 | Kiểm thử lớp CRUD
+test_crud_user_attempt.py | 21 | Kiểm thử lớp CRUD
+test_crud_writing.py | 7 | Kiểm thử lớp CRUD
+test_routes_auth.py | 12 | Kiểm thử API route
+test_routes_chatbot.py | 14 | Kiểm thử API route
+test_routes_listening.py | 11 | Kiểm thử API route
+test_routes_listening_ets.py | 14 | Kiểm thử API route
+test_routes_reading.py | 11 | Kiểm thử API route
+test_routes_sections.py | 13 | Kiểm thử API route
+test_routes_speaking.py | 16 | Kiểm thử API route
+test_routes_user_attempt.py | 23 | Kiểm thử API route
+test_routes_users.py | 9 | Kiểm thử API route
+test_routes_writing.py | 7 | Kiểm thử API route
+test_routes_writing_create.py | 6 | Kiểm thử API route
+test_security.py | 12 | Kiểm thử bảo mật
+test_services_auth.py | 12 | Kiểm thử service và AI
+test_services_groq_whisper.py | 6 | Kiểm thử service và AI
+test_services_toeic_scorer.py | 16 | Kiểm thử service và AI
+--- [TABLE END] ---
+
+Tổng cộng 271 test case backend được chia thành 24 file. Các nhóm lớn nhất là user_attempt, routes user_attempt, routes speaking và crud user_attempt. Cấu trúc này phản ánh đúng độ phức tạp của hệ thống vì mọi phân tích lịch sử làm bài, chấm điểm AI, truy xuất câu hỏi và phân phối dữ liệu đều tập trung qua user_attempt và các module AI đi kèm.
+B.3. Tổng hợp kiểm thử tự động giao diện (Jest)
+
+--- [TABLE START] ---
+File test | Số test
+admin-exams.test.js | 4
+admin-upload.test.js | 1
+admin-users.test.js | 4
+auth.test.js | 3
+chatbot.test.js | 4
+contest.test.js | 5
+course.test.js | 7
+dashboard.test.js | 6
+exam.test.js | 5
+history.test.js | 5
+profile.test.js | 5
+Tổng | 49
+--- [TABLE END] ---
+
+Bộ test tự động giao diện trên frontend không thay thế kiểm thử hộp đen thủ công mà bổ sung cho nó. Các test này được tổ chức theo màn hình như auth, dashboard, exam, history, course, contest, chatbot, profile và các màn hình quản trị. Khi giao diện được chỉnh sửa, nhóm có thể chạy lại từng file riêng hoặc toàn bộ bộ test để đảm bảo thay đổi không làm gãy luồng sử dụng.
+KẾT QUẢ BẢO TRÙM THEO MÔ-ĐUN
+Bảng này gom các nhóm test theo mô-đun để nhìn nhanh mức độ bao phủ. Mức bao phủ không chỉ tính theo số test, mà còn theo chiều sâu: có mô-đun chỉ cần vài test là đủ vì logic đơn giản, nhưng các mô-đun như user_attempt, speaking và writing phải có nhiều test hơn vì liên quan đến dữ liệu nhiều chiều và chuỗi xử lý dài.
+
+--- [TABLE START] ---
+Mô-đun | Thành phần | Số test ước tính | Ý nghĩa
+Xác thực | Auth service + auth route | 24 | Bảo vệ tài khoản và token
+Người dùng | Users route + CRUD user | 28 | Quản lý hồ sơ và mật khẩu
+Đề thi | Sections + listening + reading | 68 | CRUD và import dữ liệu đề
+Nộp bài | UserAttempt + scoring | 44 | Ghi lịch sử và tính điểm
+Speaking AI | Whisper + Groq + TOEIC scorer | 22 | Chấm Speaking theo từng dạng câu
+Writing AI | Writing route + scorer | 15 | Chấm Writing theo cấu trúc đề
+Chatbot | Chat route + context builder | 14 | Tư vấn cá nhân hóa
+Flashcard | Flashcard route + CRUD | 16 | Ôn tập từ vựng và ghi nhớ
+--- [TABLE END] ---
+
+Sự khác nhau về số test giữa các mô-đun phản ánh đúng đặc thù nghiệp vụ. Xác thực và người dùng được kiểm tra cả route lẫn service nên số lượng test nằm ở mức trung bình. Đề thi và user_attempt có số test lớn hơn vì phải đi qua nhiều lớp dữ liệu, nhiều dạng câu hỏi và nhiều tình huống lưu trữ. Đây là cơ sở để nhóm ưu tiên chạy lại những file này trước khi chốt bản nộp cuối.
+Ở mô-đun Speaking AI, số test không chỉ đếm mức độ bao phủ mà còn cho thấy mức độ phụ thuộc vào prompt và dữ liệu đầu vào. Khi mock Groq và Whisper, nhóm có thể xác minh rõ ràng từng hàm nhỏ mà không cần gọi dịch vụ ngoài. Điều đó làm cho test vừa nhanh vừa ổn định, phù hợp với môi trường học tập có nhiều vòng lặp chỉnh sửa.
+Mô-đun Writing được kiểm tra nhẹ hơn Speaking nhưng vẫn phải đảm bảo đủ dữ liệu cho từng dạng câu hỏi. Phần cần lưu ý nhất là các trường phụ như required_word_1, required_word_2 và sample_answer, vì nếu bỏ sót những trường này thì bước chấm điểm tự động sẽ thiếu căn cứ để sinh feedback phù hợp.
+Chatbot và flashcard tuy có số test ít hơn nhưng lại ảnh hưởng mạnh tới trải nghiệm học lâu dài. Chatbot cần đọc đúng ngữ cảnh học tập để tư vấn sát hơn, còn flashcard cần giữ dữ liệu ôn tập ổn định để người học quay lại sau nhiều ngày vẫn thấy lịch nhắc hợp lý. Nhóm test nhỏ nhưng nội dung rất đáng kiểm tra.
+Khi tổng hợp kết quả, điều đáng mừng là các nhóm test cốt lõi đều chạy ổn định trong khi phần lỗi tập trung ở khu vực giao diện responsive và một số chức năng đang phát triển. Điều này cho phép nhóm tách rõ phần đã sẵn sàng bàn giao và phần còn cần cải thiện sau khi nộp báo cáo.
+Nếu xét về mặt bảo trì, mức bao phủ tốt nhất là khi mỗi file route đều có ít nhất một file test tương ứng và mỗi test đều phản ánh được một tình huống sử dụng thật. Dự án hiện tại đã đi khá gần mục tiêu đó, đặc biệt ở các module xác thực, lịch sử làm bài và Speaking AI.
+Sự hiện diện của cả black-box, white-box và kiểm thử giao diện tự động giúp dự án có cái nhìn toàn diện hơn. Khi một thay đổi ở backend làm hỏng giao diện hoặc ngược lại, nhóm sẽ phát hiện sớm thay vì đợi tới lúc người dùng cuối báo lỗi.
+[Heading2] PHỤ LỤC C
+MA TRẬN TRUY XUẤT NGUỒN GỐC (TRACEABILITY MATRIX)
+Bảng dưới đây thể hiện luồng truy xuất nguồn gốc hai chiều giữa Yêu cầu tính năng (Feature), Giao diện người dùng (Frontend), Cổng giao tiếp (Backend API) và các Kịch bản/Tệp kiểm thử tương ứng. Ma trận này đảm bảo 100% các tính năng trọng yếu của hệ thống đều được bao phủ bởi các lớp kiểm thử.
+
+--- [TABLE START] ---
+Tính năng / Màn hình | API liên quan | Mã Test Case | File Script Automation
+Đăng nhập (Sign In) | POST /api/auth/login | TC_AUTH_LOG_01, TC_AUTH_LOG_02 | auth.test.js
+Đăng ký (Sign Up) | POST /api/auth/register | TC_AUTH_REG_01, TC_AUTH_REG_02 | auth.test.js
+Quên mật khẩu | POST /api/auth/reset-password | TC_AUTH_RST_01 | auth.test.js
+Dashboard Member | GET /api/dashboard | TC_DASH_01 → TC_DASH_11 | dashboard.test.js
+Lịch sử làm bài | GET /api/user-attempt/history | TC_HIS_01 → TC_HIS_11 | history.test.js
+Chi tiết kết quả | GET /api/user-attempt/{id} | TC_RESULT_01 → TC_RESULT_11 | result-detail.test.js
+Listening | GET /api/listening/sections | TC_LISTEN_01 → TC_LISTEN_15 | listening.test.js
+Reading | GET /api/reading/sections | TC_READ_01 → TC_READ_15 | reading.test.js
+Speaking | POST /api/speaking/submit | TC_SPEAK_01 → TC_SPEAK_12 | speaking.test.js
+Writing | POST /api/writing/submit | TC_WRITE_01 → TC_WRITE_12 | writing.test.js
+Chatbot AI | POST /api/chatbot/chat | TC_CHAT_01 → TC_CHAT_05 | chatbot.test.js
+Quản lý User (Admin) | GET /api/users | TC_ADMIN_USER_01 → TC_ADMIN_USER_10 | admin-user.test.js
+Đăng đề Listening | POST /api/listening | TC_ADMIN_LISTEN_01 → TC_ADMIN_LISTEN_08 | admin-listening.test.js
+Đăng đề Reading | POST /api/reading | TC_ADMIN_READ_01 → TC_ADMIN_READ_08 | admin-reading.test.js
+Đăng đề Speaking | POST /api/speaking | TC_ADMIN_SPEAK_01 → TC_ADMIN_SPEAK_08 | admin-speaking.test.js
+Đăng đề Writing | POST /api/writing | TC_ADMIN_WRITE_01 → TC_ADMIN_WRITE_08 | admin-writing.test.js
+--- [TABLE END] ---
+

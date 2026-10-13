@@ -1,0 +1,446 @@
+{
+  "info": {
+    "_postman_id": "c1f7a420-9999-4a92-b4c1-lexiloop0001",
+    "name": "Lexiloop English Learning API Collection",
+    "description": "Bộ sưu tập kiểm thử toàn diện 15 REST API Endpoints của hệ thống Web English (Lexiloop) - Nhóm 9",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "01. Get Stats (Thống kê tổng quan)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/stats",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "stats"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200 OK', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test('Response contains stats object', function () {",
+              "    var json = pm.response.json();",
+              "    pm.expect(json).to.have.property('stats');",
+              "    pm.expect(json.stats).to.have.property('total');",
+              "    pm.expect(json.stats).to.have.property('new');",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "02. Get Words (Danh sách từ vựng & Tìm kiếm)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/words?q=compelling&state=all",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "words"],
+          "query": [
+            {"key": "q", "value": "compelling"},
+            {"key": "state", "value": "all"}
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200 OK', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test('Response contains items array', function () {",
+              "    var json = pm.response.json();",
+              "    pm.expect(json).to.have.property('items');",
+              "    pm.expect(Array.isArray(json.items)).to.be.true;",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "03. Add Word - Success (Thêm từ mới hợp lệ)",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"english\": \"eloquent\",\n  \"phonetic\": \"/ˈel.ə.kwənt/\",\n  \"vietnamese\": \"hùng biện, lưu loát\",\n  \"part_of_speech\": \"adjective\",\n  \"examples\": [\"An eloquent speech.\"],\n  \"collocations\": [\"eloquent speaker\"],\n  \"word_patterns\": [\"eloquent + in + noun\"]\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/words",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "words"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 201 Created', function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "pm.test('Response contains created word with ID', function () {",
+              "    var json = pm.response.json();",
+              "    pm.expect(json).to.have.property('word');",
+              "    pm.expect(json.word.english).to.eql('eloquent');",
+              "    pm.environment.set('createdWordId', json.word.id);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "04. Add Word - Duplicate Conflict (Thêm từ bị trùng)",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"english\": \"eloquent\",\n  \"vietnamese\": \"hùng biện\",\n  \"part_of_speech\": \"adj\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/words",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "words"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 409 Conflict', function () {",
+              "    pm.response.to.have.status(409);",
+              "});",
+              "pm.test('Error message indicates duplicate', function () {",
+              "    var json = pm.response.json();",
+              "    pm.expect(json).to.have.property('error');",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "05. Bulk Import Words (Thêm hàng loạt 7 cột)",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"text\": \"pragmatic\\t/præɡˈmætɪk/\\tthực tế\\tadj\\tA pragmatic approach.\\t\\t\\nlucid\\t/ˈluːsɪd/\\trõ ràng, minh bạch\\tadj\\tA lucid explanation.\\t\\t\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/words/bulk",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "words", "bulk"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200 OK', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test('Imported count >= 0', function () {",
+              "    var json = pm.response.json();",
+              "    pm.expect(json).to.have.property('imported');",
+              "    pm.expect(json).to.have.property('skipped');",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "06. Update Word (Cập nhật từ vựng)",
+      "request": {
+        "method": "PUT",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"english\": \"eloquent\",\n  \"phonetic\": \"/ˈel.ə.kwənt/\",\n  \"vietnamese\": \"hùng biện (đã cập nhật)\",\n  \"part_of_speech\": \"adjective\",\n  \"examples\": [\"A deeply eloquent speech.\"]\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/words/{{createdWordId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "words", "{{createdWordId}}"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200 OK or 404', function () {",
+              "    pm.expect([200, 404]).to.include(pm.response.code);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "07. Reset Word Progress (Đặt lại tiến độ từ)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/words/{{createdWordId}}/reset",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "words", "{{createdWordId}}", "reset"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200 OK or 404', function () {",
+              "    pm.expect([200, 404]).to.include(pm.response.code);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "08. Get Study New Session (Lấy từ mới để học)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/study/new",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "study", "new"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200 OK', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test('Contains words array', function () {",
+              "    var json = pm.response.json();",
+              "    pm.expect(json).to.have.property('words');",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "09. Get Study Review Session (Lấy từ đến hạn ôn SRS)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/study/review",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "study", "review"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200 OK', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test('Contains words array', function () {",
+              "    var json = pm.response.json();",
+              "    pm.expect(json).to.have.property('words');",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "10. Record Study Result (Ghi nhận kết quả học)",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"word_id\": {{createdWordId}},\n  \"mode\": \"learn\",\n  \"correct\": true,\n  \"question_type\": \"typing\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/study/result",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "study", "result"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200 OK or 404', function () {",
+              "    pm.expect([200, 404]).to.include(pm.response.code);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "11. Start Speed Review (Bắt đầu Ôn siêu tốc)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/study/speed/start",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "study", "speed", "start"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200 OK or 400 (Not enough words)', function () {",
+              "    pm.expect([200, 400]).to.include(pm.response.code);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "12. Formulas CRUD (Sổ công thức)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/formulas",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "formulas"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200 OK', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test('Contains items array', function () {",
+              "    var json = pm.response.json();",
+              "    pm.expect(json).to.have.property('items');",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "13. Settings Voice (Cài đặt giọng đọc)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/settings",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "settings"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200 OK', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test('Contains settings voice_name', function () {",
+              "    var json = pm.response.json();",
+              "    pm.expect(json.settings).to.have.property('voice_name');",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "14. Export CSV (Xuất dữ liệu)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/export.csv",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "export.csv"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200 OK', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test('Content-Type is text/csv', function () {",
+              "    pm.expect(pm.response.headers.get('Content-Type')).to.include('text/csv');",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "15. Delete Word (Xoá từ vựng)",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/words/{{createdWordId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "words", "{{createdWordId}}"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200 OK or 404', function () {",
+              "    pm.expect([200, 404]).to.include(pm.response.code);",
+              "});"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:5000",
+      "type": "string"
+    }
+  ]
+}

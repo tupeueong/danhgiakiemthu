@@ -1,0 +1,40 @@
+[Heading1] PHÂN CÔNG NHIỆM VỤ
+
+--- [TABLE START] ---
+STT | Họ và tên thành viên | Mã số sinh viên | Nhiệm vụ chuyên trách phân công đảm nhận trong dự án | Đánh giá
+1 | Vũ Minh Trung | 23010361 | Xây dựng bộ test tự động hóa UI bằng Selenium, kiểm thử tích hợp API qua Postman và lập Bug Report. | 100% - Đạt
+2 | Đoàn Quang Minh | 23010392 | Thiết kế kịch bản kiểm thử (Test Case) chức năng giao diện dưới góc độ người dùng cuối (End-User). | 100% - Đạt
+3 | Lương Hồng Quân | 23010423 | Xây dựng và thực hiện Unit Test cho các chức năng của hệ thống nhằm đảm bảo chất lượng mã nguồn, kiểm tra tính ổn định sau khi tích hợp và tham gia phát hiện, sửa lỗi (Fix Bug) trong quá trình phát triển dự án | 100% - Đạt
+4 | Nguyễn Thanh Nam | 23010056 | Phân tích cấu trúc dự án và mã nguồn, tổng hợp nội dung từ các thành viên, biên soạn và hoàn thiện báo cáo cuối cùng theo đúng mẫu quy định. | 100% - Đạt
+5 | Nguyễn Tá Đặng Minh | 22010072 | Thiết kế và triển khai kiểm thử white-box Frontend (Jest + Selenium): map nhánh logic với mã nguồn với | 100% - Đạt
+--- [TABLE END] ---
+
+[Heading1] PHỤ LỤC
+[Heading1] PHỤ LỤC A
+CẤU TRÚC DỰ ÁN VÀ DANH MỤC API
+[ListParagraph] CẤU TRÚC DỰ ÁN:
+API và nghiệp vụ, còn bộ test thực hiện kiểm định chất lượng trên từng lớp. Việc mô tả đúng cấu trúc thư mục giúp người đọc nắm được cách tổ chức dự án, đồng thời thuận tiện hơn khi triển khai, bảo trì và mở rộng.
+
+--- [TABLE START] ---
+Đường dẫn | Vai trò chính
+tester_project-main/ | Thư mục gốc của dự án, chứa frontend, backend và tài liệu phụ trợ.
+tester_project-main/backend/ | Mã nguồn FastAPI, CRUD, models, schemas, services, tests và dữ liệu mẫu.
+tester_project-main/frontend/ | Mã nguồn React/Vite cho giao diện học viên và quản trị viên.
+tester_project-main/exam_management/ | Tệp SQL project phục vụ quản lý cơ sở dữ liệu nếu cần.
+tester_project-main/package.json | Cấu hình gói ở cấp dự án gốc cho các tác vụ cài đặt hoặc tích hợp.
+tester_project-main/backend/requirements.txt | Danh sách thư viện Python cần thiết cho backend.
+tester_project-main/frontend/package.json | Danh sách thư viện JavaScript và các script chạy frontend.
+--- [TABLE END] ---
+
+Ở tầng backend, cấu trúc được chia thành các vùng chức năng rõ ràng: api để khai báo router, core để đặt cấu hình và middleware, crud để thao tác dữ liệu, db để khởi tạo phiên và database, models để ánh xạ ORM, schemas để mô tả dữ liệu vào/ra, services để chứa logic nghiệp vụ và các dịch vụ AI, tests để kiểm thử tự động. Cách chia này phù hợp với FastAPI vì mỗi lớp có trách nhiệm riêng, giảm coupling giữa giao diện API và phần xử lý nghiệp vụ phía sau.
+
+--- [TABLE START] ---
+Thành phần | Chức năng
+backend/main.py | Khởi tạo FastAPI app, middleware, CORS và mount static files.
+backend/api/routes/ | Khai báo toàn bộ endpoint của hệ thống.
+backend/core/ | Cấu hình, bảo mật, middleware JWT.
+backend/crud/ | Các hàm truy vấn và thao tác cơ sở dữ liệu.
+backend/models/ | Định nghĩa bảng ORM.
+backend/schemas/ | Định nghĩa Pydantic schema cho request/response.
+backend/services/ | Các hàm xử lý nghiệp vụ, chấm điểm và gọi AI.
+backend/tests/ | Bộ kiểm thử pytest cho CRUD, routes, security và services.

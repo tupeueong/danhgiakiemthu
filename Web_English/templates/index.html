@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#5b4ee8">
+  <title>Lexiloop · Ôn từ vựng đúng nhịp</title>
+  <meta name="description" content="Thư viện từ vựng và lịch ôn lặp lại ngắt quãng chạy riêng trên máy của bạn.">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <script defer src="{{ url_for('static', filename='js/app.js') }}"></script>
+</head>
+<body>
+  <div class="app-shell" id="appShell">
+    <aside class="sidebar" aria-label="Điều hướng chính">
+      <button class="brand" type="button" data-route="dashboard" aria-label="Về trang hôm nay">
+        <span class="brand-mark" aria-hidden="true">L</span>
+        <span class="brand-copy"><strong>Lexiloop</strong><small>Learn · Recall · Retain</small></span>
+      </button>
+
+      <nav class="main-nav">
+        <button class="nav-item active" type="button" data-route="dashboard" aria-current="page">
+          <span class="nav-icon" aria-hidden="true">⌂</span><span>Hôm nay</span>
+        </button>
+        <button class="nav-item" type="button" data-route="library">
+          <span class="nav-icon" aria-hidden="true">▤</span><span>Thư viện</span>
+        </button>
+        <button class="nav-item" type="button" data-route="formulas">
+          <span class="nav-icon formula-nav-icon" aria-hidden="true">ƒ</span><span>Sổ công thức</span>
+        </button>
+        <button class="nav-item" type="button" data-route="add">
+          <span class="nav-icon" aria-hidden="true">＋</span><span>Thêm từ</span>
+        </button>
+        <button class="nav-item" type="button" data-route="settings">
+          <span class="nav-icon" aria-hidden="true">⚙</span><span>Cài đặt</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-note">
+        <span class="sidebar-note-dot"></span>
+        <p><strong>Dữ liệu ở trên máy này</strong><br><span>Không cần tài khoản · Không cần mạng</span></p>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow" id="pageEyebrow">Không gian học của bạn</p>
+          <h1 id="pageTitle">Hôm nay</h1>
+        </div>
+        <div class="voice-quick-control">
+          <label for="voiceSelectTop">Giọng đọc</label>
+          <select id="voiceSelectTop" aria-label="Chọn giọng đọc tiếng Anh">
+            <option value="Microsoft Mark - English (United States)">Mark · Nam</option>
+            <option value="Microsoft Zira - English (United States)">Zira · Nữ</option>
+            <option value="Google US English">Google US</option>
+          </select>
+          <button class="icon-button" id="testVoiceTop" type="button" title="Nghe thử giọng đọc" aria-label="Nghe thử giọng đọc">▶</button>
+        </div>
+      </header>
+
+      <section class="view active" id="dashboardView" data-view="dashboard">
+        <div class="welcome-row">
+          <div>
+            <p class="date-label" id="todayLabel"></p>
+            <h2>Một chút mỗi ngày,<br><span>nhớ lâu hơn.</span></h2>
+            <p>Học từ mới rồi quay lại đúng lúc trí nhớ cần được củng cố.</p>
+          </div>
+          <div class="today-ring" aria-label="Số lượt đã làm hôm nay">
+            <span id="todayReviewCount">0</span>
+            <small>lượt hôm nay</small>
+          </div>
+        </div>
+
+        <div class="study-actions">
+          <article class="action-card review-card">
+            <div class="action-card-top">
+              <span class="action-kicker">Ưu tiên hôm nay</span>
+              <span class="action-badge" id="dueBadge">0 từ</span>
+            </div>
+            <div class="action-symbol" aria-hidden="true">↻</div>
+            <h3>Ôn từ đến hạn</h3>
+            <p id="reviewActionDescription">Đang kiểm tra lịch ôn của bạn…</p>
+            <button class="primary-button light" id="startReviewButton" type="button">Bắt đầu ôn</button>
+          </article>
+
+          <article class="action-card speed-card">
+            <div class="action-card-top">
+              <span class="action-kicker">Phản xạ nhanh</span>
+              <span class="action-badge" id="speedBadge">3 tim</span>
+            </div>
+            <div class="action-symbol" aria-hidden="true">⚡</div>
+            <h3>Ôn siêu tốc</h3>
+            <p id="speedActionDescription">Học xong ít nhất 3 từ và chờ chúng đến hạn để bắt đầu.</p>
+            <button class="primary-button speed-button" id="startSpeedReviewButton" type="button" disabled>Chưa thể bắt đầu</button>
+          </article>
+
+          <article class="action-card learn-card">
+            <div class="action-card-top">
+              <span class="action-kicker">Mở rộng vốn từ</span>
+              <span class="action-badge" id="newBadge">0 từ</span>
+            </div>
+            <div class="action-symbol" aria-hidden="true">✦</div>
+            <h3>Học từ mới</h3>
+            <p id="learnActionDescription">Thêm từ vào thư viện để bắt đầu.</p>
+            <button class="primary-button dark" id="startLearnButton" type="button">Học 5 từ mới</button>
+          </article>
+        </div>
+
+        <div class="dashboard-grid">
+          <section class="panel stats-panel" aria-labelledby="statsTitle">
+            <div class="panel-heading">
+              <div><p class="eyebrow">Tiến độ</p><h3 id="statsTitle">Thư viện của bạn</h3></div>
+              <button class="text-button" type="button" data-route="library">Xem tất cả →</button>
+            </div>
+            <div class="stats-grid">
+              <div class="stat"><strong id="statTotal">0</strong><span>Tổng số từ</span></div>
+              <div class="stat"><strong id="statLearned">0</strong><span>Đã học</span></div>
+              <div class="stat"><strong id="statLearning">0</strong><span>Đang học</span></div>
+              <div class="stat"><strong id="statAccuracy">—</strong><span>Chính xác hôm nay</span></div>
+            </div>
+          </section>
+
+          <section class="panel next-panel" aria-labelledby="nextTitle">
+            <div class="panel-heading">
+              <div><p class="eyebrow">Lịch tiếp theo</p><h3 id="nextTitle">Lần ôn gần nhất</h3></div>
+              <span class="mini-clock" aria-hidden="true">◷</span>
+            </div>
+            <p class="next-time" id="nextReviewTime">Chưa có lịch ôn</p>
+            <p class="muted" id="nextReviewHint">Học xong một từ để tạo lịch đầu tiên.</p>
+          </section>
+        </div>
+
+        <section class="panel schedule-panel" aria-labelledby="scheduleTitle">
+          <div class="panel-heading">
+            <div><p class="eyebrow">Nhịp ghi nhớ</p><h3 id="scheduleTitle">Lộ trình ôn lặp lại</h3></div>
+            <span class="schedule-rule">Sai → trở lại 4 giờ</span>
+          </div>
+          <div class="schedule-track" id="dashboardSchedule" aria-label="Các mốc thời gian ôn tập"></div>
+        </section>
+      </section>
+
+      <section class="view" id="libraryView" data-view="library">
+        <div class="library-toolbar">
+          <label class="search-box">
+            <span aria-hidden="true">⌕</span>
+            <input id="librarySearch" type="search" placeholder="Tìm từ, nghĩa hoặc cách dùng…" autocomplete="off">
+          </label>
+          <select id="statusFilter" aria-label="Lọc theo trạng thái">
+            <option value="all">Tất cả trạng thái</option>
+            <option value="new">Chưa học</option>
+            <option value="learning">Đang học</option>
+            <option value="due">Đến hạn</option>
+            <option value="learned">Đã học</option>
+            <option value="difficult">Cần củng cố</option>
+          </select>
+          <select id="posFilter" aria-label="Lọc theo loại từ">
+            <option value="">Tất cả loại từ</option>
+          </select>
+          <a class="secondary-button export-button" href="/api/export.csv">Xuất CSV</a>
+          <button class="primary-button compact" type="button" data-route="add">＋ Thêm từ</button>
+        </div>
+
+        <div class="library-summary">
+          <p><strong id="libraryTotal">0</strong> từ trong thư viện</p>
+          <p class="muted">Nhấn vào một từ để xem và chỉnh sửa.</p>
+        </div>
+
+        <div class="library-table-wrap">
+          <table class="library-table">
+            <thead><tr><th>Từ vựng</th><th>Nghĩa</th><th>Loại từ</th><th>Trạng thái</th><th>Ôn tiếp</th><th><span class="sr-only">Thao tác</span></th></tr></thead>
+            <tbody id="libraryTableBody"></tbody>
+          </table>
+          <div class="empty-state hidden" id="libraryEmpty">
+            <span class="empty-mark" aria-hidden="true">Aa</span>
+            <h3>Thư viện đang trống</h3>
+            <p>Thêm những từ bạn thật sự muốn nhớ, từng từ hoặc cả danh sách.</p>
+            <button class="primary-button compact" type="button" data-route="add">Thêm từ đầu tiên</button>
+          </div>
+        </div>
+        <nav class="pagination" id="libraryPagination" aria-label="Phân trang thư viện"></nav>
+      </section>
+
+      <section class="view" id="formulasView" data-view="formulas">
+        <div class="formula-layout">
+          <section class="panel formula-editor-panel" aria-labelledby="formulaEditorTitle">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow" id="formulaEditorEyebrow">Ghi chú mới</p>
+                <h3 id="formulaEditorTitle">Thêm công thức</h3>
+              </div>
+              <span class="formula-mark" aria-hidden="true">ƒx</span>
+            </div>
+            <p class="muted formula-intro">Lưu cấu trúc ngữ pháp hoặc công thức bạn muốn xem lại. Mỗi ghi chú chỉ có một ô nội dung.</p>
+            <form id="formulaForm">
+              <label class="formula-field" for="formulaContent">
+                <span>Nội dung công thức <b>*</b></span>
+                <textarea id="formulaContent" name="content" rows="7" required maxlength="20000" placeholder="S + to be + a/an + adjective + person/man"></textarea>
+              </label>
+              <div class="formula-form-actions">
+                <button class="secondary-button hidden" id="formulaCancelEditButton" type="button">Huỷ chỉnh sửa</button>
+                <button class="primary-button compact" id="formulaSaveButton" type="submit">Thêm công thức</button>
+              </div>
+            </form>
+          </section>
+
+          <section class="panel formula-list-panel" aria-labelledby="formulaListTitle">
+            <div class="panel-heading formula-list-heading">
+              <div>
+                <p class="eyebrow">Ghi chú đã lưu</p>
+                <h3 id="formulaListTitle">Tất cả công thức</h3>
+              </div>
+              <span class="formula-count" id="formulaCount">0 ghi chú</span>
+            </div>
+
+            <div class="formula-status" id="formulasLoading" role="status">
+              <span class="formula-status-mark" aria-hidden="true">…</span>
+              <p>Đang tải sổ công thức…</p>
+            </div>
+
+            <div class="formula-status formula-error hidden" id="formulasError" role="alert">
+              <span class="formula-status-mark" aria-hidden="true">!</span>
+              <h4>Chưa thể tải công thức</h4>
+              <p id="formulasErrorMessage">Vui lòng thử lại.</p>
+              <button class="secondary-button" id="retryFormulasButton" type="button">Thử lại</button>
+            </div>
+
+            <div class="formula-status hidden" id="formulasEmpty">
+              <span class="formula-status-mark formula-empty-mark" aria-hidden="true">ƒx</span>
+              <h4>Sổ công thức đang trống</h4>
+              <p>Nhập công thức đầu tiên ở ô bên cạnh để bắt đầu ghi chú.</p>
+            </div>
+
+            <div class="formula-list hidden" id="formulaList" aria-live="polite"></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="view" id="addView" data-view="add">
+        <div class="add-layout">
+          <section class="panel add-panel">
+            <div class="tab-list" role="tablist" aria-label="Cách thêm từ">
+              <button class="tab-button active" id="singleTab" type="button" role="tab" aria-selected="true" aria-controls="singleAddPanel">Thêm từng từ</button>
+              <button class="tab-button" id="bulkTab" type="button" role="tab" aria-selected="false" aria-controls="bulkAddPanel">Thêm hàng loạt</button>
+            </div>
+
+            <div class="tab-panel" id="singleAddPanel" role="tabpanel" aria-labelledby="singleTab">
+              <form id="singleWordForm">
+                <div class="form-row two-columns">
+                  <label>Tiếng Anh <span>*</span><input name="english" id="singleEnglish" required maxlength="160" placeholder="Ví dụ: compelling" autocomplete="off"></label>
+                  <label>Phiên âm<input name="phonetic" maxlength="160" placeholder="Ví dụ: /kəmˈpelɪŋ/" autocomplete="off"></label>
+                </div>
+                <div class="form-row two-columns">
+                  <label>Nghĩa tiếng Việt <span>*</span><input name="vietnamese" required maxlength="320" placeholder="Ví dụ: thuyết phục, hấp dẫn" autocomplete="off"></label>
+                  <label>Loại từ<input name="part_of_speech" maxlength="80" placeholder="Ví dụ: adjective" list="posSuggestions"></label>
+                  <datalist id="posSuggestions">
+                    <option value="noun"><option value="verb"><option value="adjective"><option value="adverb"><option value="pronoun"><option value="preposition"><option value="conjunction"><option value="interjection"><option value="determiner"><option value="article"><option value="auxiliary verb"><option value="modal verb"><option value="phrase"><option value="phrasal verb"><option value="idiom">
+                  </datalist>
+                </div>
+                <p class="field-help pos-entry-help">Nếu một từ có nhiều loại từ, hãy lưu mỗi loại thành một mục riêng — ví dụ <strong>record · noun</strong> và <strong>record · verb</strong>.</p>
+                <div class="form-row two-columns usage-fields">
+                  <label>Danh sách Collocation<textarea name="collocations" rows="4" maxlength="50100" placeholder="compelling evidence&#10;highly compelling"></textarea></label>
+                  <label>Danh sách Word pattern<textarea name="word_patterns" rows="4" maxlength="50100" placeholder="compel somebody to do something&#10;compelling enough to do something"></textarea></label>
+                </div>
+                <p class="field-help usage-field-help">Mỗi dòng là một mục, tối đa 100 mục và 500 ký tự mỗi mục.</p>
+                <div class="form-row">
+                  <label>Danh sách câu ví dụ<textarea name="examples" rows="6" maxlength="10000" placeholder="She made a compelling argument.&#10;Her evidence was compelling enough to change my mind."></textarea></label>
+                  <p class="field-help example-field-help">Mỗi dòng là một câu ví dụ, tối đa 1.500 ký tự mỗi câu. Khi học, Lexiloop sẽ chọn ngẫu nhiên một câu.</p>
+                </div>
+                <div class="form-actions">
+                  <button class="secondary-button" id="previewSingleVoice" type="button">▶ Nghe thử</button>
+                  <span class="form-spacer"></span>
+                  <button class="secondary-button" type="submit" name="submit_mode" value="save">Lưu từ</button>
+                  <button class="primary-button compact" type="submit" name="submit_mode" value="continue">Lưu & thêm tiếp</button>
+                </div>
+              </form>
+            </div>
+
+            <div class="tab-panel hidden" id="bulkAddPanel" role="tabpanel" aria-labelledby="bulkTab">
+              <div class="bulk-guide">
+                <div><span class="step-number">1</span><p><strong>Dán dữ liệu</strong><br><small>Dùng định dạng 5 cột cũ hoặc 7 cột mới.</small></p></div>
+                <div><span class="step-number">2</span><p><strong>Xem trước</strong><br><small>Kiểm tra trước khi đưa vào thư viện.</small></p></div>
+              </div>
+              <label class="bulk-label" for="bulkInput">English <b>Tab</b> Phonetic <b>Tab</b> Vietnamese <b>Tab</b> Part of speech <b>Tab</b> Examples <b>Tab</b> Collocation <b>Tab</b> Word pattern</label>
+              <div class="bulk-input-shell">
+                <textarea id="bulkInput" class="bulk-input" rows="9" spellcheck="false" aria-describedby="bulkInputHelp" aria-autocomplete="list" aria-controls="bulkPosSuggestions" aria-expanded="false" placeholder="compelling&#9;/kəmˈpelɪŋ/&#9;thuyết phục, hấp dẫn&#9;adjective&#9;She made a compelling argument. || Her evidence was compelling.&#9;compelling evidence || compelling argument&#9;compelling enough to do something || find something compelling&#10;allocate&#9;/ˈæləkeɪt/&#9;phân bổ&#9;verb&#9;We allocate time to each task.&#9;allocate resources || allocate funds&#9;allocate something to somebody"></textarea>
+                <div class="bulk-pos-suggestions hidden" id="bulkPosSuggestions" role="listbox" aria-label="Gợi ý loại từ"></div>
+              </div>
+              <p class="field-help" id="bulkInputHelp">Phím <kbd>Tab</kbd> chèn dấu phân cách. Định dạng mới có 7 cột; dữ liệu 5 cột cũ vẫn dùng được. Trong các cột <strong>Examples</strong>, <strong>Collocation</strong> và <strong>Word pattern</strong>, ngăn từng mục bằng <code> || </code>. Tại cột loại từ, gõ để lọc, dùng <kbd>↑</kbd>/<kbd>↓</kbd> và nhấn <kbd>Enter</kbd> hoặc <kbd>Tab</kbd> để chọn. Có thể dán từ Excel/Google Sheets, hoặc dùng dấu <code>|</code> hay CSV. Một từ có nhiều loại từ thì nhập thành nhiều dòng riêng.</p>
+              <div class="bulk-preview-heading">
+                <h3>Xem trước <span id="bulkPreviewCount">0 dòng</span></h3>
+                <button class="text-button" id="clearBulkButton" type="button">Xoá nội dung</button>
+              </div>
+              <div class="bulk-preview-wrap">
+                <table class="bulk-preview-table">
+                  <thead><tr><th>#</th><th>English</th><th>Phiên âm</th><th>Vietnamese</th><th>Loại từ</th><th>Các ví dụ</th><th>Collocation</th><th>Word pattern</th></tr></thead>
+                  <tbody id="bulkPreviewBody"></tbody>
+                </table>
+                <p class="bulk-empty" id="bulkPreviewEmpty">Dữ liệu hợp lệ sẽ xuất hiện ở đây.</p>
+              </div>
+              <div class="form-actions">
+                <p class="import-note" id="bulkImportNote">Chưa có dòng nào sẵn sàng.</p>
+                <button class="primary-button compact" id="importBulkButton" type="button" disabled>Nhập vào thư viện</button>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </section>
+
+      <section class="view" id="settingsView" data-view="settings">
+        <div class="settings-grid">
+          <section class="panel voice-settings-panel">
+            <div class="panel-heading"><div><p class="eyebrow">Phát âm</p><h3>Chọn giọng tiếng Anh</h3></div><span class="voice-load-state" id="voiceLoadState">Đang tải giọng…</span></div>
+            <p class="muted settings-intro">Trang web sử dụng giọng có sẵn trong Chrome/Windows. Chọn một giọng rồi nghe thử.</p>
+            <div class="voice-cards" id="voiceCards">
+              <label class="voice-card" data-voice="Microsoft Mark - English (United States)">
+                <input type="radio" name="voice" value="Microsoft Mark - English (United States)">
+                <span class="voice-avatar mark">M</span>
+                <span class="voice-copy"><strong>Microsoft Mark</strong><small>Nam · English (United States)</small></span>
+                <span class="availability">Đang kiểm tra</span>
+                <button class="voice-test-button" type="button" data-test-voice="Microsoft Mark - English (United States)" aria-label="Nghe thử Microsoft Mark">▶</button>
+              </label>
+              <label class="voice-card" data-voice="Microsoft Zira - English (United States)">
+                <input type="radio" name="voice" value="Microsoft Zira - English (United States)">
+                <span class="voice-avatar zira">Z</span>
+                <span class="voice-copy"><strong>Microsoft Zira</strong><small>Nữ · English (United States)</small></span>
+                <span class="availability">Đang kiểm tra</span>
+                <button class="voice-test-button" type="button" data-test-voice="Microsoft Zira - English (United States)" aria-label="Nghe thử Microsoft Zira">▶</button>
+              </label>
+              <label class="voice-card" data-voice="Google US English">
+                <input type="radio" name="voice" value="Google US English">
+                <span class="voice-avatar google">G</span>
+                <span class="voice-copy"><strong>Google US English</strong><small>Google · English (United States)</small></span>
+                <span class="availability">Đang kiểm tra</span>
+                <button class="voice-test-button" type="button" data-test-voice="Google US English" aria-label="Nghe thử Google US English">▶</button>
+              </label>
+            </div>
+            <div class="voice-fallback-note" id="voiceFallbackNote"></div>
+          </section>
+
+          <section class="panel srs-settings-panel">
+            <div class="panel-heading"><div><p class="eyebrow">Cơ chế ghi nhớ</p><h3>Lịch SRS cố định</h3></div></div>
+            <p class="muted settings-intro">Đúng thì tiến tới mốc kế tiếp. Sai ở bất kỳ mốc nào cũng quay về lần ôn sau 4 giờ.</p>
+            <div class="vertical-schedule" id="settingsSchedule"></div>
+          </section>
+        </div>
+
+        <section class="panel data-panel">
+          <div>
+            <p class="eyebrow">Dữ liệu</p>
+            <h3>Cơ sở dữ liệu riêng trên máy</h3>
+            <p class="muted">Từ vựng, tiến độ và lịch sử học được lưu trong SQLite. Bạn có thể xuất thư viện thành CSV bất cứ lúc nào.</p>
+          </div>
+          <a class="secondary-button" href="/api/export.csv">Tải bản CSV</a>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <section class="study-view hidden" id="studyView" aria-label="Phiên học">
+    <header class="study-header">
+      <button class="study-exit" id="exitStudyButton" type="button" aria-label="Thoát phiên học">×</button>
+      <div class="study-progress-area">
+        <div class="study-progress-meta"><span id="studyModeLabel">Học từ mới</span><span id="studyCounter">0 / 0</span></div>
+        <div class="progress-track"><div id="studyProgressBar"></div></div>
+      </div>
+      <button class="study-voice-button" id="studyVoiceButton" type="button" aria-label="Nghe lại từ hiện tại" title="Nghe lại (R)">◖))</button>
+    </header>
+
+    <div class="speed-hud hidden" id="speedHud" aria-label="Trạng thái Ôn siêu tốc">
+      <div class="speed-hud-row">
+        <div class="speed-hud-item"><span>Tim</span><strong class="speed-hearts" id="speedHearts">♥ ♥ ♥</strong></div>
+        <div class="speed-hud-item"><span>Điểm</span><strong id="speedScore">0</strong></div>
+        <div class="speed-hud-item"><span>Chuỗi đúng</span><strong id="speedStreak">0 / 15</strong></div>
+      </div>
+      <div class="speed-timer" id="speedTimer" role="progressbar" aria-label="Thời gian trả lời" aria-valuemin="0" aria-valuemax="8" aria-valuenow="8">
+        <div id="speedTimerBar"></div>
+      </div>
+      <p class="speed-timer-label"><span id="speedTimerText">8,0 giây</span><span>Trả lời nhanh để nhận nhiều điểm hơn</span></p>
+    </div>
+
+    <main class="study-main">
+      <div class="study-card" id="studyCard">
+        <div id="questionArea"></div>
+        <div class="feedback-zone hidden" id="feedbackZone" aria-live="polite"></div>
+      </div>
+    </main>
+  </section>
+
+  <dialog class="word-dialog" id="wordDialog">
+    <form method="dialog" class="dialog-shell" id="editWordForm">
+      <div class="dialog-heading">
+        <div><p class="eyebrow">Chi tiết từ</p><h2 id="dialogTitle">Chỉnh sửa từ vựng</h2></div>
+        <button class="dialog-close" id="closeWordDialogButton" type="button" aria-label="Đóng">×</button>
+      </div>
+      <input type="hidden" name="id">
+      <div class="form-row two-columns">
+        <label>Tiếng Anh <span>*</span><input name="english" required maxlength="160"></label>
+        <label>Phiên âm<input name="phonetic" maxlength="160" placeholder="Ví dụ: /kəmˈpelɪŋ/"></label>
+      </div>
+      <div class="form-row two-columns">
+        <label>Nghĩa tiếng Việt <span>*</span><input name="vietnamese" required maxlength="320"></label>
+        <label>Loại từ<input name="part_of_speech" maxlength="80" list="posSuggestions"></label>
+      </div>
+      <p class="field-help pos-entry-help">Mỗi mục chỉ nên chứa một loại từ để nghĩa, ví dụ và lịch SRS được tách riêng.</p>
+      <div class="form-row two-columns usage-fields">
+        <label>Danh sách Collocation<textarea name="collocations" rows="4" maxlength="50100" placeholder="Mỗi dòng là một collocation"></textarea></label>
+        <label>Danh sách Word pattern<textarea name="word_patterns" rows="4" maxlength="50100" placeholder="Mỗi dòng là một word pattern"></textarea></label>
+      </div>
+      <p class="field-help usage-field-help">Mỗi dòng là một mục, tối đa 100 mục và 500 ký tự mỗi mục.</p>
+      <div class="form-row">
+        <label>Danh sách câu ví dụ<textarea name="examples" rows="6" maxlength="10000" placeholder="Mỗi dòng là một câu ví dụ"></textarea></label>
+        <p class="field-help example-field-help">Mỗi dòng là một câu, tối đa 1.500 ký tự mỗi câu. Khi học, một câu sẽ được chọn ngẫu nhiên.</p>
+      </div>
+      <div class="dialog-progress" id="dialogProgress"></div>
+      <div class="dialog-actions">
+        <button class="danger-text-button" id="deleteWordButton" type="button">Xoá từ</button>
+        <button class="secondary-button" id="resetWordButton" type="button">Đặt lại tiến độ</button>
+        <span class="form-spacer"></span>
+        <button class="secondary-button" id="cancelEditButton" type="button">Huỷ</button>
+        <button class="primary-button compact" id="saveEditButton" type="submit" value="default">Lưu thay đổi</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="confirm-dialog" id="confirmDialog">
+    <form method="dialog" class="confirm-shell">
+      <span class="confirm-icon" id="confirmIcon">!</span>
+      <h2 id="confirmTitle">Bạn chắc chắn chứ?</h2>
+      <p id="confirmMessage"></p>
+      <div class="confirm-actions">
+        <button class="secondary-button" value="cancel">Huỷ</button>
+        <button class="danger-button" id="confirmActionButton" value="confirm">Xác nhận</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast-stack" id="toastStack" aria-live="polite"></div>
+  <div class="sr-only" id="liveRegion" aria-live="polite"></div>
+</body>
+</html>
